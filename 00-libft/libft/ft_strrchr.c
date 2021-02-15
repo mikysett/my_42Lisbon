@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 14:12:39 by msessa            #+#    #+#             */
-/*   Updated: 2021/01/15 14:14:48 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/15 13:16:07 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ char	*ft_strrchr(const char *s, int c)
 	res = 0;
 	while (*s)
 	{
-		if (*s == c)
+		if (*s == (char)c)
 			res = (char *)s;
 		s++;
 	}
-	if (*s == c)
+	if (*s == (char)c)
 		res = (char *)s;
 	return (res);
 }

@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:13:08 by msessa            #+#    #+#              #
-#    Updated: 2021/02/15 11:35:20 by msessa           ###   ########.fr        #
+#    Updated: 2021/02/15 13:08:43 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,8 +89,8 @@ re:			fclean all
 bonus:		$(BDEPS) $(BOBJS)
 			ar rc $(NAME) $(BOBJS)
 
-so:
-			$(CC) -c $(CFLAGS) -fPIC $(BSRCS)
-			gcc -shared -o libft.so $(BOBJS)
+# so:
+# 			$(CC) -c $(CFLAGS) -fPIC $(BSRCS)
+# 			gcc -shared -o libft.so $(BOBJS)
 
 .PHONY:		all clean fclean re bonus

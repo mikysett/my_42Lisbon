@@ -6,12 +6,11 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 17:26:17 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/15 11:29:16 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/15 14:12:15 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <fcntl.h>
 #include "libft.h"
 
 static int		ft_nb_strs(char const *s, char c)
@@ -59,25 +58,28 @@ static void		ft_set_strs_size(int *strs_size, char const *str, char c)
 		*strs_size = s_size + 1;
 }
 
-static void		ft_cpy_strs(char **strs, char const *str, char c)
+static void		ft_cpy_strs(char **strs, char const *s, char c)
 {
 	int		j;
 
 	j = 0;
-	while (*str)
+	while (*s)
 	{
-		if (*str != c)
-			(*(strs))[j++] = *str;
+		if (*s != c)
+			(*strs)[j++] = *s;
 		else if (j != 0)
 		{
 			(*(strs++))[j] = '\0';
 			j = 0;
 		}
-		str++;
+		s++;
 	}
 	if (j != 0)
-		(*(strs++))[j] = '\0';
-	*(strs) = 0;
+	{
+		(*strs)[j] = '\0';
+		strs++;
+	}
+	*strs = 0;
 }
 
 static char		**ft_free_exit(char **res, int *strs_size)
@@ -107,14 +109,15 @@ char			**ft_split(char const *s, char c)
 
 	if (!s)
 		return (0);
-	while (*s == c)
-		s++;
+	if (c)
+		while (*s == c)
+			s++;
 	nb_strs = ft_nb_strs(s, c);
 	if (!(res = malloc(sizeof(char *) * (nb_strs + 1))))
 		return (0);
 	if (nb_strs)
 	{
-		if (!(strs_size = malloc(sizeof(int) * (nb_strs))))
+		if (!(strs_size = malloc(sizeof(int) * nb_strs)))
 			return (ft_free_exit(res, 0));
 		ft_set_strs_size(strs_size, s, c);
 		while (--nb_strs >= 0)
