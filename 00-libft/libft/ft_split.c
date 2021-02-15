@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_exp_new.c                                 :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 17:26:17 by msessa            #+#    #+#             */
-/*   Updated: 2021/01/20 18:36:28 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/15 11:29:16 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,35 +126,35 @@ char			**ft_split(char const *s, char c)
 	return (res);
 }
 
-int		main(void)
-{
-	int		fd;
-	char	buf[3000001];
-	int		buf_end;
-	char	**res;
-	int		repeating;
-	// int		i;
+// int		main(void)
+// {
+// 	int		fd;
+// 	char	buf[3000001];
+// 	int		buf_end;
+// 	char	**res;
+// 	int		repeating;
+// 	// int		i;
 
-	// i = 0;
-	repeating = 0;
-	while (repeating < 2000)
-	{
-		fd = open("split_test", O_RDONLY);
-		buf_end = read(fd, buf, 3000000);
-		close(fd);
-		if (buf_end > 0)
-		{
-			buf[buf_end] = '\0';
-			res = ft_split(buf, ' ');
-			// if (res)
-			// {
-			// 	while (res[i])
-			// 		i++;
-			// 	printf("res size: %d\n", i);
-			// }
-		}
-		ft_free_exit(res, 0);
-		repeating++;
-	}
-	return (0);
-}
+// 	// i = 0;
+// 	repeating = 0;
+// 	while (repeating < 2000)
+// 	{
+// 		fd = open("split_test", O_RDONLY);
+// 		buf_end = read(fd, buf, 3000000);
+// 		close(fd);
+// 		if (buf_end > 0)
+// 		{
+// 			buf[buf_end] = '\0';
+// 			res = ft_split(buf, ' ');
+// 			// if (res)
+// 			// {
+// 			// 	while (res[i])
+// 			// 		i++;
+// 			// 	printf("res size: %d\n", i);
+// 			// }
+// 		}
+// 		ft_free_exit(res, 0);
+// 		repeating++;
+// 	}
+// 	return (0);
+// }

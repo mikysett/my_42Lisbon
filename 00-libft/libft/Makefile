@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:13:08 by msessa            #+#    #+#              #
-#    Updated: 2021/01/18 16:24:31 by msessa           ###   ########.fr        #
+#    Updated: 2021/02/15 11:35:20 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,14 +46,15 @@ SRCS	=	ft_memset.c \
 			ft_putnbr_fd.c
 
 BSRCS	:=	$(SRCS) \
-			bonus_ft_lstnew.c bonus_ft_lstadd_front.c \
-			bonus_ft_lstsize.c \
-			bonus_ft_lstlast.c \
-			bonus_ft_lstadd_back.c \
-			bonus_ft_lstdelone.c \
-			bonus_ft_lstclear.c \
-			bonus_ft_lstiter.c \
-			bonus_ft_lstmap.c \
+			ft_lstnew.c \
+			ft_lstadd_front.c \
+			ft_lstsize.c \
+			ft_lstlast.c \
+			ft_lstadd_back.c \
+			ft_lstdelone.c \
+			ft_lstclear.c \
+			ft_lstiter.c \
+			ft_lstmap.c \
 
 OBJS	=	$(SRCS:.c=.o)
 
@@ -63,7 +64,7 @@ NAME	=	libft.a
 
 DEPS	=	libft.h
 
-BDEPS	:=	$(DEPS) bonus_libft.h
+BDEPS	:=	$(DEPS) libft.h
 
 CC		=	gcc
 
@@ -78,6 +79,7 @@ all:		$(NAME)
 
 clean:
 			$(RM) $(OBJS)
+			$(RM) $(BOBJS)
 
 fclean:		clean
 			$(RM) $(NAME)
