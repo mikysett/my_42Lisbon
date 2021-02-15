@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 12:23:53 by msessa            #+#    #+#             */
-/*   Updated: 2021/01/16 13:20:16 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/15 19:58:35 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	size_t	tot_size;
 
 	tot_size = nmemb * size;
-	if(!nmemb || !size
-		|| !(res = malloc(tot_size)))
-		return (malloc(0));
-	while (tot_size-- > 0)
-		*(unsigned char *)(res + tot_size) = 0;
+	if (!tot_size)
+		return (0);
+	res = malloc(tot_size);
+	if (!res)
+		return (0);
+	while (tot_size > 0)
+		*(unsigned char *)(res + --tot_size) = 0;
 	return (res);
 }

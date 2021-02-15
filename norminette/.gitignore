@@ -1,0 +1,14 @@
+**/__pycache__
+**/*.pyc
+.vscode
+venv/
+**/a.out
+**/__sandbox/
+launch_norminette.py
+*.egg-info
+dist/*
+build/*
+*.aux
+*.fdb_latexmk
+*.fls
+*.log

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 16:12:44 by msessa            #+#    #+#             */
-/*   Updated: 2021/01/16 16:17:05 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/15 19:10:06 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (0);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
-	if (!(res = malloc(sizeof(char) * (s1_len + s2_len + 1))))
+	res = malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!res)
 		return (0);
 	ores = res;
 	while (s1_len--)

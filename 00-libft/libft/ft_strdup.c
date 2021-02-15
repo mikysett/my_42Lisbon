@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 13:19:55 by msessa            #+#    #+#             */
-/*   Updated: 2021/01/16 13:27:53 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/15 18:53:55 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char	*ft_strdup(const char *s)
 	size_t	s_len;
 
 	s_len = ft_strlen(s);
-	if (!(new_str = malloc(sizeof(char) * (s_len + 1))))
+	new_str = malloc(sizeof(char) * (s_len + 1));
+	if (!new_str)
 		return (0);
 	while (*s)
 		*new_str++ = *s++;

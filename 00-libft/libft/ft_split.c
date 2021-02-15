@@ -6,11 +6,10 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 17:26:17 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/15 14:12:15 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/15 19:08:50 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
 static int		ft_nb_strs(char const *s, char c)
@@ -28,7 +27,7 @@ static int		ft_nb_strs(char const *s, char c)
 			nb_s++;
 			s++;
 			if (!*s)
-				break;
+				break ;
 		}
 		s++;
 	}
@@ -37,9 +36,9 @@ static int		ft_nb_strs(char const *s, char c)
 	return (nb_s);
 }
 
-static void		ft_set_strs_size(int *strs_size, char const *str, char c)
+static int		ft_set_strs_size(char **res, char const *str, char c)
 {
-	int		s_size;
+	size_t		s_size;
 
 	s_size = 0;
 	while (*str)
@@ -48,14 +47,21 @@ static void		ft_set_strs_size(int *strs_size, char const *str, char c)
 			s_size++;
 		else if (s_size != 0)
 		{
-			*strs_size = s_size + 1;
-			strs_size++;
+			*res = malloc(sizeof(char) * (s_size + 1));
+			if (!*res)
+				return (0);
+			res++;
 			s_size = 0;
 		}
 		str++;
 	}
 	if (s_size != 0)
-		*strs_size = s_size + 1;
+	{
+		*res = malloc(sizeof(char) * (s_size + 1));
+		if (!*res)
+			return (0);
+	}
+	return (1);
 }
 
 static void		ft_cpy_strs(char **strs, char const *s, char c)
@@ -82,7 +88,7 @@ static void		ft_cpy_strs(char **strs, char const *s, char c)
 	*strs = 0;
 }
 
-static char		**ft_free_exit(char **res, int *strs_size)
+static char		**ft_free_exit(char **res)
 {
 	int i;
 
@@ -96,15 +102,12 @@ static char		**ft_free_exit(char **res, int *strs_size)
 		}
 		free(res);
 	}
-	if (strs_size)
-		free(strs_size);
 	return (0);
 }
 
 char			**ft_split(char const *s, char c)
 {
 	int		nb_strs;
-	int		*strs_size;
 	char	**res;
 
 	if (!s)
@@ -113,51 +116,12 @@ char			**ft_split(char const *s, char c)
 		while (*s == c)
 			s++;
 	nb_strs = ft_nb_strs(s, c);
-	if (!(res = malloc(sizeof(char *) * (nb_strs + 1))))
+	res = malloc(sizeof(char *) * (nb_strs + 1));
+	if (!res)
 		return (0);
 	if (nb_strs)
-	{
-		if (!(strs_size = malloc(sizeof(int) * nb_strs)))
-			return (ft_free_exit(res, 0));
-		ft_set_strs_size(strs_size, s, c);
-		while (--nb_strs >= 0)
-			if (!(res[nb_strs] = malloc(sizeof(char) * strs_size[nb_strs])))
-				return (ft_free_exit(res, strs_size));
-		free(strs_size);
-	}
+		if (!ft_set_strs_size(res, s, c))
+			return (ft_free_exit(res));
 	ft_cpy_strs(res, s, c);
 	return (res);
 }
-
-// int		main(void)
-// {
-// 	int		fd;
-// 	char	buf[3000001];
-// 	int		buf_end;
-// 	char	**res;
-// 	int		repeating;
-// 	// int		i;
-
-// 	// i = 0;
-// 	repeating = 0;
-// 	while (repeating < 2000)
-// 	{
-// 		fd = open("split_test", O_RDONLY);
-// 		buf_end = read(fd, buf, 3000000);
-// 		close(fd);
-// 		if (buf_end > 0)
-// 		{
-// 			buf[buf_end] = '\0';
-// 			res = ft_split(buf, ' ');
-// 			// if (res)
-// 			// {
-// 			// 	while (res[i])
-// 			// 		i++;
-// 			// 	printf("res size: %d\n", i);
-// 			// }
-// 		}
-// 		ft_free_exit(res, 0);
-// 		repeating++;
-// 	}
-// 	return (0);
-// }

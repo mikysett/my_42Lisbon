@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 19:31:57 by msessa            #+#    #+#             */
-/*   Updated: 2021/01/18 13:36:05 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/15 19:02:51 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ char		*ft_itoa(int n)
 
 	digits = ft_set_digits(n / 10);
 	neg = n < 0 ? 1 : 0;
-	if(!(res = malloc(sizeof(char) * (digits + neg + 1))))
+	res = malloc(sizeof(char) * (digits + neg + 1));
+	if (!res)
 		return (0);
 	if (!neg)
 		ft_save_pos_nb(res, n, digits - 1);

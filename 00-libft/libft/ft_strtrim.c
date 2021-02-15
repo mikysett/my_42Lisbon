@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 16:19:49 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/15 13:24:04 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/15 18:55:17 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ char		*ft_strtrim(char const *s1, char const *set)
 		end--;
 	while (ft_isinset(*(s1 + start), set) && start < end)
 		start++;
-	if (!(res = malloc(sizeof(char) * (end - start + 1))))
+	res = malloc(sizeof(char) * (end - start + 1));
+	if (!res)
 		return (0);
 	ores = res;
 	while (start < end)

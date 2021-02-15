@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_old.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 17:26:17 by msessa            #+#    #+#             */
-/*   Updated: 2021/01/20 15:28:16 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/15 18:14:12 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,8 @@ static void		ft_set_strs_size(char **res, char const *str, char const c)
 			str_size++;
 		else if (str_size != 0)
 		{
-			if (!(*res = malloc(sizeof(char) * (str_size + 1))))
+			*res = malloc(sizeof(char) * (str_size + 1));
+			if (!*res)
 			{
 				ft_free_exit(ores);
 				return ;
