@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/15 16:13:38 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/16 11:17:33 by msessa           ###   ########.fr       */
+/*   Created: 2021/02/15 22:28:01 by msessa            #+#    #+#             */
+/*   Updated: 2021/02/16 19:28:37 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
-{
-	char	*odst;
-	size_t	dst_len;
-	size_t	src_len;
+# define DEBUG_MODE 1
+# if DEBUG_MODE == 1
+#  define BUFFER_SIZE 42
+# endif
 
-	odst = dst;
-	while (*dst && size != 0)
-	{
-		dst++;
-		size--;
-	}
-	dst_len = dst - odst;
-	src_len = ft_strlen(src);
-	if (size == 0)
-		return (dst_len + src_len);
-	size--;
-	while (*src && size != 0)
-	{
-		*dst++ = *src++;
-		size--;
-	}
-	*dst = '\0';
-	return (dst_len + src_len);
-}
+# include <unistd.h>
+# include <stdlib.h>
+
+int		get_next_line(int fd, char **line);
+size_t	ft_strlen(const char *s);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
+
+#endif
