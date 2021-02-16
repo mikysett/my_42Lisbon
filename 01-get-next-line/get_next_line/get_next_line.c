@@ -6,15 +6,15 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 22:25:06 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/16 19:27:39 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/16 20:01:35 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+// #include <stdio.h>
+// #include <sys/types.h>
+// #include <sys/stat.h>
+// #include <fcntl.h>
 
 size_t		ft_partial_len(char *buf)
 {
@@ -145,29 +145,29 @@ int			get_next_line(int fd, char **line)
 	}
 }
 
-int		main(int argc, char **argv)
-{
-	char *line;
-	int fd;
-	int res_gnl;
-	int i;
+// int		main(int argc, char **argv)
+// {
+// 	char *line;
+// 	int fd;
+// 	int res_gnl;
+// 	int i;
 
-	i = 1;
-	while (i < argc)
-	{
-		fd = open(argv[i], O_RDONLY);
-		while ((res_gnl = get_next_line(STDIN_FILENO, &line)) > 0)
-		{
-			printf("res: %d, line: %s\n", res_gnl, line);
-			free(line);
-		}
-		close(fd);
-		i++;
-		if (line)
-		{
-			printf("res: %d, LAST: %s\n", res_gnl, line);
-			free(line);
-		}
-	}
-	return (0);
-}
+// 	i = 1;
+// 	while (i < argc)
+// 	{
+// 		fd = open(argv[i], O_RDONLY);
+// 		while ((res_gnl = get_next_line(STDIN_FILENO, &line)) > 0)
+// 		{
+// 			printf("res: %d, line: %s\n", res_gnl, line);
+// 			free(line);
+// 		}
+// 		close(fd);
+// 		i++;
+// 		if (line)
+// 		{
+// 			printf("res: %d, LAST: %s\n", res_gnl, line);
+// 			free(line);
+// 		}
+// 	}
+// 	return (0);
+// }
