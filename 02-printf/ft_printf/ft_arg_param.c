@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 18:05:21 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/18 17:14:44 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/18 18:37:13 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ char	*ft_set_arg_width(t_arg *arg, char *str)
 {
 	if (*str == '*')
 	{
-		arg->width_as_arg = true;
+		arg->w_as_arg = true;
 		return (str + 1);
 	}
-	arg->width_as_arg = false;
+	arg->w_as_arg = false;
 	arg->width = 1;
 	if (ft_isdigit(*str))
 	{
@@ -60,11 +60,11 @@ char	*ft_set_arg_precision(t_arg *arg, char *str)
 		return (str);
 	arg->precision_set = true;
 	arg->precision = 6;
-	arg->precision_as_arg = false;
+	arg->p_as_arg = false;
 	str++;
 	if (*str == '*')
 	{
-		arg->precision_as_arg = true;
+		arg->p_as_arg = true;
 		return (str + 1);
 	}
 	if (ft_isdigit(*str))
@@ -106,7 +106,6 @@ char	*ft_set_arg_lenmod(t_arg *arg, char *str)
 
 char	*ft_set_arg_conv(t_arg *arg, char *str)
 {
-
 	if (!ft_is_conversion(*str))
 		return (0);
 	arg->conv = *str;

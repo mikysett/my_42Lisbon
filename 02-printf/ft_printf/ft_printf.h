@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 20:08:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/18 17:48:26 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/18 19:07:16 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ typedef struct	s_str_part
 typedef struct	s_arg
 {
 	t_arg_type	type;
-	t_val		value;
+	t_val		val;
 	t_flags		*flags;
 	int			width;
-	bool		width_as_arg;
+	bool		w_as_arg;
 	bool		precision_set;
 	int			precision;
-	bool		precision_as_arg;
+	bool		p_as_arg;
 	t_len_mod	len_mod;
 	char		conv;
 }				t_arg;
@@ -100,7 +100,7 @@ typedef union	u_val
 	unsigned long int		v_ulint;
 	unsigned long long int	v_ullint;
 	int						v_wint;
-	wchar_t					*v_wchar;
+	wchar_t					*v_wchar_ptr;
 }				t_val;
 
 
