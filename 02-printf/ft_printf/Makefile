@@ -6,11 +6,13 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:13:08 by msessa            #+#    #+#              #
-#    Updated: 2021/02/17 18:05:48 by msessa           ###   ########.fr        #
+#    Updated: 2021/02/18 11:33:56 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	=	ft_printf.c \
+			ft_set_str.c \
+			ft_free_str_part.c \
 			ft_arg.c \
 
 BSRCS	:=	$(SRCS) \
