@@ -16,16 +16,32 @@
 # include <unistd.h>
 # include <stdarg.h>
 
+typedef struct	s_str_part
+{
+	t_str_type			str_type;
+	char				*str_start;
+	char				*str_end;
+	size_t				str_size;
+	t_arg				*arg;
+	struct s_str_part	*next;
+}				t_str_part;
+
+typedef enum	e_str_type
+{
+	string,
+	argument
+}				t_str_type;
+
 typedef struct	s_arg
 {
-	size_t	format_len;
-	t_type	type;
-	t_val	value;
-	char	conversion;
+	size_t		format_len;
+	t_arg_type	type;
+	t_val		value;
+	char		conversion;
 
 }				t_arg;
 
-typedef enum	e_type
+typedef enum	e_arg_type
 {
 	tp_char,
 	tp_char_ptr,
@@ -36,7 +52,7 @@ typedef enum	e_type
 	tp_uint,
 	tp_ulint,
 	tp_ullint
-}				t_type;
+}				t_arg_type;
 
 typedef union	u_val
 {
