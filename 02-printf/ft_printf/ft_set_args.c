@@ -12,18 +12,18 @@
 
 #include "ft_printf.h"
 
-bool		ft_set_args(va_list ap, t_str_part **sp)
+bool		ft_set_args(va_list ap, t_str_part *sp)
 {
 	va_list ap2;
 	t_arg	*arg;
 	va_copy(ap2, ap);
-	while (*sp)
+	while (sp)
 	{
-		if ((*sp)->str_type == argument)
+		if (sp->str_type == argument)
 		{
-			arg = (*sp)->arg;
-			if ((arg->w_as_arg && get_w(arg, va_arg(ap2, int)))
-				|| (arg->p_as_arg && get_p(arg, va_arg(ap2, int))))
+			arg = sp->arg;
+			if ((arg->w_as_arg && !get_w(arg, va_arg(ap2, int)))
+				|| (arg->p_as_arg && !get_p(arg, va_arg(ap2, int))))
 				return (false);
 			if (arg->type == tp_char)
 				arg->val.v_char = va_arg(ap2, char);
@@ -52,7 +52,7 @@ bool		ft_set_args(va_list ap, t_str_part **sp)
 			else if (arg->type == tp_wchar_ptr)
 				arg->val.v_wchar_ptr = va_arg(ap2, wchar_t *);
 		}
-		*sp = (*sp)->next;
+		sp = sp->next;
 	}
 	va_end(ap2);
 	return (true);

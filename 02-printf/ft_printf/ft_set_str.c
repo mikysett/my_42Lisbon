@@ -21,6 +21,7 @@ static bool		ft_add_str(t_str_part **str_part, char *format, char *o_format)
 	new_str->str_type = string;
 	new_str->str_start = format;
 	new_str->str_end = o_format;
+	new_str->str_size = o_format - format;
 	ft_sp_lstadd_back(str_part, new_str);
 	return (true);
 }
@@ -32,17 +33,13 @@ static char		*ft_add_arg(t_str_part **str_part, char *o_format)
 	if (!(new_arg = malloc(sizeof(t_str_part))))
 		return (0);
 	new_arg->str_type = argument;
-	o_format = ft_set_arg_flags(new_arg, o_format);
-	if (o_format)
-		o_format = ft_set_arg_width(new_arg, o_format);
-	if (o_format)
-		o_format = ft_set_arg_precision(new_arg, o_format);
-	if (o_format)
-		o_format = ft_set_arg_lenmod(new_arg, o_format);
-	if (o_format)
-		o_format = ft_set_arg_conv(new_arg, o_format);
-	if (o_format)
-		o_format = ft_set_arg_type(new_arg, o_format);
+	if ((o_format = ft_set_arg_flags(new_arg, o_format))
+		&& (o_format = ft_set_arg_width(new_arg, o_format))
+		&& (o_format = ft_set_arg_precision(new_arg, o_format))
+		&& (o_format = ft_set_arg_lenmod(new_arg, o_format))
+		&& (o_format = ft_set_arg_conv(new_arg, o_format))
+		&& (o_format = ft_set_arg_type(new_arg, o_format)))
+		;
 	ft_sp_lstadd_back(str_part, new_arg);
 	return (o_format);
 }

@@ -21,10 +21,10 @@ int				ft_printf(const char *format, ...)
 	if (!(str_part = ft_set_str(format)))
 		return (-1);
 	va_start(ap, format);
-	if (!ft_set_args(ap, str_part))
+	if (!ft_set_args(ap, *str_part))
 		return (-1);
 	va_end(ap);
-	print_count = ft_print_str_part(str_part);
+	print_count = ft_printer(*str_part);
 	ft_free_str_part(str_part);
 	return (print_count);
 }

@@ -103,6 +103,13 @@ typedef union	u_val
 	wchar_t					*v_wchar_ptr;
 }				t_val;
 
+typedef struct	s_str_arg
+{
+	char	*str;
+	int		str_len;
+}				t_str_arg;
+
+
 
 int			ft_printf(const char *format, ...);
 t_str_part	**ft_set_str(char *format);
