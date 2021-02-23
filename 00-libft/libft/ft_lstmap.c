@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:33:06 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/15 19:04:02 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/22 15:32:58 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,23 @@ static t_list	*ft_del_return(t_list *lst, void (*del)(void *))
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 	void (*del)(void *))
 {
-	t_list	*new_lst;
+	t_list	*new_head;
 	t_list	*new_prev;
 	t_list	*new_curr;
 
-	new_lst = 0;
+	new_head = ft_lstnew(f(lst->content));
+	if (!new_head)
+		return (0);
+	new_prev = new_head;
+	lst = lst->next;
 	while (lst)
 	{
-		if (!(new_curr = ft_lstnew(f(lst->content))))
-			return (ft_del_return(new_lst, del));
-		if (!new_lst)
-		{
-			new_lst = new_curr;
-			new_prev = new_curr;
-		}
-		else
-			new_prev->next = new_curr;
+		new_curr = ft_lstnew(f(lst->content));
+		if (!new_curr)
+			return (ft_del_return(new_head, del));
+		new_prev->next = new_curr;
 		new_prev = new_curr;
 		lst = lst->next;
 	}
-	return (new_lst);
+	return (new_head);
 }
