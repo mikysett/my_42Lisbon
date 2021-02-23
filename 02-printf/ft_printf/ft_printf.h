@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 20:08:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/18 19:07:16 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/23 21:07:23 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,7 @@ char		*ft_set_arg_conv(t_arg *arg, char *str);
 char		*ft_set_arg_type(t_arg *arg, char *str);
 bool		ft_is_conv(char c);
 void		ft_sp_lstadd_back(t_str_part **lst, t_str_part *new);
+
+t_str_arg   ft_set_arg_c(t_str_part *sp);
 
 #endif

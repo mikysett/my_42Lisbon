@@ -7,7 +7,7 @@ int			ft_print_str(t_str_part *sp)
 	return (write(1, sp->str_start, sp->str_size));
 }
 
-t_str_arg   *ft_set_str_arg(t_str_part *sp)
+t_str_arg   ft_set_str_arg(t_str_part *sp)
 {
 	if (sp->arg->conv == 'c')
 		return (ft_set_arg_c(sp));
@@ -30,14 +30,14 @@ t_str_arg   *ft_set_str_arg(t_str_part *sp)
 	else if (sp->arg->conv == 'e')
 		return (ft_set_arg_e(sp));
 	else
-		return (0);
+		return ((t_str_arg){ str : 0, str_len : -1 });
 }
 
 int			ft_printer(t_str_part *sp)
 {
 	int			print_count;
 	int			print_result;
-	t_str_arg	*str_arg;
+	t_str_arg	str_arg;
 
 	print_count = 0;
 	while (sp)
@@ -46,10 +46,11 @@ int			ft_printer(t_str_part *sp)
 			print_result = ft_print_str(sp);
 		else
 		{
-			if (!(str_arg = ft_set_str_arg(sp)))
+			str_arg = ft_set_str_arg(sp);
+			if (str_arg.str_len == -1)
 				return (-1);
 			print_result = ft_print_arg(sp, str_arg);
-			free(str_arg);
+			free(str_arg.str);
 		}
 		if (print_result < 0)
 			return (-1);

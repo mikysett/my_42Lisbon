@@ -30,8 +30,11 @@ int		main(void)
 	
 	printf("### char\n");
 	res0 = printf("%c", 'a');
+	printf("\n");
 	res1 = ft_printf("%c", 'a');
+	printf("\n");
 	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
 	res0 = printf("char at the end of the string %c", 'a');
 	printf("\n");
 	res1 = ft_printf("char at the end of the string %c", 'a');
@@ -71,6 +74,91 @@ int		main(void)
 	res0 = printf("with width: %10c of 10", 'Q');
 	printf("\n");
 	res1 = ft_printf("with width: %10c of 10", 'Q');
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+	
+	res0 = printf("with width on left: %-10c of 10", 'Q');
+	printf("\n");
+	res1 = ft_printf("with width on left: %-10c of 10", 'Q');
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+	
+	res0 = printf("with width by 0: %010c of 10", 'Q');
+	printf("\n");
+	res1 = ft_printf("with width by 0: %010c of 10", 'Q');
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+	
+	res0 = printf("with width by 0 left: %-010c of 10", 'Q');
+	printf("\n");
+	res1 = ft_printf("with width by 0 left: %-010c of 10", 'Q');
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
+
+
+	
+	printf("### int\n");
+	res0 = printf("%d", 114);
+	res1 = ft_printf("%d", 114);
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+	res0 = printf("char at the end of the string %d", 114);
+	printf("\n");
+	res1 = ft_printf("char at the end of the string %d", 114);
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
+	res0 = printf("char at the end of the string %d", 114);
+	printf("\n");
+	res1 = ft_printf("char at the end of the string %d", 114);
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+	
+	res0 = printf("%d at the start of the string", 117);
+	printf("\n");
+	res1 = ft_printf("%d at the start of the string", 117);
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
+	res0 = printf("in the middle: %d of the string", 1493);
+	printf("\n");
+	res1 = ft_printf("in the middle: %d of the string", 1493);
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+	
+	res0 = printf("with precision: %.4d of four", 1493);
+	printf("\n");
+	res1 = ft_printf("with predision: %.4d of four", 1493);
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+	
+	res0 = printf("with predision: %.0d of 0", 1493);
+	printf("\n");
+	res1 = ft_printf("with predision: %.0d of 0", 1493);
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+	
+	res0 = printf("with width: %10d of 10", 1493);
+	printf("\n");
+	res1 = ft_printf("with width: %10d of 10", 1493);
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+	
+	res0 = printf("with width on left: %-10d of 10", 1493);
+	printf("\n");
+	res1 = ft_printf("with width on left: %-10d of 10", 1493);
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+	
+	res0 = printf("with width by 0: %010d of 10", 1493);
+	printf("\n");
+	res1 = ft_printf("with width by 0: %010d of 10", 1493);
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+	
+	res0 = printf("with width by 0 left: %-010d of 10", 1493);
+	printf("\n");
+	res1 = ft_printf("with width by 0 left: %-010d of 10", 1493);
 	printf("\n");
 	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
 	return (0);
