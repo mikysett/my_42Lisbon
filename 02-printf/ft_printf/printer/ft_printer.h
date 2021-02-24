@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_str_part.c                                 :+:      :+:    :+:   */
+/*   ft_printer.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/18 13:03:27 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/24 19:13:44 by msessa           ###   ########.fr       */
+/*   Created: 2021/02/16 20:08:41 by msessa            #+#    #+#             */
+/*   Updated: 2021/02/24 17:07:31 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef FT_PRINTER_H
+# define FT_PRINTER_H
+# include "../ft_printf.h"
 
-void	ft_sp_lstadd_back(t_str_part **lst, t_str_part *new)
-{
-	new->next = 0;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	while ((*lst)->next)
-		(lst) = &((*lst)->next);
-	(*lst)->next = new;
-}
+bool		ft_print_padding(size_t len, bool is_zero);
+char		*ft_get_padding(int len, char c);
+int			ft_print_arg(t_str_part *sp, t_str_arg str_arg);
+
+#endif

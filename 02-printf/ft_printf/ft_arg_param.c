@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 18:05:21 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/24 16:42:58 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/24 20:29:53 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 char	*ft_set_arg_flags(t_arg *arg, char *str)
 {
-	int i;
-	t_flags flag_sel;
+	int		i;
+	t_flags	flag_sel;
 
 	i = 0;
 	while (i < NB_FLAGS)
-		arg->flags[i] = 0;
+		arg->flags[i++] = false;
 	while ((flag_sel = ft_convert_flag(*str)) != flags_none)
 	{
 		arg->flags[flag_sel] = true;
@@ -95,6 +95,7 @@ char	*ft_set_arg_lenmod(t_arg *arg, char *str)
 		arg->len_mod = h;
 		return (str + 1);
 	}
+	arg->len_mod = lm_none;
 	return (str);
 }
 

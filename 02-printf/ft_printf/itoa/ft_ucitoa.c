@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 11:29:33 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/24 12:13:26 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/24 17:08:57 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	ft_save_neg_nb(char *res, unsigned char n, int digits)
 		*(res + --digits) = '0' - (n % 10);
 }
 
-char		*ft_litoa(unsigned char n)
+char		*ft_ucitoa(unsigned char n)
 {
 	char	*res;
 	int		digits;

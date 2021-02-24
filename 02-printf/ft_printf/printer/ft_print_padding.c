@@ -6,11 +6,11 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 14:16:53 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/24 15:25:04 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/24 17:41:06 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printer.h"
 
 char		*ft_get_padding(int len, char c)
 {
@@ -21,7 +21,7 @@ char		*ft_get_padding(int len, char c)
 	i = 0;
 	if (!len)
 		return (padding);
-	if (padding == 0 || ft_strlen(padding) < len)
+	if (padding == 0 || ft_strlen(padding) < (size_t)len)
 	{
 		if (padding)
 			free(padding);

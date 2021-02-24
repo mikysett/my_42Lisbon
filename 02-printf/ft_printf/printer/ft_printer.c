@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printer.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/24 16:52:54 by msessa            #+#    #+#             */
+/*   Updated: 2021/02/24 16:52:54 by msessa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-
-#include "ft_printf.h"
+#include "ft_printer.h"
 
 int			ft_print_str(t_str_part *sp)
 {
@@ -30,7 +40,7 @@ t_str_arg   ft_set_str_arg(t_str_part *sp)
 	// else if (sp->arg->conv == 'e')
 	// 	return (ft_set_arg_e(sp));
 	else
-		return ((t_str_arg){ str : 0, is_freeable : false, str_len : -1 });
+		return ((t_str_arg){ .str = 0, .is_freeable = false, .str_len = -1 });
 }
 
 int			ft_printer(t_str_part *sp)
@@ -42,7 +52,7 @@ int			ft_printer(t_str_part *sp)
 	print_count = 0;
 	while (sp)
 	{
-		if (sp->str_type = string)
+		if (sp->str_type == string)
 			print_result = ft_print_str(sp);
 		else
 		{
@@ -58,4 +68,5 @@ int			ft_printer(t_str_part *sp)
 		print_count += print_result;
 		sp = sp->next;
 	}
+	return (print_count);
 }

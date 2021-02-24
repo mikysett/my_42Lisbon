@@ -6,11 +6,11 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 20:49:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/24 16:30:05 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/24 17:42:28 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printer.h"
 
 t_str_arg   ft_set_arg_d(t_str_part *sp)
 {
@@ -23,7 +23,7 @@ t_str_arg   ft_set_arg_d(t_str_part *sp)
 		|| (l_mod == ll && !(str_arg.str = ft_llitoa(sp->arg->val.v_llint)))
 		|| (l_mod == h && !(str_arg.str = ft_sitoa(sp->arg->val.v_short)))
 		|| (l_mod == hh && !(str_arg.str = ft_citoa(sp->arg->val.v_char))))
-		return ((t_str_arg){ str : 0, is_freeable: 0, str_len : -1 });
+		return ((t_str_arg){ .str = 0, .is_freeable = false, .str_len = -1 });
 	str_arg.is_freeable = true;
 	str_arg.str_len = ft_strlen(str_arg.str);
 	return (str_arg);
@@ -40,7 +40,7 @@ t_str_arg   ft_set_arg_u(t_str_part *sp)
 		|| (l_mod == ll && !(str_arg.str = ft_ullitoa(sp->arg->val.v_ullint)))
 		|| (l_mod == h && !(str_arg.str = ft_usitoa(sp->arg->val.v_ushort)))
 		|| (l_mod == hh && !(str_arg.str = ft_ucitoa(sp->arg->val.v_uchar))))
-		return ((t_str_arg){ str : 0, is_freeable: 0, str_len : -1 });
+		return ((t_str_arg){ .str = 0, .is_freeable = false, .str_len = -1 });
 	str_arg.is_freeable = true;
 	str_arg.str_len = ft_strlen(str_arg.str);
 	return (str_arg);

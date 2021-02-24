@@ -6,11 +6,11 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 20:49:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/24 11:22:29 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/24 20:39:45 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printer.h"
 
 t_str_arg   ft_set_arg_c(t_str_part *sp)
 {
@@ -21,6 +21,7 @@ t_str_arg   ft_set_arg_c(t_str_part *sp)
 		str_arg.str_len = 1;
 		*(str_arg.char_str) = sp->arg->val.v_char;
 		*(str_arg.char_str + 1) = '\0';
+		str_arg.str = str_arg.char_str;
 	}
 	else
 		str_arg.str_len = 0;
