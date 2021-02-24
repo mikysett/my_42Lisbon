@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:20:28 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/18 17:48:08 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/24 16:33:36 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static char		*ft_add_str_part(t_str_part **str_part, char *format, char *o_forma
 	return (o_format);
 }
 
-t_str_part		**ft_set_str(char *format)
+t_str_part		**ft_set_str(const char *format)
 {
 	t_str_part	**str_part;
 	char		*o_format;

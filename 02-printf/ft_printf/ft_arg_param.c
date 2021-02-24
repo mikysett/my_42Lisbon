@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 18:05:21 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/18 18:37:13 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/24 16:42:58 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,18 @@
 
 char	*ft_set_arg_flags(t_arg *arg, char *str)
 {
-	t_flags	*flags;
-	int		i;
-	size_t	nb_flags;
+	int i;
+	t_flags flag_sel;
 
-	nb_flags = 0;
-	while (ft_is_flag(str[nb_flags]))
-		nb_flags++;
-	if (!(flags = malloc(sizeof(t_flags) * (nb_flags + 1))))
-		return (0);
-	flags[nb_flags] = none;
 	i = 0;
-	while (i < nb_flags)
+	while (i < NB_FLAGS)
+		arg->flags[i] = 0;
+	while ((flag_sel = ft_convert_flag(*str)) != flags_none)
 	{
-		flags[i] = ft_convert_flag(str[i]);
-		i++;
+		arg->flags[flag_sel] = true;
+		str++;
 	}
-	arg->flags = flags;
-	return (str + nb_flags);
+	return (str);
 }
 
 char	*ft_set_arg_width(t_arg *arg, char *str)
@@ -106,9 +100,12 @@ char	*ft_set_arg_lenmod(t_arg *arg, char *str)
 
 char	*ft_set_arg_conv(t_arg *arg, char *str)
 {
-	if (!ft_is_conversion(*str))
-		return (0);
-	arg->conv = *str;
-	return (str + 1);
+	if (*str == 'c' || *str == 's' || *str == 'p' || *str == 'd'
+		|| *str == 'i' || *str == 'u' || *str == 'x' || *str == 'X')
+	{
+		arg->conv = *str;
+		return (str + 1);
+	}
+	return (0);
 }
 

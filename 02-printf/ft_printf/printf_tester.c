@@ -131,6 +131,20 @@ int		main(void)
 	printf("\n");
 	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
 
+	printf("PRECISION 30:\n");
+	res0 = printf("empty string:%.30s<", "THIS IS A GOOD STRING");
+	printf("\n");
+	res1 = ft_printf("empty string:%.30s<", "THIS IS A GOOD STRING");
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
+	printf("PRECISION -30:\n");
+	res0 = printf("empty string:%.-30s<", "THIS IS A GOOD STRING");
+	printf("\n");
+	res1 = ft_printf("empty string:%.-30s<", "THIS IS A GOOD STRING");
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
 	printf("WIDTH 5:\n");
 	res0 = printf("empty string:%5s<", "THIS IS A GOOD STRING");
 	printf("\n");
@@ -149,6 +163,20 @@ int		main(void)
 	res0 = printf("empty string:%-25s<", "THIS IS A GOOD STRING");
 	printf("\n");
 	res1 = ft_printf("empty string:%-25s<", "THIS IS A GOOD STRING");
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
+	printf("WIDTH -25 (WITH INT VARIABLE) LEFT PADDED:\n");
+	res0 = printf("empty string:%*s<", -25, "THIS IS A GOOD STRING");
+	printf("\n");
+	res1 = ft_printf("empty string:%*s<", -25, "THIS IS A GOOD STRING");
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
+	printf("WIDTH -25 (WITH INT VARIABLE) + minus sign LEFT PADDED:\n");
+	res0 = printf("empty string:%-*s<", -25, "THIS IS A GOOD STRING");
+	printf("\n");
+	res1 = ft_printf("empty string:%-*s<", -25, "THIS IS A GOOD STRING");
 	printf("\n");
 	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
 
@@ -183,6 +211,18 @@ int		main(void)
 	res0 = printf("in the middle: %d of the string", 1493);
 	printf("\n");
 	res1 = ft_printf("in the middle: %d of the string", 1493);
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+	
+	res0 = printf("with precision: %.20d of 20", 1493);
+	printf("\n");
+	res1 = ft_printf("with predision: %.20d of 20", 1493);
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+	
+	res0 = printf("with precision: %.-20d of -20", 1493);
+	printf("\n");
+	res1 = ft_printf("with predision: %.-20d of -20", 1493);
 	printf("\n");
 	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
 	

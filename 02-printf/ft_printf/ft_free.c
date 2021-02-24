@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:40 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/18 17:45:13 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/24 16:45:48 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,17 @@
 static void	ft_free_arg(t_arg *arg)
 {
 	if (!arg)
-		return (0);
-	if (arg->flags)
-		free(arg->flags);
+		return ;
 	free(arg);
+}
+
+void		ft_free_padding(void)
+{
+	char *padding;
+
+	padding = ft_get_padding(0, ' ');
+	if (padding)
+		free(padding);
 }
 
 t_str_part	**ft_free_str_part(t_str_part **str_part)
@@ -36,4 +43,5 @@ t_str_part	**ft_free_str_part(t_str_part **str_part)
 		*str_part = next;
 	}
 	free(str_part);
+	return (0);
 }

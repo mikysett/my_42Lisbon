@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 20:09:10 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/18 18:23:55 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/24 16:24:25 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,7 @@ int				ft_printf(const char *format, ...)
 		return (-1);
 	va_end(ap);
 	print_count = ft_printer(*str_part);
+	ft_free_padding();
 	ft_free_str_part(str_part);
 	return (print_count);
-}
-
-int		main(void)
-{
-	return (0);
 }

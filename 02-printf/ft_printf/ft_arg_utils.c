@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 15:46:22 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/18 17:42:47 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/24 16:43:56 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ static char	*ft_set_arg_type_h(t_arg *arg, char *str)
 
 char		*ft_set_arg_type(t_arg *arg, char *str)
 {
-	if (arg->len_mod == none)
+	if (arg->len_mod == lm_none)
 		return (ft_set_arg_type_std(arg, str));
 	else if (arg->len_mod == l || arg->len_mod == ll)
 		return (ft_set_arg_type_l(arg, str));
-	else if (arg->len_mod == h || arg->len_mod == hh)
+	else // if (arg->len_mod == h || arg->len_mod == hh)
 		return (ft_set_arg_type_h(arg, str));
 }

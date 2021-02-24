@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 20:49:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/24 12:05:40 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/24 16:30:05 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_str_arg   ft_set_arg_d(t_str_part *sp)
 	t_len_mod	l_mod;
 	
 	l_mod = sp->arg->len_mod;
-	if ((l_mod == none && !(str_arg.str = ft_itoa(sp->arg->val.v_int)))
+	if ((l_mod == lm_none && !(str_arg.str = ft_itoa(sp->arg->val.v_int)))
 		|| (l_mod == l && !(str_arg.str = ft_litoa(sp->arg->val.v_lint)))
 		|| (l_mod == ll && !(str_arg.str = ft_llitoa(sp->arg->val.v_llint)))
 		|| (l_mod == h && !(str_arg.str = ft_sitoa(sp->arg->val.v_short)))
@@ -35,7 +35,7 @@ t_str_arg   ft_set_arg_u(t_str_part *sp)
 	t_len_mod	l_mod;
 	
 	l_mod = sp->arg->len_mod;
-	if ((l_mod == none && !(str_arg.str = ft_uitoa(sp->arg->val.v_uint)))
+	if ((l_mod == lm_none && !(str_arg.str = ft_uitoa(sp->arg->val.v_uint)))
 		|| (l_mod == l && !(str_arg.str = ft_ulitoa(sp->arg->val.v_ulint)))
 		|| (l_mod == ll && !(str_arg.str = ft_ullitoa(sp->arg->val.v_ullint)))
 		|| (l_mod == h && !(str_arg.str = ft_usitoa(sp->arg->val.v_ushort)))

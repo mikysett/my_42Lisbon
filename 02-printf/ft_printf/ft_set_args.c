@@ -6,13 +6,31 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 18:19:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/18 19:09:56 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/24 16:46:54 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-bool		ft_set_args(va_list ap, t_str_part *sp)
+static bool		get_w(t_str_part *sp, int size)
+{
+	if (size < 0)
+	{
+		sp->arg->flags[minus] = true;
+		sp->arg->width = -size;
+	}
+	else
+		sp->arg->width = size;
+	return (true);
+}
+
+static bool		get_p(t_arg *arg, int size)
+{
+	arg->precision = size;
+	return (true);
+}
+
+bool			ft_set_args(va_list ap, t_str_part *sp)
 {
 	va_list ap2;
 	t_arg	*arg;
@@ -22,7 +40,7 @@ bool		ft_set_args(va_list ap, t_str_part *sp)
 		if (sp->str_type == argument)
 		{
 			arg = sp->arg;
-			if ((arg->w_as_arg && !get_w(arg, va_arg(ap2, int)))
+			if ((arg->w_as_arg && !get_w(sp, va_arg(ap2, int)))
 				|| (arg->p_as_arg && !get_p(arg, va_arg(ap2, int))))
 				return (false);
 			if (arg->type == tp_char)
