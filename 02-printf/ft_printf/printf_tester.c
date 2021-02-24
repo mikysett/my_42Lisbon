@@ -97,10 +97,70 @@ int		main(void)
 
 
 
+	printf("      ######### STRING ########\n\n");
+	res0 = printf("%s", "THIS IS A BASIC STRING");
+	printf("\n");
+	res1 = ft_printf("%s", "THIS IS A BASIC STRING");
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
+	res0 = printf("char at the end of the string %s", "THIS IS A BASIC STRING");
+	printf("\n");
+	res1 = ft_printf("char at the end of the string %s", "THIS IS A BASIC STRING");
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
+	printf("EMPTY STRING:\n");
+	res0 = printf("empty string:%s<", "");
+	printf("\n");
+	res1 = ft_printf("empty string:%s<", "");
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
+	printf("PRECISION 5:\n");
+	res0 = printf("empty string:%.5s<", "THIS IS A GOOD STRING");
+	printf("\n");
+	res1 = ft_printf("empty string:%.5s<", "THIS IS A GOOD STRING");
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
+	printf("PRECISION 0:\n");
+	res0 = printf("empty string:%.0s<", "THIS IS A GOOD STRING");
+	printf("\n");
+	res1 = ft_printf("empty string:%.0s<", "THIS IS A GOOD STRING");
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
+	printf("WIDTH 5:\n");
+	res0 = printf("empty string:%5s<", "THIS IS A GOOD STRING");
+	printf("\n");
+	res1 = ft_printf("empty string:%5s<", "THIS IS A GOOD STRING");
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
+	printf("WIDTH 25:\n");
+	res0 = printf("empty string:%25s<", "THIS IS A GOOD STRING");
+	printf("\n");
+	res1 = ft_printf("empty string:%25s<", "THIS IS A GOOD STRING");
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
+	printf("WIDTH 25 LEFT PADDED:\n");
+	res0 = printf("empty string:%-25s<", "THIS IS A GOOD STRING");
+	printf("\n");
+	res1 = ft_printf("empty string:%-25s<", "THIS IS A GOOD STRING");
+	printf("\n");
+	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
+
+
+
+
 	
 	printf("### int\n");
 	res0 = printf("%d", 114);
+	printf("\n");
 	res1 = ft_printf("%d", 114);
+	printf("\n");
 	printf("   printf: %d\nft_printf: %d\n\n", res0, res1);
 	res0 = printf("char at the end of the string %d", 114);
 	printf("\n");

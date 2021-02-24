@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_arg_char.c                                     :+:      :+:    :+:   */
+/*   ft_itoa.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/23 20:49:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/23 21:10:23 by msessa           ###   ########.fr       */
+/*   Created: 2021/02/16 20:08:41 by msessa            #+#    #+#             */
+/*   Updated: 2021/02/24 12:18:58 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef FT_ITOA_H
+# define FT_ITOA_H
+# include "../libft/libft.h"
+# include "../ft_printf.h"
 
-t_str_arg   ft_set_arg_c(t_str_part *sp)
-{
-	t_str_arg	str_arg;
+char		*ft_citoa(char n);
+char		*ft_sitoa(short n);
+char		*ft_litoa(long int n);
+char		*ft_llitoa(long long int n);
+char		*ft_ucitoa(unsigned char n);
+char		*ft_usitoa(unsigned short n);
+char		*ft_uitoa(unsigned int n);
+char		*ft_ulitoa(unsigned long int n);
+char		*ft_ullitoa(unsigned long long int n);
 
-	if (ft_isprint(sp->arg->val.v_char))
-	{
-		if(!(str_arg.str = malloc(sizeof(char) * 2)))
-			str_arg.str_len = -1;
-		else
-			str_arg.str_len = 1;
-		*(str_arg.str) = sp->arg->val.v_char;
-		*(str_arg.str + 1) = '\0';
-	}
-	else
-		str_arg.str_len = 0;
-	return (str_arg);
-}
-
-t_str_arg   ft_set_arg_s(t_str_part *sp)
-{
-
-
-}
+#endif

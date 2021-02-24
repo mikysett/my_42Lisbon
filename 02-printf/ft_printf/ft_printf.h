@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 20:08:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/23 21:07:23 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/24 12:18:40 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdarg.h>
 # include <stdbool.h>
 # include "libft/libft.h"
+# include "utilities/ft_itoa.h"
 
 typedef enum	e_str_type
 {
@@ -105,6 +106,8 @@ typedef union	u_val
 
 typedef struct	s_str_arg
 {
+	char	char_str[2];
+	bool	is_freeable;
 	char	*str;
 	int		str_len;
 }				t_str_arg;
@@ -124,5 +127,10 @@ bool		ft_is_conv(char c);
 void		ft_sp_lstadd_back(t_str_part **lst, t_str_part *new);
 
 t_str_arg   ft_set_arg_c(t_str_part *sp);
+t_str_arg   ft_set_arg_s(t_str_part *sp);
+t_str_arg   ft_set_arg_d(t_str_part *sp);
+t_str_arg   ft_set_arg_u(t_str_part *sp);
+
+int			ft_print_arg(t_str_part *sp, t_str_arg str_arg)
 
 #endif

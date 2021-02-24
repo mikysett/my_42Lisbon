@@ -30,7 +30,7 @@ t_str_arg   ft_set_str_arg(t_str_part *sp)
 	else if (sp->arg->conv == 'e')
 		return (ft_set_arg_e(sp));
 	else
-		return ((t_str_arg){ str : 0, str_len : -1 });
+		return ((t_str_arg){ str : 0, is_freeable : false, str_len : -1 });
 }
 
 int			ft_printer(t_str_part *sp)
@@ -49,8 +49,9 @@ int			ft_printer(t_str_part *sp)
 			str_arg = ft_set_str_arg(sp);
 			if (str_arg.str_len == -1)
 				return (-1);
-			print_result = ft_print_arg(sp, str_arg);
-			free(str_arg.str);
+		print_result = ft_print_arg(sp, str_arg);
+			if (str_arg.is_freeable)
+				free(str_arg.str);
 		}
 		if (print_result < 0)
 			return (-1);
