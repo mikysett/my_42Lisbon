@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 18:05:21 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/24 20:29:53 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/27 14:59:06 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_set_arg_width(t_arg *arg, char *str)
 		return (str + 1);
 	}
 	arg->w_as_arg = false;
-	arg->width = 1;
+	arg->width = 0;
 	if (ft_isdigit(*str))
 	{
 		arg->width = ft_atoi(str);
@@ -50,17 +50,17 @@ char	*ft_set_arg_width(t_arg *arg, char *str)
 char	*ft_set_arg_precision(t_arg *arg, char *str)
 {
 	arg->precision_set = false;
+	arg->p_as_arg = false;
 	if (*str != '.')
 		return (str);
 	arg->precision_set = true;
-	arg->precision = 6;
-	arg->p_as_arg = false;
 	str++;
 	if (*str == '*')
 	{
 		arg->p_as_arg = true;
 		return (str + 1);
 	}
+	arg->precision = 6;
 	if (ft_isdigit(*str))
 	{
 		arg->precision = ft_atoi(str);
@@ -102,7 +102,8 @@ char	*ft_set_arg_lenmod(t_arg *arg, char *str)
 char	*ft_set_arg_conv(t_arg *arg, char *str)
 {
 	if (*str == 'c' || *str == 's' || *str == 'p' || *str == 'd'
-		|| *str == 'i' || *str == 'u' || *str == 'x' || *str == 'X')
+		|| *str == 'i' || *str == 'u' || *str == 'x' || *str == 'X'
+		|| *str == 'n')
 	{
 		arg->conv = *str;
 		return (str + 1);

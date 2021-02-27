@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 18:19:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/24 16:46:54 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/27 13:12:44 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ bool			ft_set_args(va_list ap, t_str_part *sp)
 {
 	va_list ap2;
 	t_arg	*arg;
+
 	va_copy(ap2, ap);
 	while (sp)
 	{
@@ -44,13 +45,15 @@ bool			ft_set_args(va_list ap, t_str_part *sp)
 				|| (arg->p_as_arg && !get_p(arg, va_arg(ap2, int))))
 				return (false);
 			if (arg->type == tp_char)
-				arg->val.v_char = va_arg(ap2, char);
+				arg->val.v_char = va_arg(ap2, int);
 			else if (arg->type == tp_uchar)
-				arg->val.v_uchar = va_arg(ap2, unsigned char);
+				arg->val.v_uchar = (unsigned char)va_arg(ap2, int);
+			else if (arg->type == tp_wint)
+				arg->val.v_wint = va_arg(ap2, wchar_t);
 			else if (arg->type == tp_short)
-				arg->val.v_short = va_arg(ap2, short);
+				arg->val.v_short = (short)va_arg(ap2, int);
 			else if (arg->type == tp_ushort)
-				arg->val.v_ushort = va_arg(ap2, unsigned short);
+				arg->val.v_ushort = (unsigned short)va_arg(ap2, int);
 			else if (arg->type == tp_char_ptr)
 				arg->val.v_char_ptr = va_arg(ap2, char *);
 			else if (arg->type == tp_ptr)

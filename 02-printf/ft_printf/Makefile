@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:13:08 by msessa            #+#    #+#              #
-#    Updated: 2021/02/24 19:54:05 by msessa           ###   ########.fr        #
+#    Updated: 2021/02/26 19:09:11 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,11 @@ SRCS	=	ft_printf.c \
 			printer/ft_print_arg.c \
 			printer/ft_print_padding.c \
 			printer/ft_printer.c \
-			printer/set_arg_char.c \
-			printer/set_arg_int.c \
+			printer/ft_set_arg_char.c \
+			printer/ft_set_arg_int.c \
+			printer/ft_set_hex.c \
+			itoa/ft_llitoa_len.c \
+			itoa/ft_ullitoa_len.c \
 			itoa/ft_citoa.c \
 			itoa/ft_litoa.c \
 			itoa/ft_llitoa.c \

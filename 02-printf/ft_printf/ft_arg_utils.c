@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 15:46:22 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/24 16:43:56 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/27 12:30:11 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ bool		ft_is_conv(char c)
 
 static char	*ft_set_arg_type_std(t_arg *arg, char *str)
 {
-	if (arg->conv == 'd' || arg->conv == 'i')
+	if (arg->conv == 'd' || arg->conv == 'i' || arg->conv == 'n')
 		arg->type = tp_int;
 	else if (arg->conv == 'u' || arg->conv == 'x' || arg->conv == 'X')
 		arg->type = tp_uint;
+	else if (arg->conv == 'p')
+		arg->type = tp_ullint;
 	else if (arg->conv == 'c')
-		arg->type = tp_uchar;
+		arg->type = tp_char;
 	else if (arg->conv == 's')
 		arg->type = tp_char_ptr;
 	else
@@ -38,39 +40,74 @@ static char	*ft_set_arg_type_std(t_arg *arg, char *str)
 
 static char	*ft_set_arg_type_l(t_arg *arg, char *str)
 {
-	if (arg->len_mod == l && (arg->conv == 'd' || arg->conv == 'i'))
-		arg->type = tp_lint;
-	else if (arg->len_mod == l && (arg->conv == 'u'
-		|| arg->conv == 'x' || arg->conv == 'X'))
-		arg->type = tp_ulint;
-	else if (arg->len_mod == ll && (arg->conv == 'd' || arg->conv == 'i'))
-		arg->type = tp_llint;
-	else if (arg->len_mod == ll && (arg->conv == 'u'
-		|| arg->conv == 'x' || arg->conv == 'X'))
-		arg->type = tp_ullint;
-	else if (arg->len_mod == l && arg->conv == 'c')
-		arg->type = tp_wint;
-	else if (arg->len_mod == l && arg->conv == 's')
-		arg->type = tp_wchar_ptr;
-	else
-		return (0);
+	if (arg->len_mod == ll)
+	{
+		if (arg->conv == 'd' || arg->conv == 'i' || arg->conv == 'n')
+			arg->type = tp_llint;
+		else if (arg->conv == 'u' || arg->conv == 'p'
+			|| arg->conv == 'x' || arg->conv == 'X')
+			arg->type = tp_ullint;
+		else
+			return (0);
+	}
+	else // if (arg->len_mod == l)
+	{
+		if (arg->conv == 'd' || arg->conv == 'i' || arg->conv == 'n')
+			arg->type = tp_lint;
+		else if (arg->conv == 'p')
+			arg->type = tp_ullint;
+		else if (arg->conv == 'u' || arg->conv == 'x' || arg->conv == 'X')
+			arg->type = tp_ulint;
+		else if (arg->conv == 'c')
+			arg->type = tp_wint;
+		else if (arg->conv == 's')
+			arg->type = tp_wchar_ptr;
+		else
+			return (0);
+	}
+	// if (arg->len_mod == l && (arg->conv == 'd' || arg->conv == 'i' || arg->conv == 'n'))
+	// 	arg->type = tp_lint;
+	// else if (arg->len_mod == l && (arg->conv == 'u'
+	// 	|| arg->conv == 'x' || arg->conv == 'X'))
+	// 	arg->type = tp_ulint;
+	// else if (arg->len_mod == l && arg->conv == 'p')
+	// 	arg->type = tp_ullint;
+	// else if (arg->len_mod == ll && (arg->conv == 'd' || arg->conv == 'i' || arg->conv == 'n'))
+	// 	arg->type = tp_llint;
+	// else if (arg->len_mod == ll && (arg->conv == 'u' || arg->conv == 'p'
+	// 	|| arg->conv == 'x' || arg->conv == 'X'))
+	// 	arg->type = tp_ullint;
+	// else if (arg->len_mod == l && arg->conv == 'c')
+	// 	arg->type = tp_wint;
+	// else if (arg->len_mod == l && arg->conv == 's')
+	// 	arg->type = tp_wchar_ptr;
+	// else
+	// 	return (0);
 	return (str);	
 }
 
 static char	*ft_set_arg_type_h(t_arg *arg, char *str)
 {
-	if (arg->len_mod == h && (arg->conv == 'd' || arg->conv == 'i'))
-		arg->type = tp_short;
-	else if (arg->len_mod == h && (arg->conv == 'u'
-		|| arg->conv == 'x' || arg->conv == 'X'))
-		arg->type = tp_ushort;
-	else if (arg->len_mod == hh && (arg->conv == 'd' || arg->conv == 'i'))
-		arg->type = tp_char;
-	else if (arg->len_mod == hh && (arg->conv == 'u'
-		|| arg->conv == 'x' || arg->conv == 'X'))
-		arg->type = tp_uchar;
-	else
-		return (0);
+	if (arg->len_mod == hh)
+	{
+		if (arg->conv == 'd' || arg->conv == 'i' || arg->conv == 'n')
+			arg->type = tp_char;
+		else if (arg->conv == 'u' || arg->conv == 'p'
+			|| arg->conv == 'x' || arg->conv == 'X')
+			arg->type = tp_uchar;
+		else
+			return (0);
+	}
+	else // if (arg->len_mod == h)
+	{
+		if (arg->conv == 'd' || arg->conv == 'i' || arg->conv == 'n')
+			arg->type = tp_short;
+		else if (arg->conv == 'u' || arg->conv == 'p'
+			|| arg->conv == 'x' || arg->conv == 'X')
+			arg->type = tp_ushort;
+		else
+			return (0);
+	}
 	return (str);	
 }
 

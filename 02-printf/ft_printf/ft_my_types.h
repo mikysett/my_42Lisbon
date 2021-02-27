@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 20:08:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/24 17:04:13 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/27 10:43:03 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 typedef enum	e_str_type
 {
 	string,
-	argument
+	argument,
+	print_counter
 }				t_str_type;
 
 typedef enum	e_arg_type
@@ -73,7 +74,7 @@ typedef union	u_val
 	unsigned int			v_uint;
 	unsigned long int		v_ulint;
 	unsigned long long int	v_ullint;
-	int						v_wint;
+	wchar_t					v_wint;
 	wchar_t					*v_wchar_ptr;
 }				t_val;
 
@@ -81,7 +82,7 @@ typedef struct	s_arg
 {
 	t_arg_type	type;
 	t_val		val;
-	bool		flags[5];
+	bool		flags[NB_FLAGS];
 	int			width;
 	bool		w_as_arg;
 	bool		precision_set;
@@ -103,7 +104,6 @@ typedef struct	s_str_part
 
 typedef struct	s_str_arg
 {
-	char	char_str[2];
 	bool	is_freeable;
 	char	*str;
 	int		str_len;

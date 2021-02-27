@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 20:08:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/24 20:05:29 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/26 12:07:49 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ t_str_arg   ft_set_arg_c(t_str_part *sp);
 t_str_arg   ft_set_arg_s(t_str_part *sp);
 t_str_arg   ft_set_arg_d(t_str_part *sp);
 t_str_arg   ft_set_arg_u(t_str_part *sp);
-
+t_str_arg   ft_set_arg_x(t_str_part *sp);
+t_str_arg   ft_set_arg_p(t_str_part *sp);
 
 
 #endif

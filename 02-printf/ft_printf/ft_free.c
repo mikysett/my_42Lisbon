@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:31:40 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/24 16:45:48 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/27 15:13:23 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void		ft_free_padding(void)
 	padding = ft_get_padding(0, ' ');
 	if (padding)
 		free(padding);
+	ft_get_padding(-1, ' ');
 }
 
 t_str_part	**ft_free_str_part(t_str_part **str_part)
@@ -36,7 +37,7 @@ t_str_part	**ft_free_str_part(t_str_part **str_part)
 		return (0);
 	while (*str_part)
 	{
-		if ((*str_part)->str_type == argument)
+		if ((*str_part)->str_type != string)
 			ft_free_arg((*str_part)->arg);
 		next = (*str_part)->next;
 		free(*str_part);
