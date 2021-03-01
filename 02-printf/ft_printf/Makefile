@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:13:08 by msessa            #+#    #+#              #
-#    Updated: 2021/02/26 19:09:11 by msessa           ###   ########.fr        #
+#    Updated: 2021/03/01 17:24:42 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,18 +23,10 @@ SRCS	=	ft_printf.c \
 			printer/ft_printer.c \
 			printer/ft_set_arg_char.c \
 			printer/ft_set_arg_int.c \
-			printer/ft_set_hex.c \
-			itoa/ft_llitoa_len.c \
-			itoa/ft_ullitoa_len.c \
-			itoa/ft_citoa.c \
-			itoa/ft_litoa.c \
-			itoa/ft_llitoa.c \
-			itoa/ft_sitoa.c \
-			itoa/ft_ucitoa.c \
-			itoa/ft_uitoa.c \
-			itoa/ft_ulitoa.c \
-			itoa/ft_ullitoa.c \
-			itoa/ft_usitoa.c \
+			number_printers/ft_set_hex.c \
+			number_printers/ft_set_hex_utils.c \
+			number_printers/ft_llitoa_len.c \
+			number_printers/ft_ullitoa_len.c \
 			libft/ft_memset.c \
 			libft/ft_bzero.c \
 			libft/ft_memcpy.c \
@@ -81,7 +73,11 @@ SRCS	=	ft_printf.c \
 
 BSRCS	:=	$(SRCS) \
 
+TSRCS	:=	$(SRCS) main.c
+
 OBJS	=	$(SRCS:.c=.o)
+
+TOBJS	:=	$(TSRCS:.c=.o)
 
 BOBJS	=	$(BSRCS:.c=.o)
 
@@ -89,7 +85,7 @@ NAME	=	libftprintf.a
 
 DEPS	=	ft_printf.h \
 			ft_my_types.h \
-			itoa/ft_itoa.h \
+			number_printers/ft_number_printers.h \
 			printer/ft_printer.h \
 			libft/libft.h \
 
@@ -106,8 +102,8 @@ $(NAME):	$(DEPS) $(OBJS)
 
 all:		$(NAME)
 
-test:		$(DEPS) $(OBJS)
-			$(CC) $(CFLAGS) -fsanitize=address $(OBJS) -o test
+test:		$(DEPS) $(TOBJS)
+			$(CC) $(CFLAGS) -fsanitize=address $(TOBJS) -o test
 
 clean:
 			$(RM) $(OBJS)

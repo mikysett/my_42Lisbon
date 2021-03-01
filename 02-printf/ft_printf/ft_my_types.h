@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 20:08:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/27 10:43:03 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/01 17:27:41 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef union	u_val
 	short					v_short;
 	unsigned short			v_ushort;
 	char					*v_char_ptr;
-	void					*v_ptr; // TO BE CHECKED
+	void					*v_ptr;
 	int						v_int;
 	long int				v_lint;
 	long long int			v_llint;

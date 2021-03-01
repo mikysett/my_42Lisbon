@@ -6,15 +6,11 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 22:25:06 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/16 20:01:35 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/01 18:07:00 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-// #include <stdio.h>
-// #include <sys/types.h>
-// #include <sys/stat.h>
-// #include <fcntl.h>
 
 size_t		ft_partial_len(char *buf)
 {
@@ -53,7 +49,6 @@ static char	*ft_update_line(char *buf, char *line)
 	return (bigger_line);
 }
 
-
 static int	ft_update_buf(char *buf)
 {
 	size_t	buf_chunk;
@@ -81,43 +76,6 @@ static int	ft_free_exit(char **line)
 	return (-1);
 }
 
-// SMALL TEST TO OPTIMIZE WHEN SMALL BUFFER AND BIG LINES
-// static char	*ft_update_line(char *buf, char *line)
-// {
-// 	size_t	line_len;
-// 	int		i;
-
-// 	line_len = ft_strlen(line);
-// 	i = 0;
-// 	while (*buf && *buf != '\n')
-// 	{
-// 		line[line_len + i] = *buf++;
-// 		i++;
-// 	}
-// 	line[line_len + i] = '\0';
-// 	return (line);
-// }
-
-// SMALL TEST TO OPTIMIZE WHEN SMALL BUFFER AND BIG LINES
-// static int	ft_resize_line(char **line)
-// {
-// 	return (1);
-// 	char	*new_line;
-// 	int		i;
-
-// 	new_line = malloc(sizeof(char) * (ft_strlen(*line) + 1));
-// 	i = 0;
-// 	while ((*line)[i])
-// 	{
-// 		new_line[i] = (*line)[i];
-// 		i++;
-// 	}
-// 	new_line[i] = '\0';
-// 	free(*line);
-// 	*line = new_line;
-// 	return (1);
-// }
-
 int			get_next_line(int fd, char **line)
 {
 	static char	buf[BUFFER_SIZE + 1] = { '\0' };
@@ -144,30 +102,3 @@ int			get_next_line(int fd, char **line)
 		buf[read_out] = '\0';
 	}
 }
-
-// int		main(int argc, char **argv)
-// {
-// 	char *line;
-// 	int fd;
-// 	int res_gnl;
-// 	int i;
-
-// 	i = 1;
-// 	while (i < argc)
-// 	{
-// 		fd = open(argv[i], O_RDONLY);
-// 		while ((res_gnl = get_next_line(STDIN_FILENO, &line)) > 0)
-// 		{
-// 			printf("res: %d, line: %s\n", res_gnl, line);
-// 			free(line);
-// 		}
-// 		close(fd);
-// 		i++;
-// 		if (line)
-// 		{
-// 			printf("res: %d, LAST: %s\n", res_gnl, line);
-// 			free(line);
-// 		}
-// 	}
-// 	return (0);
-// }

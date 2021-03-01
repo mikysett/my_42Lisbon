@@ -6,13 +6,14 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 12:16:49 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/27 10:49:52 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/01 17:58:02 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printer.h"
 
-int		ft_print_arg(t_str_part *sp, t_str_arg sa)
+long long int		ft_print_arg(t_str_part *sp, t_str_arg sa,
+	long long int print_count)
 {
 	int padding_len;
 
@@ -33,9 +34,9 @@ int		ft_print_arg(t_str_part *sp, t_str_arg sa)
 			if (!ft_print_padding(padding_len, false))
 				return (-1);
 		}
-		return (padding_len + sa.str_len);
+		return (print_count + padding_len + sa.str_len);
 	}
 	if (sa.str_len)
 		write(1, sa.str, sa.str_len);
-	return (sa.str_len);
+	return (print_count + sa.str_len);
 }

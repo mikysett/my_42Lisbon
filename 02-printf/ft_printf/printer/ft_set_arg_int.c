@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 20:49:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/27 10:51:55 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/01 17:12:44 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,25 @@ static int	ft_set_nb_len(t_arg *arg)
 		return (1);
 }
 
-t_str_arg   ft_set_arg_d(t_str_part *sp)
+t_str_arg	ft_set_arg_d(t_str_part *sp)
 {
 	t_arg		*arg;
 	t_str_arg	sa;
 	t_len_mod	l_mod;
 	int			len;
-	
+
 	arg = sp->arg;
 	len = ft_set_nb_len(arg);
 	l_mod = arg->len_mod;
 	if (l_mod == lm_none)
 		sa.str = ft_llitoa_len(arg->val.v_int, len, arg);
-	else if(l_mod == l)
+	else if (l_mod == l)
 		sa.str = ft_llitoa_len(arg->val.v_lint, len, arg);
-	else if(l_mod == ll)
+	else if (l_mod == ll)
 		sa.str = ft_llitoa_len(arg->val.v_llint, len, arg);
-	else if(l_mod == h)
+	else if (l_mod == h)
 		sa.str = ft_llitoa_len(arg->val.v_short, len, arg);
-	else if(l_mod == hh)
+	else if (l_mod == hh)
 		sa.str = ft_llitoa_len(arg->val.v_char, len, arg);
 	if (!sa.str)
 		return ((t_str_arg){ .str = 0, .is_freeable = false, .str_len = -1 });
@@ -53,25 +53,25 @@ t_str_arg   ft_set_arg_d(t_str_part *sp)
 	return (sa);
 }
 
-t_str_arg   ft_set_arg_u(t_str_part *sp)
+t_str_arg	ft_set_arg_u(t_str_part *sp)
 {
 	t_arg		*arg;
 	t_str_arg	sa;
 	t_len_mod	l_mod;
 	int			len;
-	
+
 	arg = sp->arg;
 	len = ft_set_nb_len(arg);
 	l_mod = arg->len_mod;
 	if (l_mod == lm_none)
 		sa.str = ft_ullitoa_len(arg->val.v_uint, len);
-	else if(l_mod == l)
+	else if (l_mod == l)
 		sa.str = ft_ullitoa_len(arg->val.v_ulint, len);
-	else if(l_mod == ll)
+	else if (l_mod == ll)
 		sa.str = ft_ullitoa_len(arg->val.v_ullint, len);
-	else if(l_mod == h)
+	else if (l_mod == h)
 		sa.str = ft_ullitoa_len(arg->val.v_ushort, len);
-	else if(l_mod == hh)
+	else if (l_mod == hh)
 		sa.str = ft_ullitoa_len(arg->val.v_uchar, len);
 	if (!sa.str)
 		return ((t_str_arg){ .str = 0, .is_freeable = false, .str_len = -1 });
@@ -80,20 +80,16 @@ t_str_arg   ft_set_arg_u(t_str_part *sp)
 	return (sa);
 }
 
-
-t_str_arg   ft_set_arg_x(t_str_part *sp)
+t_str_arg	ft_set_arg_x(t_str_part *sp)
 {
 	t_arg		*arg;
 	t_str_arg	sa;
 	t_len_mod	l_mod;
 	int			len;
 	char		hex_c;
-	
+
 	arg = sp->arg;
-	if (arg->conv == 'X')
-		hex_c = 'A';
-	else
-		hex_c = 'a';
+	hex_c = arg->conv == 'X' ? 'A' : 'a';
 	len = ft_set_nb_len(arg);
 	l_mod = arg->len_mod;
 	if (l_mod == lm_none)
@@ -113,7 +109,7 @@ t_str_arg   ft_set_arg_x(t_str_part *sp)
 	return (sa);
 }
 
-t_str_arg   ft_set_arg_p(t_str_part *sp)
+t_str_arg	ft_set_arg_p(t_str_part *sp)
 {
 	if (sp->arg->val.v_ullint == 0)
 		return (ft_set_arg_s(sp));

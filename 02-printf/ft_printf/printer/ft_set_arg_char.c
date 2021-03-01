@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 20:49:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/27 11:17:33 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/01 17:30:54 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,31 @@
 static char	*ft_get_nil(void)
 {
 	static char nil_str[6] = "(nil)";
+
 	return (nil_str);
 }
 
 static char	*ft_get_null(void)
 {
 	static char null_str[7] = "(null)";
+
 	return (null_str);
 }
 
-t_str_arg   ft_set_arg_c(t_str_part *sp)
+t_str_arg	ft_set_arg_c(t_str_part *sp)
 {
 	t_str_arg	str_arg;
 
 	str_arg.str_len = 1;
 	if (sp->arg->len_mod == l)
-		str_arg.str = &(sp->arg->val.v_wint);
+		str_arg.str = (char *)&(sp->arg->val.v_wint);
 	else
 		str_arg.str = &(sp->arg->val.v_char);
 	str_arg.is_freeable = false;
 	return (str_arg);
 }
 
-t_str_arg   ft_set_arg_s(t_str_part *sp)
+t_str_arg	ft_set_arg_s(t_str_part *sp)
 {
 	int			str_size;
 	t_arg		*arg;

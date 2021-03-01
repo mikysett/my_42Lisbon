@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 15:46:22 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/27 12:30:11 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/01 16:35:46 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*ft_set_arg_type_std(t_arg *arg, char *str)
 		arg->type = tp_char_ptr;
 	else
 		return (0);
-	return (str);	
+	return (str);
 }
 
 static char	*ft_set_arg_type_l(t_arg *arg, char *str)
@@ -44,18 +44,15 @@ static char	*ft_set_arg_type_l(t_arg *arg, char *str)
 	{
 		if (arg->conv == 'd' || arg->conv == 'i' || arg->conv == 'n')
 			arg->type = tp_llint;
-		else if (arg->conv == 'u' || arg->conv == 'p'
-			|| arg->conv == 'x' || arg->conv == 'X')
+		else if (arg->conv == 'u' || arg->conv == 'x' || arg->conv == 'X')
 			arg->type = tp_ullint;
 		else
 			return (0);
 	}
-	else // if (arg->len_mod == l)
+	else
 	{
 		if (arg->conv == 'd' || arg->conv == 'i' || arg->conv == 'n')
 			arg->type = tp_lint;
-		else if (arg->conv == 'p')
-			arg->type = tp_ullint;
 		else if (arg->conv == 'u' || arg->conv == 'x' || arg->conv == 'X')
 			arg->type = tp_ulint;
 		else if (arg->conv == 'c')
@@ -65,25 +62,7 @@ static char	*ft_set_arg_type_l(t_arg *arg, char *str)
 		else
 			return (0);
 	}
-	// if (arg->len_mod == l && (arg->conv == 'd' || arg->conv == 'i' || arg->conv == 'n'))
-	// 	arg->type = tp_lint;
-	// else if (arg->len_mod == l && (arg->conv == 'u'
-	// 	|| arg->conv == 'x' || arg->conv == 'X'))
-	// 	arg->type = tp_ulint;
-	// else if (arg->len_mod == l && arg->conv == 'p')
-	// 	arg->type = tp_ullint;
-	// else if (arg->len_mod == ll && (arg->conv == 'd' || arg->conv == 'i' || arg->conv == 'n'))
-	// 	arg->type = tp_llint;
-	// else if (arg->len_mod == ll && (arg->conv == 'u' || arg->conv == 'p'
-	// 	|| arg->conv == 'x' || arg->conv == 'X'))
-	// 	arg->type = tp_ullint;
-	// else if (arg->len_mod == l && arg->conv == 'c')
-	// 	arg->type = tp_wint;
-	// else if (arg->len_mod == l && arg->conv == 's')
-	// 	arg->type = tp_wchar_ptr;
-	// else
-	// 	return (0);
-	return (str);	
+	return (str);
 }
 
 static char	*ft_set_arg_type_h(t_arg *arg, char *str)
@@ -98,7 +77,7 @@ static char	*ft_set_arg_type_h(t_arg *arg, char *str)
 		else
 			return (0);
 	}
-	else // if (arg->len_mod == h)
+	else
 	{
 		if (arg->conv == 'd' || arg->conv == 'i' || arg->conv == 'n')
 			arg->type = tp_short;
@@ -108,7 +87,7 @@ static char	*ft_set_arg_type_h(t_arg *arg, char *str)
 		else
 			return (0);
 	}
-	return (str);	
+	return (str);
 }
 
 char		*ft_set_arg_type(t_arg *arg, char *str)
@@ -117,6 +96,6 @@ char		*ft_set_arg_type(t_arg *arg, char *str)
 		return (ft_set_arg_type_std(arg, str));
 	else if (arg->len_mod == l || arg->len_mod == ll)
 		return (ft_set_arg_type_l(arg, str));
-	else // if (arg->len_mod == h || arg->len_mod == hh)
+	else
 		return (ft_set_arg_type_h(arg, str));
 }

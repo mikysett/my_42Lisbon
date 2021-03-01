@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:20:28 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/27 14:02:46 by msessa           ###   ########.fr       */
+/*   Updated: 2021/02/27 15:54:57 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,14 @@ static char		*ft_add_arg(t_str_part **str_part, char *o_format)
 		&& (o_format = ft_set_arg_conv(new_arg, o_format))
 		&& (o_format = ft_set_arg_type(new_arg, o_format)))
 	{
+		if (new_arg->conv != 'n')
+			new_str->str_type = argument;
+		else
+			new_str->str_type = print_counter;
+		ft_sp_lstadd_back(str_part, new_str);
 	}
-	if (new_arg->conv != 'n')
-		new_str->str_type = argument;
 	else
-		new_str->str_type = print_counter;
-	ft_sp_lstadd_back(str_part, new_str);
+		ft_free_one_str_arg(new_str);
 	return (o_format);
 }
 
