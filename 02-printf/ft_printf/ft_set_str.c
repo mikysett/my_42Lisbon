@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 11:20:28 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/27 15:54:57 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/02 15:20:32 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ static char		*ft_add_arg(t_str_part **str_part, char *o_format)
 		|| !(new_arg = malloc(sizeof(t_arg))))
 		return (0);
 	new_str->arg = new_arg;
-	if ((o_format = ft_set_arg_flags(new_arg, o_format))
-		&& (o_format = ft_set_arg_width(new_arg, o_format))
-		&& (o_format = ft_set_arg_precision(new_arg, o_format))
-		&& (o_format = ft_set_arg_lenmod(new_arg, o_format))
-		&& (o_format = ft_set_arg_conv(new_arg, o_format))
+	o_format = ft_set_arg_flags(new_arg, o_format);
+	o_format = ft_set_arg_width(new_arg, o_format);
+	o_format = ft_set_arg_precision(new_arg, o_format);
+	o_format = ft_set_arg_lenmod(new_arg, o_format);
+	if ((o_format = ft_set_arg_conv(new_arg, o_format))
 		&& (o_format = ft_set_arg_type(new_arg, o_format)))
 	{
 		if (new_arg->conv != 'n')
@@ -90,7 +90,7 @@ t_str_part		**ft_set_str(char *format)
 		else
 			o_format++;
 	}
-	if (format != o_format && !ft_add_str_part(str_part, format, o_format))
+	if (format != o_format && !ft_add_str(str_part, format, o_format))
 		return (ft_free_str_part(str_part));
 	return (str_part);
 }

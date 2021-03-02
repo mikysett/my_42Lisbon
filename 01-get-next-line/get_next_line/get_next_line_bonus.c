@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 22:25:06 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/02 17:38:35 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/02 17:34:49 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-static size_t	ft_partial_len(char *buf)
-{
-	char *o_buf;
-
-	o_buf = buf;
-	while (*buf && *buf != '\n')
-		buf++;
-	return (buf - o_buf);
-}
-
-static char		*ft_update_line(char *buf, char *line)
+static char	*ft_update_line(char *buf, char *line)
 {
 	size_t	buf_chunk;
 	char	*bigger_line;
@@ -49,7 +39,7 @@ static char		*ft_update_line(char *buf, char *line)
 	return (bigger_line);
 }
 
-static int		ft_update_buf(char *buf)
+static int	ft_update_buf(char *buf)
 {
 	size_t	buf_chunk;
 	size_t	i;
@@ -69,35 +59,61 @@ static int		ft_update_buf(char *buf)
 	return (1);
 }
 
-static int		ft_free_exit(char **line)
+static int	ft_init_vars(int fd, char *buf[1025], char **line)
 {
-	free(*line);
-	*line = 0;
-	return (-1);
+	if (!buf[fd])
+	{
+		buf[fd] = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		if (!buf[fd])
+			return (0);
+		buf[fd][0] = '\0';
+	}
+	*line = malloc(sizeof(char) * 1);
+	if (!*line)
+		return (0);
+	**line = '\0';
+	return (1);
 }
 
-int				get_next_line(int fd, char **line)
+static int	ft_update_outputs(int fd, char *buf[1025], char **line)
 {
-	static char	buf[BUFFER_SIZE + 1] = { '\0' };
-	int			read_out;
+	if (*buf[fd] != '\0')
+	{
+		*line = ft_update_line(buf[fd], *line);
+		if (!*line)
+		{
+			free(buf[fd]);
+			buf[fd] = 0;
+			return (-1);
+		}
+		if (ft_update_buf(buf[fd]))
+			return (1);
+	}
+	return (0);
+}
 
-	if (!line || !(*line = malloc(sizeof(char) * 1)))
+int			get_next_line(int fd, char **line)
+{
+	static char	*buf[1025] = { 0 };
+	int			read_out;
+	int			update;
+
+	if (!line || fd < 0 || fd > 1024 || !ft_init_vars(fd, buf, line))
 		return (-1);
-	**line = '\0';
 	while (1)
 	{
-		if (*buf != '\0')
-		{
-			if (!((*line = ft_update_line(buf, *line))))
-				return (-1);
-			if (ft_update_buf(buf))
-				return (1);
-		}
-		read_out = read(fd, buf, BUFFER_SIZE);
+		update = ft_update_outputs(fd, buf, line);
+		if (update != 0)
+			return (update);
+		read_out = read(fd, buf[fd], BUFFER_SIZE);
 		if (read_out < 0)
 			return (ft_free_exit(line));
 		else if (read_out == 0)
+		{
+			free(buf[fd]);
+			buf[fd] = 0;
 			return (0);
-		buf[read_out] = '\0';
+		}
+		buf[fd][read_out] = '\0';
 	}
 }

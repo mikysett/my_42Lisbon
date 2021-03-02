@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 20:08:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/01 17:27:41 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/02 15:09:09 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_MY_TYPES_H
 # include <stdlib.h>
 # include <stdbool.h>
-# define NB_FLAGS 5
+# define NB_FLAGS 6
 
 typedef enum	e_str_type
 {

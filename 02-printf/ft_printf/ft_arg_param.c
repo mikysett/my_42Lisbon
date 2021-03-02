@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 18:05:21 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/01 16:35:17 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/02 15:16:45 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ char	*ft_set_arg_precision(t_arg *arg, char *str)
 		arg->p_as_arg = true;
 		return (str + 1);
 	}
-	arg->precision = 6;
 	if (ft_isdigit(*str))
 	{
 		arg->precision = ft_atoi(str);
@@ -75,28 +74,28 @@ char	*ft_set_arg_precision(t_arg *arg, char *str)
 
 char	*ft_set_arg_lenmod(t_arg *arg, char *str)
 {
-	if (*str == 'l' && *(str + 1) == 'l')
+	if (*str != 'l' && *str != 'h')
 	{
-		arg->len_mod = ll;
-		return (str + 2);
+		arg->len_mod = lm_none;
+		return (str);
 	}
 	if (*str == 'l')
 	{
+		if (*(str + 1) == 'l')
+		{
+			arg->len_mod = ll;
+			return (str + 2);
+		}
 		arg->len_mod = l;
 		return (str + 1);
 	}
-	if (*str == 'h' && *(str + 1) == 'h')
+	if (*(str + 1) == 'h')
 	{
 		arg->len_mod = hh;
 		return (str + 2);
 	}
-	if (*str == 'h')
-	{
-		arg->len_mod = h;
-		return (str + 1);
-	}
-	arg->len_mod = lm_none;
-	return (str);
+	arg->len_mod = h;
+	return (str + 1);
 }
 
 char	*ft_set_arg_conv(t_arg *arg, char *str)

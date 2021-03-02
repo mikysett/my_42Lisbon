@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 14:16:53 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/01 17:36:09 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/02 15:23:08 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,12 @@ char		*ft_get_padding(int len, char c)
 bool		ft_print_padding(size_t len, bool is_zero)
 {
 	char	*padding;
-	char	c;
 
 	if (is_zero)
-		c = '0';
+		padding = ft_get_padding(len, '0');
 	else
-		c = ' ';
-	if (!(padding = ft_get_padding(len, c)))
+		padding = ft_get_padding(len, ' ');
+	if (!padding)
 		return (false);
 	write(1, padding, len);
 	return (true);
