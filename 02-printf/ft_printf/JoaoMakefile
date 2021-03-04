@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    JoaoMakefile                                       :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jcassis <jcassis@student.42lisboa>         +#+  +:+       +#+         #
+#    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/12 12:58:58 by jcassis           #+#    #+#              #
-#    Updated: 2021/02/17 11:56:35 by jcassis          ###   ########.fr        #
+#    Updated: 2021/03/04 14:25:19 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,8 @@ $(NAME): $(OBJS)
 
 $(DIR_O)/%.o: $(DIR_S)/%.c $(HEADER)/ft_printf.h
 	@mkdir -p obj
+	@mkdir -p obj/printer
+	@mkdir -p obj/number_printers
 	@$(CC) $(FLAGS) -I $(HEADER) -o $@ -c $<
 
 norme:

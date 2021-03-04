@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 22:25:06 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/02 17:38:35 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/04 12:25:23 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int				get_next_line(int fd, char **line)
 	static char	buf[BUFFER_SIZE + 1] = { '\0' };
 	int			read_out;
 
-	if (!line || !(*line = malloc(sizeof(char) * 1)))
+	if (!BUFFER_SIZE || !line || !(*line = malloc(sizeof(char) * 1)))
 		return (-1);
 	**line = '\0';
 	while (1)

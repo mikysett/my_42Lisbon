@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   ft_list_str_part.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/15 22:28:01 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/04 13:31:46 by msessa           ###   ########.fr       */
+/*   Created: 2021/02/18 13:03:27 by msessa            #+#    #+#             */
+/*   Updated: 2021/03/04 14:22:50 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
-# include <unistd.h>
-# include <stdlib.h>
+#include "../includes/ft_printf.h"
 
-int		get_next_line(int fd, char **line);
-size_t	ft_strlen(const char *s);
-size_t	ft_partial_len(char *buf);
-int		ft_free_exit(int fd, char *buf[1025], char **line);
-
-#endif
+void	ft_sp_lstadd_back(t_str_part **lst, t_str_part *new)
+{
+	new->next = 0;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	while ((*lst)->next)
+		(lst) = &((*lst)->next);
+	(*lst)->next = new;
+}

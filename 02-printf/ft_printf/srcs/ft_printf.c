@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/15 22:28:01 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/04 13:31:46 by msessa           ###   ########.fr       */
+/*   Created: 2021/02/16 20:09:10 by msessa            #+#    #+#             */
+/*   Updated: 2021/03/04 16:34:54 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
-# include <unistd.h>
-# include <stdlib.h>
+#include "../includes/ft_printf.h"
 
-int		get_next_line(int fd, char **line);
-size_t	ft_strlen(const char *s);
-size_t	ft_partial_len(char *buf);
-int		ft_free_exit(int fd, char *buf[1025], char **line);
+int				ft_printf(const char *format, ...)
+{
+	va_list		ap;
+	t_str_part	**str_part;
+	int			print_count;
 
-#endif
+	if (!(str_part = ft_set_str((char *)format)))
+		return (-1);
+	va_start(ap, format);
+	if (!ft_set_args(&ap, *str_part))
+		return (-1);
+	va_end(ap);
+	print_count = ft_printer(*str_part);
+	ft_get_padding(-1, ' ');
+	ft_free_str_part(str_part);
+	return (print_count);
+}

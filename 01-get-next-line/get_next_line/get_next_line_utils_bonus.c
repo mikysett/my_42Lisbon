@@ -6,15 +6,17 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 22:28:06 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/02 17:37:21 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/04 12:14:17 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-int		ft_free_exit(char **line)
+int		ft_free_exit(int fd, char *buf[1025], char **line)
 {
+	free(buf[fd]);
 	free(*line);
+	buf[fd] = 0;
 	*line = 0;
 	return (-1);
 }

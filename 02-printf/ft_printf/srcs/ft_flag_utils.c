@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   ft_flag_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/15 22:28:01 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/04 13:31:46 by msessa           ###   ########.fr       */
+/*   Created: 2021/02/18 17:41:19 by msessa            #+#    #+#             */
+/*   Updated: 2021/03/04 14:22:43 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
-# include <unistd.h>
-# include <stdlib.h>
+#include "../includes/ft_printf.h"
 
-int		get_next_line(int fd, char **line);
-size_t	ft_strlen(const char *s);
-size_t	ft_partial_len(char *buf);
-int		ft_free_exit(int fd, char *buf[1025], char **line);
-
-#endif
+t_flags		ft_convert_flag(char c)
+{
+	if (c == '#')
+		return (hashtag);
+	if (c == '0')
+		return (zero);
+	if (c == '-')
+		return (minus);
+	if (c == ' ')
+		return (space);
+	if (c == '+')
+		return (plus);
+	return (flags_none);
+}

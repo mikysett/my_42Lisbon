@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 22:25:06 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/02 17:34:49 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/04 12:26:09 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@ static int	ft_update_buf(char *buf)
 
 static int	ft_init_vars(int fd, char *buf[1025], char **line)
 {
+	*line = malloc(sizeof(char) * 1);
+	if (!*line)
+		return (0);
+	**line = '\0';
 	if (!buf[fd])
 	{
 		buf[fd] = malloc(sizeof(char) * (BUFFER_SIZE + 1));
@@ -68,10 +72,6 @@ static int	ft_init_vars(int fd, char *buf[1025], char **line)
 			return (0);
 		buf[fd][0] = '\0';
 	}
-	*line = malloc(sizeof(char) * 1);
-	if (!*line)
-		return (0);
-	**line = '\0';
 	return (1);
 }
 
@@ -98,7 +98,8 @@ int			get_next_line(int fd, char **line)
 	int			read_out;
 	int			update;
 
-	if (!line || fd < 0 || fd > 1024 || !ft_init_vars(fd, buf, line))
+	if (!BUFFER_SIZE || !line || fd < 0 || fd > 1024
+		|| !ft_init_vars(fd, buf, line))
 		return (-1);
 	while (1)
 	{
@@ -107,7 +108,7 @@ int			get_next_line(int fd, char **line)
 			return (update);
 		read_out = read(fd, buf[fd], BUFFER_SIZE);
 		if (read_out < 0)
-			return (ft_free_exit(line));
+			return (ft_free_exit(fd, buf, line));
 		else if (read_out == 0)
 		{
 			free(buf[fd]);

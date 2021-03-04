@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   ft_printer.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/15 22:28:01 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/04 13:31:46 by msessa           ###   ########.fr       */
+/*   Created: 2021/02/16 20:08:41 by msessa            #+#    #+#             */
+/*   Updated: 2021/03/04 13:56:40 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
-# include <unistd.h>
-# include <stdlib.h>
+#ifndef FT_PRINTER_H
+# define FT_PRINTER_H
+# include "ft_printf.h"
 
-int		get_next_line(int fd, char **line);
-size_t	ft_strlen(const char *s);
-size_t	ft_partial_len(char *buf);
-int		ft_free_exit(int fd, char *buf[1025], char **line);
-
+bool			ft_print_padding(size_t len, bool is_zero);
+char			*ft_get_padding(int len, char c);
+long long int	ft_print_arg(t_str_part *sp, t_str_arg sa,
+	long long int print_count);
 #endif

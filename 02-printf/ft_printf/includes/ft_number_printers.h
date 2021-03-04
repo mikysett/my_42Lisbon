@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   ft_number_printers.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/15 22:28:01 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/04 13:31:46 by msessa           ###   ########.fr       */
+/*   Created: 2021/02/16 20:08:41 by msessa            #+#    #+#             */
+/*   Updated: 2021/03/04 13:56:36 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
-# include <unistd.h>
-# include <stdlib.h>
+#ifndef FT_NUMBER_PRINTERS_H
+# define FT_NUMBER_PRINTERS_H
+# include "ft_printf.h"
 
-int		get_next_line(int fd, char **line);
-size_t	ft_strlen(const char *s);
-size_t	ft_partial_len(char *buf);
-int		ft_free_exit(int fd, char *buf[1025], char **line);
+char		*ft_llitoa_len(long long int n, int len, t_arg *arg);
+char		*ft_ullitoa_len(unsigned long long int n, int len);
+char		*ft_set_hex(unsigned long long int n, int len,
+	char c_base, bool alt);
+int			ft_set_digits_hex(unsigned long long int n);
+void		ft_save_nb_hex(char *res, unsigned long long int n,
+	int digits, char c_base);
 
 #endif
