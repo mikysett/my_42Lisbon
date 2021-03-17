@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 20:09:10 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/04 18:30:53 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/17 19:15:48 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1315,6 +1315,15 @@ int		main(int argc, char **argv)
 	if (argc == 1 || !strcmp(argv[1], "null"))
 	{
 		null_tester();
+	}
+
+	if (argc == 1 || !strcmp(argv[1], "eval"))
+	{
+		printf("printf: %--00-4-i\n", 42);
+		ft_printf("ft_printf: %--00-4-i\n", 42);
+
+		printf("printf: %--00i\n", 42);
+		ft_printf("ft_printf: %--00i\n", 42);
 	}
 	return (0);
 }
