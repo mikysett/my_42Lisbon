@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 20:08:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/04 13:57:14 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/17 14:34:38 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ t_str_part	**ft_free_str_part(t_str_part **str_part);
 void		ft_free_one_str_arg(t_str_part *str_part);
 char		*ft_free_padding(char *padding);
 int			ft_printer(t_str_part *sp);
+bool		ft_get_arg_basic(va_list *ap, t_arg *arg);
+bool		ft_get_arg_unsigned(va_list *ap, t_arg *arg);
+bool		ft_get_arg_mix(va_list *ap, t_arg *arg);
+bool		ft_get_arg_n(va_list *ap, t_arg *arg);
 t_str_arg	ft_set_arg_c(t_str_part *sp);
 t_str_arg	ft_set_arg_s(t_str_part *sp);
 t_str_arg	ft_set_arg_d(t_str_part *sp);

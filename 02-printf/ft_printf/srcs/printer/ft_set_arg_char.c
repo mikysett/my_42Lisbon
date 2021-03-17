@@ -6,23 +6,21 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 20:49:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/04 15:32:38 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/17 16:03:47 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_printer.h"
 
-static char	*ft_get_nil(void)
-{
-	static char nil_str[6] = "0x0";
-
-	return (nil_str);
-}
-
-static char	*ft_get_null(void)
+static char	*ft_get_null(char conv)
 {
 	static char null_str[7] = "(null)";
+	static char nil_str[6] = "0x0";
 
+	if (conv == 's')
+		return (null_str);
+	else
+		return (nil_str);
 	return (null_str);
 }
 
@@ -49,12 +47,7 @@ t_str_arg	ft_set_arg_s(t_str_part *sp)
 	if (arg->precision_set == true && arg->precision < 0)
 		arg->precision_set = false;
 	if (!arg->val.v_char_ptr)
-	{
-		if (arg->conv == 's')
-			sa.str = ft_get_null();
-		else
-			sa.str = ft_get_nil();
-	}
+		sa.str = ft_get_null(arg->conv);
 	else
 		sa.str = arg->val.v_char_ptr;
 	if (arg->precision_set)

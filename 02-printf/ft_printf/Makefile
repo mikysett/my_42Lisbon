@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:13:08 by msessa            #+#    #+#              #
-#    Updated: 2021/03/04 17:21:06 by msessa           ###   ########.fr        #
+#    Updated: 2021/03/17 17:12:17 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SOURCES	=	ft_printf.c \
 			ft_flag_utils.c \
 			ft_free.c \
 			ft_list_str_part.c \
+			ft_get_args.c \
 			ft_set_args.c \
 			ft_set_str.c \
 			printer/ft_print_arg.c \
@@ -59,7 +60,7 @@ BDEPS	:=	$(DEPS)
 
 CC		=	gcc
 
-CFLAGS	=	-g -Wall -Wextra #-Werror
+CFLAGS	=	-g -Wall -Wextra -Werror
 
 RM		=	rm -f
 
