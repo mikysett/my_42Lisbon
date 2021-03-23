@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/03/23 13:37:56 by msessa           ###   ########.fr        #
+#    Updated: 2021/03/23 18:58:24 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,71 +14,67 @@ NAME	=	cub3D
 
 LIBFT	=	libft
 
-HEADERS	=	includes
+MINILIBX	=	minilibx
 
-SOURCES	=	ft_printf.c \
-			ft_arg_param.c \
-			ft_arg_utils.c \
-			ft_flag_utils.c \
-			ft_free.c \
-			ft_list_str_part.c \
-			ft_get_args.c \
-			ft_set_args.c \
-			ft_set_str.c \
-			printer/ft_print_arg.c \
-			printer/ft_print_padding.c \
-			printer/ft_printer.c \
-			printer/ft_set_arg_char.c \
-			printer/ft_set_arg_int.c \
-			number_printers/ft_set_hex.c \
-			number_printers/ft_set_hex_utils.c \
-			number_printers/ft_llitoa_len.c \
-			number_printers/ft_ullitoa_len.c \
+HEADERS	=	headers
 
 DIR_S	=	srcs
+
 DIR_O	=	obj
 
-SRCS := $(shell find $(DIR_S) -name *.c)
-OBJS := $(SRCS:%=$(DIR_O)/%.o)
+SRCS	:= $(shell find $(DIR_S) -name *.c)
+
+OBJS	:= $(SRCS:%.c=$(DIR_O)/%.o)
+
+SUB_DIR_O := $(shell find $(DIR_S) -type d)
+SUB_DIR_O := $(SUB_DIR_O:%=$(DIR_O)/%)
+# OBJS := $(SRCS:%=$(DIR_O)/%.o)
 
 BSRCS	:=	$(SRCS) \
 
-TSRCS	:=	$(SRCS) main.c
+# TSRCS	:=	$(SRCS) main.c
 
-TOBJS	:=	$(TSRCS:.c=.o)
+# TOBJS	:=	$(TSRCS:.c=.o)
 
-BOBJS	=	$(BSRCS:.c=.o)
+# BOBJS	=	$(BSRCS:.c=.o)
 
-DEPS	=	$(HEADERS)/ft_cube3d.h
+DEPS	=	$(HEADERS)/ft_cub3d.h
 
 BDEPS	:=	$(DEPS)
 
 CC		=	gcc
 
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	
+
+LIBS	=	-Lminilibx -lmlx -Llibft -lft
 
 RM		=	rm -f
 
-$(DIR_O)/%.o: $(DIR_S)/%.c $(DEPS)
+$(DIR_O)/%.o: %.c
 			@mkdir -p $(DIR_O)
-			@$(CC) $(CFLAGS) -o $@ -c $<
+			echo $(SUB_DIR_O)
+			@mkdir -p $(SUB_DIR_O)
+			$(CC) $(CFLAGS) -I/minilibx/ -I/libft/ -I/headers/ -o $@ -c $<
 
 $(NAME):	$(DEPS) $(OBJS)
+			@make all -C $(MINILIBX)
 			@make bonus -C $(LIBFT)
-			@cp libft/libft.a ./$(NAME)
-			ar rcs $(NAME) $(OBJS)
+			$(CC) $(CFLAGS) $(LIBS) -o $(NAME) $(OBJS)
 
 all:		$(NAME)
 
-test:		$(DEPS) $(TOBJS)
-			@make bonus -C $(LIBFT)
-			@cp libft/libft.a ./$(NAME)
-			$(CC) -g -fsanitize=address $(NAME) $(TOBJS) -o test
+# test:		$(DEPS) $(TOBJS)
+# 			@make bonus -C $(LIBFT)
+# 			@cp libft/libft.a ./$(NAME)
+# 			$(CC) -g -fsanitize=address $(NAME) $(TOBJS) -o test
 
-clean:
+cubclean:
 			$(RM) $(OBJS)
 			$(RM) $(BOBJS)
+
+clean:		cubclean
 			@make clean -C $(LIBFT)
+			@make clean -C $(MINILIBX)
 
 fclean:		clean
 			$(RM) $(NAME)
@@ -87,9 +83,9 @@ fclean:		clean
 re:			fclean all
 			@make fclean -C $(LIBFT)
 
-bonus:		$(BDEPS) $(BOBJS)
-			@make bonus -C $(LIBFT)
-			@cp libft/libft.a ./$(NAME)
-			ar rc $(NAME) $(BOBJS)
+# bonus:		$(BDEPS) $(BOBJS)
+# 			@make bonus -C $(LIBFT)
+# 			@cp libft/libft.a ./$(NAME)
+# 			ar rc $(NAME) $(BOBJS)
 
 .PHONY:		all clean fclean re bonus
