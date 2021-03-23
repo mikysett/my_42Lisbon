@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:13:08 by msessa            #+#    #+#              #
-#    Updated: 2021/03/17 19:22:34 by msessa           ###   ########.fr        #
+#    Updated: 2021/03/18 10:56:59 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,8 @@ re:			fclean all
 			@make fclean -C $(LIBFT)
 
 bonus:		$(BDEPS) $(BOBJS)
-			ar rc $(NAME) $(BOBJS)
 			@make bonus -C $(LIBFT)
+			@cp libft/libft.a ./$(NAME)
+			ar rc $(NAME) $(BOBJS)
 
 .PHONY:		all clean fclean re bonus
