@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 16:45:41 by msessa            #+#    #+#             */
-/*   Updated: 2021/01/15 15:46:02 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/23 11:53:06 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memset(void *s, int c, size_t n)
 {
-	void *res;
+	void	*res;
 
 	c = (unsigned char)c;
 	res = s;

@@ -6,59 +6,42 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 13:27:23 by msessa            #+#    #+#             */
-/*   Updated: 2021/01/18 14:49:04 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/23 13:32:31 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_set_digits(int n)
+static void	ft_write_pos_nb(int n, int fd)
 {
-	int	digits;
+	char	c;
 
-	digits = 1;
-	while (n != 0)
+	if (n > 9)
+		ft_write_pos_nb(n / 10, fd);
+	c = '0' + (n % 10);
+	write(fd, &c, 1);
+}
+
+static void	ft_write_neg_nb(int n, int fd)
+{
+	char	c;
+
+	if (n < -9)
+		ft_write_neg_nb(n / 10, fd);
+	c = '0' - (n % 10);
+	write(fd, &c, 1);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	char neg;
+
+	if (n < 0)
 	{
-		n /= 10;
-		digits++;
+		neg = '-';
+		write(fd, &neg, 1);
+		ft_write_neg_nb(n, fd);
 	}
-	return (digits);
-}
-
-static void	ft_save_pos_nb(char *res, int n, int digits)
-{
-	res[digits] = '0' + (n % 10);
-	while ((n /= 10) != 0)
-		*(res + --digits) = '0' + (n % 10);
-}
-
-static void	ft_save_neg_nb(char *res, int n, int digits)
-{
-	res[digits] = '0' - (n % 10);
-	while ((n /= 10) != 0)
-		*(res + --digits) = '0' - (n % 10);
-}
-
-void		ft_write_nb(int n, int fd, int digits, int neg)
-{
-	char	nb[digits + neg];
-
-	if (!neg)
-		ft_save_pos_nb(nb, n, digits - 1);
 	else
-	{
-		*nb = '-';
-		ft_save_neg_nb(nb, n, digits);
-	}
-	write(fd, nb, digits + neg);
-}
-
-void		ft_putnbr_fd(int n, int fd)
-{
-	int		digits;
-	int		neg;
-
-	digits = ft_set_digits(n / 10);
-	neg = n < 0 ? 1 : 0;
-	ft_write_nb(n, fd, digits, neg);
+		ft_write_pos_nb(n, fd);
 }

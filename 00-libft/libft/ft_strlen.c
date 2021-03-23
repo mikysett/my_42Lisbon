@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 14:32:35 by msessa            #+#    #+#             */
-/*   Updated: 2021/01/15 15:45:16 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/23 12:49:55 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const char *s)
 {
-	const char *i;
+	const char	*i;
 
 	i = s;
 	while (*i)

@@ -6,13 +6,13 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 13:58:38 by msessa            #+#    #+#             */
-/*   Updated: 2021/01/15 14:03:11 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/23 11:42:23 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isprint(int c)
+int	ft_isprint(int c)
 {
 	return (!(c < 32 || c > 126));
 }

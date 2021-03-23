@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 14:55:09 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/15 19:03:01 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/23 12:52:15 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t src_len;
+	size_t	src_len;
 
 	if (!dst || !src)
 		return (0);

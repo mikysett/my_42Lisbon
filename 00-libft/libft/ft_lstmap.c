@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 16:33:06 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/22 15:32:58 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/23 11:46:01 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_list	*ft_del_return(t_list *lst, void (*del)(void *))
 	return (0);
 }
 
-t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *),
 	void (*del)(void *))
 {
 	t_list	*new_head;

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 13:08:07 by msessa            #+#    #+#             */
-/*   Updated: 2021/01/18 13:24:28 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/23 12:48:41 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	size_t s_len;
+	size_t	s_len;
 
 	if (!s)
 		return ;

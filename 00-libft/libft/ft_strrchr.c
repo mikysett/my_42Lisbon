@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 14:12:39 by msessa            #+#    #+#             */
-/*   Updated: 2021/02/15 19:11:50 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/23 12:52:16 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	char *res;
+	char	*res;
 
 	res = 0;
 	while (*s)
