@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/03/23 18:58:24 by msessa           ###   ########.fr        #
+#    Updated: 2021/03/24 14:20:39 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=	cub3D
 
 LIBFT	=	libft
 
-MINILIBX	=	minilibx
+MINILIBX	=	minilibx-unix
 
 HEADERS	=	headers
 
@@ -30,7 +30,7 @@ SUB_DIR_O := $(shell find $(DIR_S) -type d)
 SUB_DIR_O := $(SUB_DIR_O:%=$(DIR_O)/%)
 # OBJS := $(SRCS:%=$(DIR_O)/%.o)
 
-BSRCS	:=	$(SRCS) \
+# BSRCS	:=	$(SRCS) \
 
 # TSRCS	:=	$(SRCS) main.c
 
@@ -46,7 +46,7 @@ CC		=	gcc
 
 CFLAGS	=	
 
-LIBS	=	-Lminilibx -lmlx -Llibft -lft
+LIBS	=	-Lminilibx -Llibft -lft -lmlx -lXext -lX11 -lglut -lGLU -lGL
 
 RM		=	rm -f
 
