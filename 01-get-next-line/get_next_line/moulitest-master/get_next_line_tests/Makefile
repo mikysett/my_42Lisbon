@@ -1,1 +1,0 @@
-../testframework/v3_templates/Makefile_template.mk

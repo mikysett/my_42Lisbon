@@ -1,2 +1,0 @@
-int notValid;
-int NotValidEither;

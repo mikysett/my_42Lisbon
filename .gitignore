@@ -1,4 +1,5 @@
 **/.vscode/
+**/test-*/
 /42_Subjects-master/
 /42-exercises/
 /Documentation/

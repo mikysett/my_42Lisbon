@@ -1,9 +1,0 @@
-################################################################################
-# Use absolute path
-################################################################################
-
-LIBFT_PATH = /absolute/path/to/project
-GET_NEXT_LINE_PATH = /absolute/path/to/project
-FT_PRINTF_PATH = /absolute/path/to/project
-FT_LS_PATH = /absolute/path/to/project
-LIBFTASM_PATH = /absolute/path/to/project
