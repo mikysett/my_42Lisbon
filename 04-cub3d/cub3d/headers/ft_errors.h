@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cub3d.h                                         :+:      :+:    :+:   */
+/*   ft_errors.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/23 15:34:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/25 13:43:50 by msessa           ###   ########.fr       */
+/*   Created: 2021/03/25 12:13:56 by msessa            #+#    #+#             */
+/*   Updated: 2021/03/25 16:21:12 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_CUB3D_H
-# define FT_CUB3D_H
+#ifndef FT_ERRORS_H
+# define FT_ERRORS_H
 
-# include <math.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "../minilibx/mlx.h"
-# include "../libft/libft.h"
-# include "ft_errors.h"
-# include "ft_init_map.h"
-# define BUFFER_SIZE 64
-
-int	ft_error(t_errors err);
+typedef enum	e_errors
+{
+	err_none,
+	err_params,
+	err_map_path,
+	err_map_malloc,
+	err_map_gnl
+}				t_errors;
 #endif

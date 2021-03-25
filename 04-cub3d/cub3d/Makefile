@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/03/24 14:20:39 by msessa           ###   ########.fr        #
+#    Updated: 2021/03/25 11:48:56 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=	cub3D
 
 LIBFT	=	libft
 
-MINILIBX	=	minilibx-unix
+MINILIBX	=	minilibx
 
 HEADERS	=	headers
 
@@ -46,7 +46,8 @@ CC		=	gcc
 
 CFLAGS	=	
 
-LIBS	=	-Lminilibx -Llibft -lft -lmlx -lXext -lX11 -lglut -lGLU -lGL
+LIBS	=	-Lminilibx -Llibft -lft
+UNIX_LIBS	=	-Lminilibx -Llibft -lft -lmlx -lXext -lX11 -lglut -lGLU -lGL
 
 RM		=	rm -f
 
