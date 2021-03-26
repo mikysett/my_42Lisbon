@@ -1,28 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_errors.h                                        :+:      :+:    :+:   */
+/*   ft_save_map_file.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/25 12:13:56 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/26 19:15:17 by msessa           ###   ########.fr       */
+/*   Created: 2021/03/26 19:33:57 by msessa            #+#    #+#             */
+/*   Updated: 2021/03/26 19:34:27 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ERRORS_H
-# define FT_ERRORS_H
+#include "../../headers/ft_cub3d.h"
 
-typedef enum	e_errors
-{
-	err_params,
-	err_map_extension,
-	err_map_path,
-	err_map_malloc,
-	err_map_gnl,
-	err_map_split,
-	err_map_param,
-	err_map_grid,
-	err_map_param_miss
-}				t_errors;
-#endif

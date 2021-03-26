@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/03/25 11:48:56 by msessa           ###   ########.fr        #
+#    Updated: 2021/03/26 11:02:33 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SUB_DIR_O := $(shell find $(DIR_S) -type d)
 SUB_DIR_O := $(SUB_DIR_O:%=$(DIR_O)/%)
 # OBJS := $(SRCS:%=$(DIR_O)/%.o)
 
-# BSRCS	:=	$(SRCS) \
+BSRCS	:=	$(SRCS) \
 
 # TSRCS	:=	$(SRCS) main.c
 
@@ -44,23 +44,26 @@ BDEPS	:=	$(DEPS)
 
 CC		=	gcc
 
-CFLAGS	=	
+CFLAGS	=	-Wall -Wextra
 
-LIBS	=	-Lminilibx -Llibft -lft
-UNIX_LIBS	=	-Lminilibx -Llibft -lft -lmlx -lXext -lX11 -lglut -lGLU -lGL
+LIBS	=	-L./libft -lft
 
 RM		=	rm -f
 
+INCLUDES	= -I/libft/ -I/headers/
+
+# After that, to compile your project:
+# clang -Wall -Wextra -Werror main.c -lbsd -lmlx -lXext -lX11
+
 $(DIR_O)/%.o: %.c
 			@mkdir -p $(DIR_O)
-			echo $(SUB_DIR_O)
 			@mkdir -p $(SUB_DIR_O)
-			$(CC) $(CFLAGS) -I/minilibx/ -I/libft/ -I/headers/ -o $@ -c $<
+			$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 $(NAME):	$(DEPS) $(OBJS)
-			@make all -C $(MINILIBX)
+			# @make all -C $(MINILIBX)
 			@make bonus -C $(LIBFT)
-			$(CC) $(CFLAGS) $(LIBS) -o $(NAME) $(OBJS)
+			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 
 all:		$(NAME)
 

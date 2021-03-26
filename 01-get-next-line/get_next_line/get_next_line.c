@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 22:25:06 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/25 14:22:17 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/26 16:26:46 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static size_t	ft_partial_len(char *buf)
 {
-	char *o_buf;
+	char	*o_buf;
 
 	o_buf = buf;
 	while (*buf && *buf != '\n')
@@ -22,7 +22,7 @@ static size_t	ft_partial_len(char *buf)
 	return (buf - o_buf);
 }
 
-static char		*ft_update_line(char *buf, char *line)
+static char	*ft_update_line(char *buf, char *line)
 {
 	size_t	buf_chunk;
 	char	*bigger_line;
@@ -33,7 +33,7 @@ static char		*ft_update_line(char *buf, char *line)
 	i = 0;
 	j = 0;
 	buf_chunk = ft_partial_len(buf);
-	line_len = *line ? ft_strlen(line) : 0;
+	line_len = ft_strlen(line);
 	bigger_line = malloc(sizeof(char) * (line_len + buf_chunk + 1));
 	if (!bigger_line)
 		return (0);
@@ -49,7 +49,7 @@ static char		*ft_update_line(char *buf, char *line)
 	return (bigger_line);
 }
 
-static int		ft_update_buf(char *buf)
+static int	ft_update_buf(char *buf)
 {
 	size_t	buf_chunk;
 	size_t	i;
@@ -69,7 +69,7 @@ static int		ft_update_buf(char *buf)
 	return (1);
 }
 
-static int		ft_free_exit(char **line, int read_out)
+static int	ft_free_exit(char **line, int read_out)
 {
 	if (read_out < 0)
 	{
@@ -80,9 +80,9 @@ static int		ft_free_exit(char **line, int read_out)
 	return (0);
 }
 
-int				get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
-	static char	buf[BUFFER_SIZE + 1] = { '\0' };
+	static char	buf[BUFFER_SIZE + 1] = {'\0'};
 	int			read_out;
 
 	if (!BUFFER_SIZE || !line)
@@ -95,7 +95,8 @@ int				get_next_line(int fd, char **line)
 	{
 		if (*buf != '\0')
 		{
-			if (!((*line = ft_update_line(buf, *line))))
+			*line = ft_update_line(buf, *line);
+			if (!*line)
 				return (-1);
 			if (ft_update_buf(buf))
 				return (1);
