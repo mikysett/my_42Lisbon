@@ -6,13 +6,27 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:43:09 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/26 17:45:59 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/28 19:12:57 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_INIT_MAP_H
 # define FT_INIT_MAP_H
 # define MIN_MAP_PARAMS 9
+# define NB_DIRECTIONS 9
+
+typedef enum	e_directions
+{
+	d_cn,
+	d_t,
+	d_tl,
+	d_l,
+	d_bl,
+	d_b,
+	d_br,
+	d_r,
+	d_tr
+}				t_directions;
 
 typedef enum	e_map_p_types
 {
@@ -27,18 +41,37 @@ typedef enum	e_map_p_types
 	map_grid
 }				t_map_p_types;
 
-typedef enum	e_map_el
+typedef enum	e_map_el_type
 {
+	invalid,
 	empty,
+	e_floor,
 	wall,
 	item,
-	player
+	player,
+	door,
+	enemy
+}				t_map_el_type;
+
+typedef struct	s_map_el_extra
+{
+	char			*text;
+	char			*sprite;
+	int				direction;
+	int				life;
+	int				height;
+}				t_map_el_extra;
+
+typedef struct	s_map_el
+{
+	t_map_el_type	type;
+	t_map_el_extra	*extra;
 }				t_map_el;
 
 typedef struct	s_size
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 }				t_size;
 
 typedef struct	s_color
@@ -55,7 +88,6 @@ typedef union	u_map_p_val
 	char	*texture;
 }				t_map_p_val;
 
-
 typedef struct	s_map_par
 {
 	t_map_p_types	type;
@@ -66,8 +98,8 @@ typedef struct	s_player
 {
 	t_size	position;
 	int		direction;
+	int		life;
 }				t_player;
-
 
 typedef struct	s_map
 {
@@ -77,22 +109,31 @@ typedef struct	s_map
 	t_map_el	**map_grid;
 }				t_map;
 
-t_map	*ft_init_map(char *map_path);
-int		get_next_line(int fd, char **line);
+t_map			*ft_init_map(char *map_path);
+int				get_next_line(int fd, char **line);
 
-t_map	*ft_free_map(t_map *map);
-void	ft_free_split(char **str);
-t_map	*ft_alloc_map(void);
+t_map			*ft_free_map(t_map *map);
+void			ft_free_map_file(t_list	**map_lines);
+t_map			*ft_alloc_map(void);
 
-int		ft_init_map_param(int fd, t_map *map, char **line, bool *params_set);
+t_list			**ft_save_file(char *map_path);
 
-int		ft_init_map_size(int fd, t_map *map, char **line);
+bool			ft_init_map_param(t_list *map_line, t_map *map,
+					bool *params_set);
 
-bool	ft_is_map_grid(char *line, bool *p_set);
-int		ft_count_param_args(char **params);
-bool	ft_param_double(t_map_p_types p_type, bool *p_set);
-bool	ft_is_map_el(char c);
+bool			ft_init_map_size(t_list *map_line, t_map *map);
 
-int		ft_set_map_grid(t_map *map, char *map_path);
+t_color			ft_get_color(char *clr_str);
+bool			ft_is_map_grid(char *line, bool *p_set);
+int				ft_count_param_args(char **params);
+bool			ft_param_double(t_map_p_types p_type, bool *p_set);
+char			*ft_next_map_el(char *line);
+
+bool			ft_set_map_grid(t_list *map_line, t_map *map);
+bool			ft_check_map_grid(t_map_el **grid, t_size map_size);
+
+void			ft_set_grid_line(t_map_el *grid_line, int grid_size);
+t_map_el_type	ft_get_el_type(char c);
+t_map_el		**ft_alloc_map_grid(t_size map_size);
 
 #endif

@@ -6,31 +6,11 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 11:16:37 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/26 18:21:32 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/28 19:07:32 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/ft_cub3d.h"
-
-static t_color	ft_get_color(char *clr_str)
-{
-	t_color	clr;
-	char	**clr_arr;
-	int		nb_clr;
-
-	clr_arr = ft_split(clr_str, ',');
-	nb_clr = ft_count_param_args(clr_arr);
-	if (nb_clr != 3)
-	{
-		ft_free_split(clr_arr);
-		return ((t_color){red: -1, green: -1, blue: -1});
-	}
-	clr.red = ft_atoi(clr_arr[0]);
-	clr.green = ft_atoi(clr_arr[1]);
-	clr.blue = ft_atoi(clr_arr[2]);
-	ft_free_split(clr_arr);
-	return (clr);
-}
 
 static bool	ft_set_param_value(t_map_par *new_p, char **param, int nb_args)
 {
@@ -118,7 +98,7 @@ static bool	ft_save_map_param(t_map *map, char *line, bool *p_set)
 		return (false);
 	}
 	// to test
-	ft_print_split(param);
+	// ft_print_split(param);
 	nb_args = ft_count_param_args(param);
 	if (!ft_set_param(map, param, nb_args, p_set))
 	{
@@ -130,28 +110,15 @@ static bool	ft_save_map_param(t_map *map, char *line, bool *p_set)
 	return (true);
 }
 
-int	ft_init_map_param(int fd, t_map *map, char **line, bool *params_set)
+bool	ft_init_map_param(t_list *map_line, t_map *map, bool *params_set)
 {
-	int		read_out;
-	bool	check_p;
-
-	check_p = true;
-	read_out = get_next_line(fd, line);
-	while (read_out > 0)
+	while (map_line)
 	{
-		if (ft_is_map_grid(*line, params_set))
-			break ;
-		check_p = ft_save_map_param(map, *line, params_set);
-		free(*line);
-		if (check_p == false)
-			break ;
-		read_out = get_next_line(fd, line);
-		if (read_out < 0)
-			ft_error(err_map_gnl);
+		if (ft_is_map_grid(map_line->content, params_set))
+			return (true);
+		if (!ft_save_map_param(map, map_line->content, params_set))
+			return (false);
+		map_line = map_line->next;
 	}
-	if (read_out == 0)
-		free(*line);
-	if (read_out < 0 || check_p == false)
-		return (-1);
-	return (read_out);
+	return (true);
 }

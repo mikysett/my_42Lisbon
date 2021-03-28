@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:44:13 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/26 19:28:59 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/28 19:02:01 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,46 +38,38 @@ static bool	ft_check_params(bool *params_set)
 	return (true);
 }
 
-static int	ft_set_map(int fd, t_map *map)
+static int	ft_set_map(t_list **map_lines, t_map *map)
 {
-	char	*line;
-	int		read_out;
 	bool	params_set[MIN_MAP_PARAMS];
 
 	ft_init_params(params_set);
-	read_out = ft_init_map_param(fd, map, &line, params_set);
+	if (!ft_init_map_param(*map_lines, map, params_set))
+		return (false);
+	if (!ft_check_params(params_set))
+		return (ft_error(err_map_param_miss));
 	// to test
-	ft_print_params_set(params_set);
-	if (read_out > 0 && !ft_check_params(params_set))
-	{
-		free(line);
-		ft_error(err_map_param_miss);
-		read_out = -1;
-	}
-	if (read_out <= 0)
-		return (0);
-	read_out = ft_init_map_size(fd, map, &line);
-	if (read_out < 0)
-		return (0);
+	// ft_print_params_set(params_set);
+	if (!ft_init_map_size(*map_lines, map))
+		return (ft_error(err_map_grid));
 	return (1);
 }
 
 t_map	*ft_init_map(char *map_path)
 {
 	t_map	*map;
-	int		fd;
+	t_list	**map_lines;
 
-	fd = open(map_path, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_error(err_map_path);
+	map_lines = ft_save_file(map_path);
+	if (!map_lines)
 		return (0);
-	}
 	map = ft_alloc_map();
-	if (map && !ft_set_map(fd, map))
+	if (map && !ft_set_map(map_lines, map))
 		map = ft_free_map(map);
-	close(fd);
-	if (map && !ft_set_map_grid(map, map_path))
+	if (map && !ft_set_map_grid(*map_lines, map))
 		map = ft_free_map(map);
+	// to test
+	else if (map)
+		ft_print_map_grid(map);
+	ft_free_map_file(map_lines);
 	return (map);
 }

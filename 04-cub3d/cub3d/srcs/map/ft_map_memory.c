@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 15:54:56 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/26 17:46:09 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/28 19:03:33 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,37 +24,29 @@ static void	ft_del_map_param(void *p)
 
 t_map	*ft_free_map(t_map *map)
 {
-	// free the params
 	if (map->map_params)
 	{
 		ft_lstclear(map->map_params, &ft_del_map_param);
 		free(map->map_params);
 	}
-	// free map grid
 	if (map->map_grid)
-	{
-		free(map->map_grid);
-	}
+		ft_free_matrix((void **)map->map_grid, map->map_size.y);
 	free(map);
 	return (0);
 }
 
-void	ft_free_split(char **str)
+void	ft_free_map_file(t_list	**map_lines)
 {
-	char	**o_str;
-
-	o_str = str;
-	while (*str != 0)
+	if (map_lines)
 	{
-		free(*str);
-		str++;
+		ft_lstclear(map_lines, &free);
+		free(map_lines);
 	}
-	free(o_str);
 }
 
 t_map	*ft_alloc_map(void)
 {
-	t_map *map;
+	t_map	*map;
 
 	map = malloc(sizeof(t_map));
 	if (!map)

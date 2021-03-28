@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:34:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/26 11:11:29 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/28 18:32:50 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 # include "../minilibx/mlx.h"
 # include "../libft/libft.h"
 # include "ft_errors.h"
-# include "ft_tests.h"
+# include "ft_mem_utilities.h"
 # include "ft_init_map.h"
+# include "ft_tests.h"
 # define BUFFER_SIZE 64
 
 int	ft_error(t_errors err);

@@ -6,11 +6,31 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 11:16:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/26 16:48:16 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/28 19:07:56 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/ft_cub3d.h"
+
+t_color	ft_get_color(char *clr_str)
+{
+	t_color	clr;
+	char	**clr_arr;
+	int		nb_clr;
+
+	clr_arr = ft_split(clr_str, ',');
+	nb_clr = ft_count_param_args(clr_arr);
+	if (nb_clr != 3)
+	{
+		ft_free_split(clr_arr);
+		return ((t_color){red : - 1, green : - 1, blue : - 1});
+	}
+	clr.red = ft_atoi(clr_arr[0]);
+	clr.green = ft_atoi(clr_arr[1]);
+	clr.blue = ft_atoi(clr_arr[2]);
+	ft_free_split(clr_arr);
+	return (clr);
+}
 
 bool	ft_is_map_grid(char *line, bool *p_set)
 {
@@ -18,8 +38,8 @@ bool	ft_is_map_grid(char *line, bool *p_set)
 		line++;
 	if (*line == '1')
 	{
-		ft_param_double(map_grid, p_set);
-		printf("Map grid start parsing\n");
+		if (p_set)
+			ft_param_double(map_grid, p_set);
 		return (true);
 	}
 	return (false);
@@ -45,12 +65,20 @@ bool	ft_param_double(t_map_p_types p_type, bool *p_set)
 	return (false);
 }
 
-// UNUSED FUNCTION FOR NOW
-
-bool	ft_is_map_el(char c)
+char	*ft_next_map_el(char *line)
 {
-	if (c == ' ' || c == '0' || c == '1' || c == '2'
-		|| c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (true);
-	return (false);
+	if (*line == ' ' || *line == '0' || *line == '1' || *line == '2'
+		|| *line == 'N' || *line == 'S' || *line == 'E' || *line == 'W')
+		return (line + 1);
+	if (*line == '[')
+	{
+		line++;
+		while (*line)
+		{
+			if (*line == ']')
+				return (line + 1);
+			line++;
+		}
+	}
+	return (0);
 }
