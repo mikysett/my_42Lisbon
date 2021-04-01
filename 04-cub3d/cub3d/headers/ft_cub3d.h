@@ -6,13 +6,13 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:34:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/28 18:32:50 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/01 13:01:57 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_CUB3D_H
 # define FT_CUB3D_H
-
+# define IS_OS_MAC 0
 # include <math.h>
 # include <stdio.h>
 # include <string.h>
@@ -20,12 +20,18 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include "../minilibx/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 # include "ft_errors.h"
 # include "ft_mem_utilities.h"
 # include "ft_init_map.h"
+# include "ft_init_game.h"
+# include "ft_mini_map.h"
+# include "ft_set_events.h"
+# include "ft_run_game.h"
 # include "ft_tests.h"
 # define BUFFER_SIZE 64
 
 int	ft_error(t_errors err);
+int	ft_mlx_error(t_mlx_errors err);
 #endif

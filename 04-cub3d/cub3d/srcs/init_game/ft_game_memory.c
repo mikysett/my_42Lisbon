@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_errors.h                                        :+:      :+:    :+:   */
+/*   ft_game_memory.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/25 12:13:56 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/28 19:54:11 by msessa           ###   ########.fr       */
+/*   Created: 2021/03/29 17:55:49 by msessa            #+#    #+#             */
+/*   Updated: 2021/04/01 18:16:31 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ERRORS_H
-# define FT_ERRORS_H
+#include "../../headers/ft_cub3d.h"
 
-typedef enum e_errors
+void	ft_free_game(t_game *game)
 {
-	err_params,
-	err_map_extension,
-	err_map_path,
-	err_map_malloc,
-	err_map_gnl,
-	err_map_split,
-	err_map_param,
-	err_map_grid,
-	err_map_param_miss
-}				t_errors;
+	ft_free_map(game->map);
 
-typedef enum e_mlx_errors
-{
-	err_mlx
-}				t_mlx_errors;
-#endif
+	// to test
+	if (game->win)
+	{
+		// textures needs to be improved
+		if (game->text)
+			mlx_destroy_image(game->mlx, game->text);
+		if (game->mm_img.img_ref)
+			mlx_destroy_image(game->mlx, game->mm_img.img_ref);
+		mlx_destroy_window(game->mlx, game->win);
+	}
+	// free(game->mlx);
+}

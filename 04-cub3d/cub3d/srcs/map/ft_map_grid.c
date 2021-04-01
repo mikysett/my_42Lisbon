@@ -6,21 +6,43 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 17:22:04 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/28 19:02:53 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/01 20:10:00 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/ft_cub3d.h"
 
-void	ft_get_map_el(char *line, t_map *map, int y, int x)
+// need to find another place
+double	ft_deg_to_rad(double deg)
 {
-	map->map_grid[y][x].extra = 0;
-	map->map_grid[y][x].type = ft_get_el_type(*line);
-	if (map->map_grid[y][x].type == player)
+	printf("ft_deg_to_rad: %f\n", deg * (PI / 180.0));
+	return (deg * (PI / 180.0));
+}
+
+void	ft_set_player_dir(t_player *player, char dir)
+{
+	if (dir == 'E')
+		player->dir = 0;
+	else if (dir == 'N')
+		player->dir = ft_deg_to_rad(90);
+	else if (dir == 'W')
+		player->dir = ft_deg_to_rad(180);
+	else if (dir == 'S')
+		player->dir = ft_deg_to_rad(270);
+}
+
+void	ft_get_map_el(char *line, t_map *map, int x, int y)
+{
+	map->map_grid[x][y].extra = 0;
+	map->map_grid[x][y].type = ft_get_el_type(*line);
+	if (map->map_grid[x][y].type == player)
 	{
 		// direction to be improved
-		map->player.direction = *line;
-		map->player.position = (t_size){x, y};
+		ft_set_player_dir(&(map->player), *line);
+		map->player.pos = (t_size){x : x, y : y};
+		map->player.cell_pos = (t_size){x : NB_CELL_POS / 2, y : NB_CELL_POS / 2};
+	// printf("get_map_el => player position: x: %d, y: %d\n", map->player.pos.x, map->player.pos.y);
+	// printf("get_map_el => player position: x: %d, y: %d\n", map->player.cell_pos.x, map->player.cell_pos.y);
 		map->player.life = 100;
 	}
 }
@@ -32,12 +54,12 @@ int	ft_init_grid_line(char *line, t_map *map, int y, int player_set)
 	x = 0;
 	while (*line)
 	{
-		ft_get_map_el(line, map, y, x);
+		ft_get_map_el(line, map, x, y);
 		line = ft_next_map_el(line);
-		if (map->map_grid[y][x].type == invalid
-			|| (player_set == 2 && map->map_grid[y][x].type == player))
+		if (map->map_grid[x][y].type == invalid
+			|| (player_set == 2 && map->map_grid[x][y].type == player))
 			return (0);
-		if (map->map_grid[y][x].type == player)
+		if (map->map_grid[x][y].type == player)
 			player_set = 2;
 		x++;
 	}

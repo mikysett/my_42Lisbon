@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_errors.h                                        :+:      :+:    :+:   */
+/*   ft_run_game.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/25 12:13:56 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/28 19:54:11 by msessa           ###   ########.fr       */
+/*   Created: 2021/03/29 16:52:38 by msessa            #+#    #+#             */
+/*   Updated: 2021/04/01 17:29:16 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ERRORS_H
-# define FT_ERRORS_H
+#ifndef FT_RUN_GAME_H
+# define FT_RUN_GAME_H
 
-typedef enum e_errors
-{
-	err_params,
-	err_map_extension,
-	err_map_path,
-	err_map_malloc,
-	err_map_gnl,
-	err_map_split,
-	err_map_param,
-	err_map_grid,
-	err_map_param_miss
-}				t_errors;
+void	ft_run_game(t_map *map);
+int		ft_render_game(void *game);
+void	ft_game_print(t_game *game);
 
-typedef enum e_mlx_errors
-{
-	err_mlx
-}				t_mlx_errors;
+void	ft_draw_rect(t_img_data *img, t_size pos, t_size size, int color);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 18:37:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/28 19:00:27 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/29 21:00:04 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ static bool	ft_check_map_row(t_map_el **grid, int y, t_size map_size)
 		cell[d_b] = empty;
 		cell[d_bl] = empty;
 		cell[d_tl] = empty;
-		cell[d_cn] = grid[y][x].type;
+		cell[d_cn] = grid[x][y].type;
 		if (x + 1 != map_size.x)
-			cell[d_l] = grid[y][x + 1].type;
+			cell[d_l] = grid[x + 1][y].type;
 		if (y + 1 != map_size.y)
-			cell[d_b] = grid[y + 1][x].type;
+			cell[d_b] = grid[x][y + 1].type;
 		if (x + 1 != map_size.x && y + 1 != map_size.y)
-			cell[d_bl] = grid[y + 1][x + 1].type;
+			cell[d_bl] = grid[x + 1][y + 1].type;
 		if (x + 1 != map_size.x && y - 1 >= 0)
-			cell[d_tl] = grid[y - 1][x + 1].type;
+			cell[d_tl] = grid[x + 1][y - 1].type;
 		if (!ft_check_map_cell(cell))
 			return (false);
 		x++;

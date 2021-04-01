@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 18:41:10 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/28 19:06:37 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/29 20:32:20 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ t_map_el	**ft_alloc_map_grid(t_size map_size)
 	int			i;
 
 	i = 0;
-	map_grid = malloc(sizeof(t_map_el *) * map_size.y);
+	map_grid = malloc(sizeof(t_map_el *) * map_size.x);
 	if (!map_grid)
 		return (0);
-	while (i < map_size.y)
+	while (i < map_size.x)
 	{
-		map_grid[i] = malloc(sizeof(t_map_el) * map_size.x);
+		map_grid[i] = malloc(sizeof(t_map_el) * map_size.y);
 		if (!map_grid[i])
 		{
 			while (--i >= 0)
@@ -61,7 +61,7 @@ t_map_el	**ft_alloc_map_grid(t_size map_size)
 			free(map_grid);
 			return (0);
 		}
-		ft_set_grid_line(map_grid[i], map_size.x);
+		ft_set_grid_line(map_grid[i], map_size.y);
 		i++;
 	}
 	return (map_grid);

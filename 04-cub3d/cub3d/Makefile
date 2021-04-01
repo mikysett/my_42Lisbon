@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/03/26 11:02:33 by msessa           ###   ########.fr        #
+#    Updated: 2021/04/01 19:45:44 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,9 +44,10 @@ BDEPS	:=	$(DEPS)
 
 CC		=	gcc
 
-CFLAGS	=	-Wall -Wextra
+# Change optimization flag to -O3 for faster execution
+CFLAGS	=	-O0 -Wall -Wextra
 
-LIBS	=	-L./libft -lft
+LIBS	=	-lm -L./libft -lft -lmlx -lX11 -lbsd -lXext
 
 RM		=	rm -f
 

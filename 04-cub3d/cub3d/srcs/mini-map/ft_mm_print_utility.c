@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_errors.h                                        :+:      :+:    :+:   */
+/*   ft_mm_print_utility.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/25 12:13:56 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/28 19:54:11 by msessa           ###   ########.fr       */
+/*   Created: 2021/03/31 19:05:27 by msessa            #+#    #+#             */
+/*   Updated: 2021/03/31 19:05:50 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ERRORS_H
-# define FT_ERRORS_H
+#include "../../headers/ft_cub3d.h"
 
-typedef enum e_errors
+int	ft_set_cell_y(t_mini_map *mm, int y)
 {
-	err_params,
-	err_map_extension,
-	err_map_path,
-	err_map_malloc,
-	err_map_gnl,
-	err_map_split,
-	err_map_param,
-	err_map_grid,
-	err_map_param_miss
-}				t_errors;
+	if (y == 0)
+		return (mm->cell_size - mm->cell_offset.y);
+	if (y == mm->nb_cells.y - 1)
+		return (mm->cell_offset.y);
+	return (mm->cell_size);
+}
 
-typedef enum e_mlx_errors
+int	ft_set_cell_x(t_mini_map *mm, int x)
 {
-	err_mlx
-}				t_mlx_errors;
-#endif
+	if (x == 0)
+		return (mm->cell_size - mm->cell_offset.x);
+	if (x == mm->nb_cells.x - 1)
+		return (mm->cell_offset.x);
+	return (mm->cell_size);
+}

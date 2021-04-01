@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:43:09 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/28 19:12:57 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/01 20:33:11 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,19 @@
 # define FT_INIT_MAP_H
 # define MIN_MAP_PARAMS 9
 # define NB_DIRECTIONS 9
+# define NB_CELL_POS 512
+# define WALKING_STEPS 8
+# define PI				3.141592654
+# define ONE_DEGREE		0.017453293
+# define FULL_CIRCLE	6.283185307
 
-typedef enum	e_directions
+typedef enum	e_rot
+{
+	r_left,
+	r_right
+}				t_rot;
+
+typedef enum	e_dir
 {
 	d_cn,
 	d_t,
@@ -26,7 +37,7 @@ typedef enum	e_directions
 	d_br,
 	d_r,
 	d_tr
-}				t_directions;
+}				t_dir;
 
 typedef enum	e_map_p_types
 {
@@ -96,8 +107,13 @@ typedef struct	s_map_par
 
 typedef struct	s_player
 {
-	t_size	position;
-	int		direction;
+	t_size	pos;
+	double	dir;
+	t_size	cell_pos;
+	t_size	last_pos;
+	t_size	last_cell_pos;
+	bool	moving[NB_DIRECTIONS];
+	bool	rotating[2];
 	int		life;
 }				t_player;
 

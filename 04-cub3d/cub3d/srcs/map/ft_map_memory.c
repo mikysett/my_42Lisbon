@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 15:54:56 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/28 19:03:33 by msessa           ###   ########.fr       */
+/*   Updated: 2021/03/29 20:35:35 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_map	*ft_free_map(t_map *map)
 		free(map->map_params);
 	}
 	if (map->map_grid)
-		ft_free_matrix((void **)map->map_grid, map->map_size.y);
+		ft_free_matrix((void **)map->map_grid, map->map_size.x);
 	free(map);
 	return (0);
 }
