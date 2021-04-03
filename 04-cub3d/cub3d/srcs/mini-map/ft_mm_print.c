@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:02:17 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/01 20:21:49 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/02 14:09:15 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,8 @@ t_size	ft_take_dir_point(double dir)
 {
 	t_size	dir_point;
 
-	dir_point.x = cos(dir) * 100.0;
-	dir_point.y = sin(dir) * 100.0;
-	printf("dir: %f\n", dir);
-	printf("cos dir: %f, sin dir: %f\n", cos(dir), sin(dir));
-	printf("dir_point.x: %d, dir_point.y: %d\n", dir_point.x, dir_point.y);
+	dir_point.x = cos(dir) * DIR_DISTANCE;
+	dir_point.y = sin(dir) * DIR_DISTANCE;
 	return (dir_point);
 }
 

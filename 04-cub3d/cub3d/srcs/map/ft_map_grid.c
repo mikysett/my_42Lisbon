@@ -6,29 +6,22 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 17:22:04 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/01 20:10:00 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/02 19:18:50 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/ft_cub3d.h"
-
-// need to find another place
-double	ft_deg_to_rad(double deg)
-{
-	printf("ft_deg_to_rad: %f\n", deg * (PI / 180.0));
-	return (deg * (PI / 180.0));
-}
 
 void	ft_set_player_dir(t_player *player, char dir)
 {
 	if (dir == 'E')
 		player->dir = 0;
 	else if (dir == 'N')
-		player->dir = ft_deg_to_rad(90);
+		player->dir = DEGREES_90;
 	else if (dir == 'W')
-		player->dir = ft_deg_to_rad(180);
+		player->dir = DEGREES_180;
 	else if (dir == 'S')
-		player->dir = ft_deg_to_rad(270);
+		player->dir = DEGREES_270;
 }
 
 void	ft_get_map_el(char *line, t_map *map, int x, int y)

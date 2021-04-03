@@ -6,19 +6,12 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:43:09 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/01 20:33:11 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/02 13:48:33 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_INIT_MAP_H
 # define FT_INIT_MAP_H
-# define MIN_MAP_PARAMS 9
-# define NB_DIRECTIONS 9
-# define NB_CELL_POS 512
-# define WALKING_STEPS 8
-# define PI				3.141592654
-# define ONE_DEGREE		0.017453293
-# define FULL_CIRCLE	6.283185307
 
 typedef enum	e_rot
 {
