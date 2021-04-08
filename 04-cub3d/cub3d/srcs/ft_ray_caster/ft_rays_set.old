@@ -1,0 +1,298 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_rays_set.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/02 17:19:20 by msessa            #+#    #+#             */
+/*   Updated: 2021/04/07 11:39:24 by msessa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../headers/ft_cub3d.h"
+
+t_size_f	ft_get_float_pos(t_size pos, t_size cell_pos)
+{
+	t_size_f	f_pos;
+
+	f_pos.x = pos.x + cell_pos.x / (double)NB_CELL_POS;
+	f_pos.y = pos.y + cell_pos.y / (double)NB_CELL_POS;
+	return (f_pos);
+}
+
+bool	ft_catch_wall_jump_x(t_map_el **map_grid, t_ray *ray, t_size_f ray_pos)
+{
+	if (ray->neg_step_x)
+	{
+		ray->pos.x = (int)ray_pos.x + 1;
+		ray->pos.y = ray_pos.y;
+		ray->color = 0xFFAA0000;
+	}
+	else
+	{
+		ray->pos.x = (int)ray_pos.x - 1;
+		ray->pos.y = ray_pos.y;
+		ray->color = 0xFFAA0000;
+	}
+	return (true);
+}
+
+void	ft_set_sidewall_x_neg(t_ray *ray, t_size_f ray_pos)
+{
+	if (ray->neg_step_y)
+	{
+		ray->intersec.y = (int)(ray_pos.y) + 1 - ray_pos.y;
+		ray->intersec.x = ray->intersec.y / -tan(ray->dir);
+	}
+	else
+	{
+		ray->intersec.y = ray_pos.y - (int)(ray_pos.y);
+		ray->intersec.x = ray->intersec.y / tan(ray->dir);
+	}
+	if ((int)(ray_pos.x + ray->intersec.x) == (int)ray_pos.x)
+	{
+		ray->pos.x = ray_pos.x + ray->intersec.x;
+		ray->color = 0xFFFFFFFF;
+	}
+	else
+	{
+		ray->pos.x = (int)ray_pos.x + 1;
+		ray->pos.y = ray_pos.y;
+		ray->color = 0xFFAA0000;
+	}
+}
+
+void	ft_ray_cast_x_neg(t_map_el **map_grid, t_ray *ray,
+	t_size_f p_pos, t_size_f ray_pos)
+{
+	double	last_ray_pos_y;
+
+	ray_pos.x = (int)p_pos.x;
+	ray_pos.y = p_pos.y + tan(ray->dir) * (p_pos.x - (int)p_pos.x);
+	last_ray_pos_y = ray_pos.y;
+	while (map_grid[(int)ray_pos.x][(int)ray_pos.y].type != wall)
+	{
+		last_ray_pos_y = ray_pos.y;
+		ray_pos.x -= 1;
+		ray_pos.y += ray->y_incr;
+		if ((int)last_ray_pos_y != (int)ray_pos.y
+			&& map_grid[(int)ray_pos.x][(int)last_ray_pos_y].type == wall)
+		{
+			ft_catch_wall_jump_x(map_grid, ray, ray_pos);
+			return ;
+		}
+	}
+	if ((int)last_ray_pos_y != (int)ray_pos.y
+		&& map_grid[(int)ray_pos.x][(int)last_ray_pos_y].type == wall)
+		ft_catch_wall_jump_x(map_grid, ray, ray_pos);
+	else
+		ft_set_sidewall_x_neg(ray, ray_pos);
+}
+
+bool	ft_set_sidewall_x_pos(t_map_el **map_grid, t_ray *ray, t_size_f ray_pos)
+{
+	if ((int)(ray_pos.x - ray->intersec.x) == (int)ray_pos.x
+		&& ((!ray->neg_step_y
+			&& map_grid[(int)ray_pos.x][(int)ray_pos.y - 1].type != wall)
+			|| (ray->neg_step_y
+				&& map_grid[(int)ray_pos.x][(int)ray_pos.y + 1].type != wall)))
+	{
+		// printf("white - ray_pos.x : %f and ray->intersec.x : %f\n", ray_pos.x, ray->intersec.x);
+		ray->pos.x = ray_pos.x + ray->intersec.x;
+		// printf("udated ray_pos.x : %f\n", ray->pos.x);
+		ray->color = 0xFFFFFFFF;
+
+		return (true);
+	}
+	return (false);
+}
+
+void	ft_ray_cast_x_pos(t_map_el **map_grid, t_ray *ray,
+	t_size_f p_pos, t_size_f ray_pos)
+{
+	ray_pos.x = (int)p_pos.x + 1;
+	ray_pos.y = p_pos.y - tan(ray->dir) * (1.0 - (p_pos.x - (int)p_pos.x));
+	// printf("ray->y_incr: %f\n", ray->y_incr);
+	while (map_grid[(int)ray_pos.x][(int)ray_pos.y].type != wall)
+	{
+		// printf("ray_pos.y: %f|", ray_pos.y);
+		ray_pos = (t_size_f){x : ray_pos.x + 1,
+			y : ray_pos.y + ray->y_incr};
+	}
+	// printf("\nwall_hit: x: %f y: %f - ", ray_pos.x, ray_pos.y);
+	if (ray->neg_step_y)
+	{
+		ray->intersec.y = (int)(ray_pos.y) + 1 - ray_pos.y;
+		ray->intersec.x = ray->intersec.y / -tan(ray->dir);
+	}
+	else
+	{
+		ray->intersec.y = ray_pos.y - (int)(ray_pos.y);
+		ray->intersec.x = ray->intersec.y / tan(ray->dir);
+	}
+	// printf("intersec.x: %f, intersec.y: %f\n", ray->intersec.x, ray->intersec.x);
+	if (!ft_set_sidewall_x_pos(map_grid, ray, ray_pos))
+	{
+		ray->pos.x = (int)ray_pos.x + 1;
+		ray->pos.y = ray_pos.y;
+		ray->color = 0xFFAA0000;
+		// printf("red\n");
+	}
+}
+
+void	ft_ray_cast_x(t_game *game, t_map_el **map_grid, t_ray *ray,
+	t_size_f p_pos, t_size_f ray_pos)
+{
+	ray->step = fabs(ray->diff_x);
+	ray->slope = 'x';
+	if (ray->diff_x < 0)
+		ray->neg_step_x = true;
+	else
+		ray->neg_step_x = false;
+	if (ray->diff_y < 0)
+		ray->neg_step_y = true;
+	else
+		ray->neg_step_y = false;
+	ray->y_incr = ray->diff_y / ray->step;
+	if (ray->neg_step_x)
+	{
+		ft_ray_cast_x_neg(map_grid, ray, p_pos, ray_pos);
+		ray->dist = ((p_pos.x - ray->pos.x) / sin(DEGREES_270 - ray->dir))
+			* sin(game->player->dir + DEGREES_90 - ray->dir);
+	}
+	else
+	{
+		ft_ray_cast_x_pos(map_grid, ray, p_pos, ray_pos);
+		// ray->dist = ray->pos.x - p_pos.x;
+		ray->dist = ((p_pos.x - ray->pos.x) / sin(DEGREES_270 - ray->dir))
+			* sin(game->player->dir + DEGREES_90 - ray->dir);
+		// printf("|dist: %f\n", ray->dist);
+	}
+
+}
+
+void	ft_ray_cast(t_game *game, t_map_el **map_grid, t_ray *ray,
+	t_size_f p_pos, t_size_f ray_pos)
+{
+	t_size_f	intersec;
+	
+	ray->diff_x = ray_pos.x - p_pos.x;
+	ray->diff_y = ray_pos.y - p_pos.y;
+	if (fabs(ray->diff_x) > fabs(ray->diff_y))
+	{
+		ft_ray_cast_x(game, map_grid, ray, p_pos, ray_pos);
+		return ;
+		ray->step = fabs(ray->diff_x);
+		ray->slope = 'x';
+	}
+	else
+	{
+		ray->step = fabs(ray->diff_y);
+		ray->slope = 'y';
+	}
+	if (ray->diff_x < 0)
+		ray->neg_step_x = true;
+	else
+		ray->neg_step_x = false;
+	if (ray->diff_y < 0)
+		ray->neg_step_y = true;
+	else
+		ray->neg_step_y = false;
+	ray->x_incr = ray->diff_x / ray->step;
+	ray->y_incr = ray->diff_y / ray->step;
+	if (ray->slope == 'x' && ray->neg_step_x && !ray->neg_step_y)
+	{
+		ray_pos.x = (int)p_pos.x;
+		ray_pos.y = p_pos.y + tan(ray->dir) * (p_pos.x - (int)p_pos.x);
+	}
+	else
+	{
+		ray_pos.x = p_pos.x + ray->x_incr;
+		ray_pos.y = p_pos.y + ray->y_incr;
+	}
+	while (1)
+	{
+		if (map_grid[(int)ray_pos.x][(int)ray_pos.y].type == wall)
+		{
+			if (ray->slope == 'x')
+			{
+				ray->dist = fabs(ray_pos.x - p_pos.x);
+				if (ray->neg_step_y)
+				{
+					// To be implemented
+					// Ray going up
+					ray->dist = 1000;
+				}
+				else
+				{
+					if ((int)ray_pos.x == p_pos.x)
+						intersec.y = ray_pos.y - p_pos.y;
+					else
+						intersec.y = ray_pos.y - (int)(ray_pos.y);
+					intersec.x = (intersec.y / tan(ray->dir));
+					if (ray->neg_step_x)
+					{
+						if ((int)(ray_pos.x + intersec.x) == (int)ray_pos.x
+							&& map_grid[(int)ray_pos.x][(int)ray_pos.y - 1].type != wall)
+						{
+							ray->pos.x = ray_pos.x + intersec.x;
+							ray->color = 0xFFFFFFFF;
+						}
+						else
+						{
+							ray->pos.x = (int)ray_pos.x + 1;
+							ray->pos.y = ray_pos.y;
+							ray->color = 0xFFAA0000;
+						}
+					}
+					else
+					{
+						// To be implemented
+						// Ray going right
+					}
+					// printf("ray->dir: %f sin: %f\n", ft_rad_to_deg(ray->dir), sin(FULL_CIRCLE - ray->dir));
+					
+					ray->dist = ((p_pos.x - ray->pos.x) / sin(FULL_CIRCLE - DEGREES_90 - ray->dir)) * sin(game->player->dir + DEGREES_90 - ray->dir);
+					if (ray->dist < 0)
+					{
+						ray->dist = 0;
+						ray->color = 0xFF00FF00;
+					}
+				}
+			}
+			else
+			{
+				// To be implemented
+				// slope == y
+			}
+			return ;
+		}
+		ray_pos.x += ray->x_incr;
+		ray_pos.y += ray->y_incr;
+	}	
+	
+}
+
+void	ft_rays_set(t_game *game, t_ray *rays,
+	const int res_x, const double rays_step)
+{
+	int			i;
+	t_size_f	p_pos;
+	double		dir_sel;
+
+	p_pos = ft_get_float_pos(game->player->pos, game->player->cell_pos);
+	// To test
+	// printf("Player float pos: - x: %.5f, y: %.5f", p_pos.x, p_pos.y);
+	dir_sel = game->player->dir + game->rays_info.half_fov;
+	i = 0;
+	while (i < res_x)
+	{
+		rays[i].dir = dir_sel;
+		rays[i].pos.x = p_pos.x + cos(dir_sel);
+		rays[i].pos.y = p_pos.y - sin(dir_sel);
+		ft_ray_cast(game, game->map->map_grid, (rays + i), p_pos, rays[i].pos);
+		dir_sel -= rays_step;
+		i++;
+	}
+}

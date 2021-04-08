@@ -6,12 +6,18 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:43:09 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/02 20:08:36 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/06 16:30:15 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_INIT_GAME_H
 # define FT_INIT_GAME_H
+
+typedef enum e_game_settings
+{
+	show_minimap,
+	show_fps
+}			t_game_settings;
 
 typedef struct s_img_data
 {
@@ -34,9 +40,28 @@ typedef struct s_mini_map
 typedef struct s_ray
 {
 	// int size;
-	t_size	pos;
-	t_size	cell_pos;
+	t_size_f	pos;
+	double		dist;
+	double		dir;
+	t_size_f	intersec;
+	char		slope;
+	bool		neg_step_x;
+	bool		neg_step_y;
+	double		step;
+	double		diff_x;
+	double		diff_y;
+	double		x_incr;
+	double		y_incr;
+	int			color;
 }				t_ray;
+
+typedef struct s_rays_info
+{
+	double	fov;
+	double	half_fov;
+	double	step;
+
+}				t_rays_info;
 
 typedef struct s_game
 {
@@ -47,9 +72,14 @@ typedef struct s_game
 	t_size		res;
 	t_player	*player;
 	t_ray		*rays;
+	t_rays_info	rays_info;
 	void		*mlx;
 	void		*win;
+	t_img_data	scene;
 	void		*text;
+	bool		settings[NB_SETTINGS];
+	struct timeval	old_time;
+	struct timeval	new_time;
 }				t_game;
 
 void	ft_free_game(t_game *game);

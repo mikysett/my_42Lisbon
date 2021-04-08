@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:43:09 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/02 13:48:33 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/03 16:37:23 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,12 @@ typedef struct	s_size
 	int	x;
 	int	y;
 }				t_size;
+
+typedef struct	s_size_f
+{
+	double	x;
+	double	y;
+}				t_size_f;
 
 typedef struct	s_color
 {

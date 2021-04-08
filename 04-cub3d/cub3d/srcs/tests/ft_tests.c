@@ -6,11 +6,36 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 11:06:56 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/29 20:54:57 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/05 11:52:30 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/ft_cub3d.h"
+
+double	ft_rad_to_deg(double rad)
+{
+	return (rad * (180.0 / PI));
+}
+
+double	ft_deg_to_rad(double deg)
+{
+	return (deg * (PI / 180.0));
+}
+
+void	ft_print_rays(t_ray *rays, const int res_x)
+{
+	int	i;
+
+	printf("Print rays infos:\n");
+	i = 0;
+	while (i < res_x)
+	{
+		printf("r%4d- x: %.5f, y: %.5f |  ", i, rays[i].pos.x, rays[i].pos.y);
+		i++;
+		if (i % 5 == 0)
+			printf("\n");
+	}
+}
 
 void	ft_print_split(char **str)
 {

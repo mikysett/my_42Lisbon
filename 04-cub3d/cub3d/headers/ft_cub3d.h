@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:34:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/02 17:32:46 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/06 10:15:35 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "ft_mem_utilities.h"
 # include "ft_init_map.h"
 # include "ft_init_game.h"
+# include "ft_bonus.h"
 # include "ft_ray_caster.h"
 # include "ft_mini_map.h"
 # include "ft_set_events.h"

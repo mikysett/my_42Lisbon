@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 13:14:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/02 23:50:13 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/06 11:48:09 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		ft_ply_set_cell_x(t_map *map, t_player *player, t_size move)
 			player->cell_pos.x = NB_CELL_POS + new_cell_pos_x;
 		}
 		else
-			player->cell_pos.x = 0;
+			player->cell_pos.x = 1;
 	}
 	else if (new_cell_pos_x >= NB_CELL_POS)
 	{
@@ -79,7 +79,7 @@ void		ft_ply_set_cell_x(t_map *map, t_player *player, t_size move)
 			player->cell_pos.x = new_cell_pos_x - NB_CELL_POS;
 		}
 		else
-			player->cell_pos.x = NB_CELL_POS - 1;
+			player->cell_pos.x = NB_CELL_POS - 2;
 	}
 	else
 		player->cell_pos.x = new_cell_pos_x;
@@ -98,7 +98,7 @@ void		ft_ply_set_cell_y(t_map *map, t_player *player, t_size move)
 			player->cell_pos.y = NB_CELL_POS + new_cell_pos_y;
 		}
 		else
-			player->cell_pos.y = 0;
+			player->cell_pos.y = 1;
 	}
 	else if (new_cell_pos_y >= NB_CELL_POS)
 	{
@@ -108,7 +108,7 @@ void		ft_ply_set_cell_y(t_map *map, t_player *player, t_size move)
 			player->cell_pos.y = new_cell_pos_y - NB_CELL_POS;
 		}
 		else
-			player->cell_pos.y = NB_CELL_POS - 1;
+			player->cell_pos.y = NB_CELL_POS - 2;
 	}
 	else
 		player->cell_pos.y = new_cell_pos_y;

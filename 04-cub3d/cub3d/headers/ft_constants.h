@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 13:45:38 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/03 12:20:20 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/06 12:19:16 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # define NB_CELL_POS	2048
 # define CAMERA_DIST	1024
 # define WALK_STEP		64
+
+# define NB_SETTINGS	2
+
+# define FOV_66			1.151917306
 
 # define PI				3.141592654
 # define ONE_DEGREE		0.017453293
@@ -58,6 +62,8 @@
 #  define KEY_MOV_UP	119
 #  define KEY_MOV_DOWN	115
 #  define KEY_SPACE		32
+#  define KEY_SHOW_FPS	'f'
+#  define KEY_SHOW_MM	'm'
 
 #  define DESTROY_NOTIFY	33
 #  define DESTROY_NOTIFY_M	0

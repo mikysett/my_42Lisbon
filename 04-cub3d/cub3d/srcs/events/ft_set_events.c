@@ -6,18 +6,31 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 10:36:30 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/02 13:15:10 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/06 17:19:40 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/ft_cub3d.h"
+
+void	ft_swap_setting(t_game *game, t_game_settings setting)
+{
+	if (game->settings[setting] == true)
+		game->settings[setting] = false;
+	else
+	{
+		game->settings[setting] = true;
+		if (setting == show_minimap)
+			ft_mini_map(game);
+	}
+}
 
 int	ft_key_press(int key, void *game_void)
 {
 	t_game	*game;
 	
 	game = (t_game *)game_void;
-	printf("key: %d\n", key);
+	// To test
+	// printf("key: %d\n", key);
 	if (key == KEY_MOV_LEFT)
 		game->player->moving[d_l] = true;
 	else if (key == KEY_MOV_RIGHT)
@@ -30,6 +43,12 @@ int	ft_key_press(int key, void *game_void)
 		game->player->rotating[r_left] = true;
 	else if (key == KEY_ARR_RIGHT)
 		game->player->rotating[r_right] = true;
+	else if (key == KEY_ARR_RIGHT)
+		game->player->rotating[r_right] = true;
+	else if (key == KEY_SHOW_FPS)
+		ft_swap_setting(game, show_fps);
+	else if (key == KEY_SHOW_MM)
+		ft_swap_setting(game, show_minimap);
 	else if (key == KEY_ESC)
 		ft_exit_game(key, game_void);
 	ft_render_game(game);

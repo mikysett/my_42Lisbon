@@ -6,13 +6,11 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:01:47 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/02 20:12:52 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/08 16:32:01 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/ft_cub3d.h"
-
-
 
 t_list	*ft_get_map_param(t_list **params, t_map_p_types type_sel)
 {
@@ -80,6 +78,12 @@ t_player	*ft_ply_init(t_player *player)
 	return (player);
 }
 
+void	ft_default_settings(t_game *game)
+{
+	game->settings[show_minimap] = true;
+	game->settings[show_fps] = true;
+}
+
 bool	ft_init_game(t_game *game, t_map *map)
 {
 	game->map = map;
@@ -88,6 +92,11 @@ bool	ft_init_game(t_game *game, t_map *map)
 	game->mini_map.cell_size = MINI_MAP_CELL_SIZE;
 	game->mm_img.img_ref = 0;
 	game->rays = 0;
+
+	ft_default_settings(game);
+	gettimeofday(&(game->new_time), 0);
+	game->old_time = game->new_time;
+
 	game->player = ft_ply_init(&(map->player));
 	game->mlx = mlx_init();
 	if (!game->mlx)
@@ -96,11 +105,12 @@ bool	ft_init_game(t_game *game, t_map *map)
 		return (false);
 	}
 	game->res = ft_init_res(map->map_params);
-	game->rays = malloc(sizeof(t_ray) * game->res.x);
-	if (!game->rays)
+	if (!ft_rays_init(game, game->res.x))
 		return (false);
-	
 	game->win = mlx_new_window(game->mlx, game->res.x, game->res.y, "cub3D");
+	game->scene.img_ref = mlx_new_image(game->mlx, game->res.x, game->res.y);
+	game->scene.img_addr = mlx_get_data_addr(game->scene.img_ref,
+		&(game->scene.bits_pix), &(game->scene.size_line), &(game->scene.endian));
 	ft_mm_init_img(game);
 	game->mm_pos = ft_mm_set_pos(game->res, game->mini_map.size);
 	// To load textures, still to be developped

@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ray_set.c                                       :+:      :+:    :+:   */
+/*   ft_update_time_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/02 17:19:17 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/02 18:58:21 by msessa           ###   ########.fr       */
+/*   Created: 2021/04/06 09:45:32 by msessa            #+#    #+#             */
+/*   Updated: 2021/04/06 10:40:03 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/ft_cub3d.h"
 
-t_ray	*ft_ray_set(t_game *game, t_ray *rays, t_size res)
+void	ft_update_time(t_game *game)
 {
-	int		i;
-
-	i = 0;
-	while (i < res.x)
-	{
-		
-	}
-	return (rays);
+	game->old_time = game->new_time;
+	gettimeofday(&(game->new_time), 0);
 }
