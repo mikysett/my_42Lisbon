@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 10:36:30 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/06 17:19:40 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/09 11:17:24 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	ft_key_press(int key, void *game_void)
 	game = (t_game *)game_void;
 	// To test
 	// printf("key: %d\n", key);
+	// mlx_clear_window(game->mlx, game->win);
 	if (key == KEY_MOV_LEFT)
 		game->player->moving[d_l] = true;
 	else if (key == KEY_MOV_RIGHT)
@@ -51,7 +52,7 @@ int	ft_key_press(int key, void *game_void)
 		ft_swap_setting(game, show_minimap);
 	else if (key == KEY_ESC)
 		ft_exit_game(key, game_void);
-	ft_render_game(game);
+	ft_render_game(game_void);
 	return (0);
 }
 
@@ -60,6 +61,7 @@ int	ft_key_release(int key, void *game_void)
 	t_game	*game;
 	
 	game = (t_game *)game_void;
+	// mlx_clear_window(game->mlx, game->win);
 	if (key == KEY_MOV_LEFT)
 		game->player->moving[d_l] = false;
 	else if (key == KEY_MOV_RIGHT)
@@ -72,6 +74,7 @@ int	ft_key_release(int key, void *game_void)
 		game->player->rotating[r_left] = false;
 	else if (key == KEY_ARR_RIGHT)
 		game->player->rotating[r_right] = false;
+	// ft_render_game(game_void);
 	return (0);
 }
 

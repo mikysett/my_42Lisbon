@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 19:45:54 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/08 16:30:34 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/09 18:57:04 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,23 @@ static void	ft_set_sidewall_y_neg(t_ray *ray)
 	{
 		ray->intersec.x = (int)(ray->pos.x) + 1 - ray->pos.x;
 		ray->intersec.y = ray->intersec.x / tan(ray->dir - DEGREES_90);
+		ray->color = 0x00110000;
+		ray->tex = tex_wall_w;
 	}
 	else
 	{
 		ray->intersec.x = ray->pos.x - (int)ray->pos.x;
 		ray->intersec.y = ray->intersec.x / tan(DEGREES_90 - ray->dir);
+		ray->color = 0x00006600;
+		ray->tex = tex_wall_e;
 	}
 	if (ray->intersec.y > 0 && ray->intersec.y < 1)
 	{
 		ray->pos.y = ray->pos.y + ray->intersec.y;
-		ray->color = 0xFFAA0000;
+		if (ray->neg_step_x)
+			ray->tex_pos = 1 - (ray->pos.y - (int)ray->pos.y);
+		else
+			ray->tex_pos = ray->pos.y - (int)ray->pos.y;
 	}
 	else
 		ft_wall_front_y(ray);
@@ -39,14 +46,20 @@ static void	ft_set_sidewall_y_pos(t_ray *ray)
 	{
 		ray->intersec.x = (int)(ray->pos.x) + 1 - ray->pos.x;
 		ray->intersec.y = ray->intersec.x / tan(DEGREES_90 - ray->dir);
+		ray->pos.y = ray->pos.y - ray->intersec.y;
+		ray->color = 0x00110000;
+		ray->tex = tex_wall_w;
+		ray->tex_pos = 1 - (ray->pos.y - (int)ray->pos.y);
 	}
 	else
 	{
 		ray->intersec.x = ray->pos.x - (int)(ray->pos.x);
 		ray->intersec.y = ray->intersec.x / tan(ray->dir - DEGREES_90);
+		ray->pos.y = ray->pos.y - ray->intersec.y;
+		ray->color = 0x00006600;
+		ray->tex = tex_wall_e;
+		ray->tex_pos = ray->pos.y - (int)ray->pos.y;
 	}
-	ray->pos.y = ray->pos.y - ray->intersec.y;
-	ray->color = 0xFFAA0000;
 }
 
 static void	ft_ray_cast_y_neg(t_map_el **map_grid, t_ray *ray,
@@ -69,10 +82,11 @@ static void	ft_ray_cast_y_neg(t_map_el **map_grid, t_ray *ray,
 			return ;
 		}
 	}
-	if ((int)last_ray_pos_x != (int)ray->pos.x
-		&& map_grid[(int)last_ray_pos_x][(int)ray->pos.y].type == wall)
-		ft_wall_front_y(ray);
-	else
+	// Apparently useless condition, leaved for further check
+	// if ((int)last_ray_pos_x != (int)ray->pos.x
+	// 	&& map_grid[(int)last_ray_pos_x][(int)ray->pos.y].type == wall)
+	// 		ft_wall_front_y(ray);
+	// else
 		ft_set_sidewall_y_neg(ray);
 }
 

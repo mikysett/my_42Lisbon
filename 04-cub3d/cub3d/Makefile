@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/04/08 13:22:11 by msessa           ###   ########.fr        #
+#    Updated: 2021/04/09 11:18:31 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,11 @@ CC		=	gcc
 # Change optimization flag to -O3 for faster execution
 CFLAGS	=	-O0 -Wall -Wextra
 
+# Linux Libs
 LIBS	=	-lm -L./libft -lft -lmlx -lX11 -lbsd -lXext
+
+# Mac Libs
+LIBS	=	-lm -L./libft -lft -lmlx -framework OpenGL -framework AppKit
 
 RM		=	rm -f
 

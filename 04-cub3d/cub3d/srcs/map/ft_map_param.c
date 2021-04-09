@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 11:16:37 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/03 11:48:21 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/09 20:53:01 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static bool	ft_set_param_value(t_map_par *new_p, char **param, int nb_args)
 	{
 		new_p->val.res.x = ft_atoi(param[1]);
 		new_p->val.res.y = ft_atoi(param[2]);
-		if (new_p->val.res.x >= 600 && new_p->val.res.y >= 400)
+		if (new_p->val.res.x >= MIN_RES_X && new_p->val.res.y >= MIN_RES_Y)
 			return (true);
 	}
 	else if (new_p->type >= nord_tex && new_p->type <= sprite_tex

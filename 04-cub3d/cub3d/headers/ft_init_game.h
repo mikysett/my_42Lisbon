@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:43:09 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/06 16:30:15 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/09 20:05:26 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_img_data
 	int		bits_pix;
 	int		size_line;
 	int		endian;
+	int		width;
+	int		height;
 }				t_img_data;
 
 typedef struct s_mini_map
@@ -52,7 +54,9 @@ typedef struct s_ray
 	double		diff_y;
 	double		x_incr;
 	double		y_incr;
+	double		tex_pos;
 	int			color;
+	t_tex_type	tex;
 }				t_ray;
 
 typedef struct s_rays_info
@@ -76,7 +80,8 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	t_img_data	scene;
-	void		*text;
+	int			tex_size;
+	t_img_data	tex[NB_TEX];
 	bool		settings[NB_SETTINGS];
 	struct timeval	old_time;
 	struct timeval	new_time;

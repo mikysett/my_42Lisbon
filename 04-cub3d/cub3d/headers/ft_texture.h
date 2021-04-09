@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_utility.c                                 :+:      :+:    :+:   */
+/*   ft_texture.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/31 18:03:53 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/09 20:28:45 by msessa           ###   ########.fr       */
+/*   Created: 2021/04/09 11:45:40 by msessa            #+#    #+#             */
+/*   Updated: 2021/04/09 13:58:18 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/ft_cub3d.h"
+#ifndef FT_TEXTURE_H
+# define FT_TEXTURE_H
 
-void	ft_draw_rect(t_img_data *img, t_size pos, t_size size, unsigned int color)
+typedef enum	e_tex_type
 {
-int			x;
-int			y;
-char		*img_addr;
-const int	step_y = img->size_line - size.x * 4;
+	tex_wall_n,
+	tex_wall_s,
+	tex_wall_w,
+	tex_wall_e
+}				t_tex_type;
 
-img_addr = img->img_addr + (pos.x * 4) + pos.y * img->size_line;
-y = 0;
-while (y++ < size.y)
-{
-	x = 0;
-	while (x++ < size.x)
-	{
-		*((int *)(img_addr)) = color;
-		img_addr += 4;
-	}
-	img_addr += step_y;
-}
-}
+#endif

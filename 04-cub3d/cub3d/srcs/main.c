@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:26:03 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/31 16:58:40 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/09 12:03:20 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	ft_mlx_error(t_mlx_errors err)
 	printf("Error\n");
 	if (err == err_mlx)
 		printf("Failed to open the window\n");
+	if (err == err_tex)
+		printf("Failed to process textures\n");
 	// else if (err == err_map_extension)
 	// 	printf("Map file must be a .cub file\n");
 	// else if (err == err_map_path)

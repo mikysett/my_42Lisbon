@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:43:09 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/03 16:37:23 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/09 14:08:36 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ typedef enum	e_dir
 	d_tr
 }				t_dir;
 
+/* The _tex texture types must start this enum and be on the same order
+** of enum t_tex_type */
 typedef enum	e_map_p_types
 {
-	resolution,
 	nord_tex,
 	south_tex,
 	west_tex,
 	east_tex,
 	sprite_tex,
+	resolution,
 	floor_col,
 	ceiling_col,
 	map_grid

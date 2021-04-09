@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 19:36:29 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/06 11:00:44 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/09 11:16:37 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ void	ft_print_fps(t_game *game)
 		fps = ft_strdup("> 1000"); 
 	else
 		fps = ft_itoa(1.0 / frame_time);
+	// ft_draw_rect(&game->scene, (t_size){x : 6, y : 20}, (t_size){x : 100, y : 24}, 0x00FFFFFF);
 	mlx_string_put(game->mlx, game->win, 10, 20, 0xFFFF0000, "FPS: ");
-	mlx_string_put(game->mlx, game->win, 40, 20, 0xFFFF0000, fps);
+	mlx_string_put(game->mlx, game->win, 60, 20, 0xFFFF0000, fps);
 	// printf("fps: %s", fps);
 	free(fps);
 }
@@ -67,6 +68,7 @@ int	ft_render_game(void *game_void)
 	t_game	*game;
 
 	game = (t_game *)game_void;
+	// mlx_clear_window(game->mlx, game->win);
 	ft_game_print(game);
 	return (1);
 }

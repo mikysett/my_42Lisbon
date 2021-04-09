@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:13:56 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/28 19:54:11 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/09 12:03:52 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef enum e_errors
 
 typedef enum e_mlx_errors
 {
-	err_mlx
+	err_mlx,
+	err_tex
 }				t_mlx_errors;
 #endif
