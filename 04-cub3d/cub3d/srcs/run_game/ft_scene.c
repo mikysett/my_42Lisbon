@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 18:49:26 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/09 21:28:34 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/11 01:36:34 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,65 +34,102 @@ void	ft_draw_bg(t_game *game, int half_height)
 		(t_size){x : game->res.x, y : half_height}, 0x0011AA00);
 }
 
-void	ft_draw_tex(t_game *game, t_ray *ray,
-	const t_size pos, const int tex_height)
+void	ft_draw_tex(t_game *game)
 {
+	t_vert_line	*line;
 	int			i;
-	char		*img_addr;
-	t_img_data	*tex;
-	const int	step_y = game->scene.size_line;
-	int			color;
-	int			tex_x_pos;
+	char		*scene_addr;
+	char		*tex_addr;
+	int			size_line;
 
-	img_addr = game->scene.img_addr + (pos.x * 4)
-		+ pos.y * game->scene.size_line;
-	tex = &game->tex[ray->tex];
-	tex_x_pos = (int)(TEX_SIZE * ray->tex_pos) * 4;
+	line = &game->line;
+	size_line = line->tex->size_line;
+	tex_addr = line->tex_addr;
+	scene_addr = game->scene.img_addr + (line->pos.x * 4)
+		+ line->pos.y * game->scene.size_line;
 	i = 0;
-	while (i < tex_height)
+	while (i < line->tex_h)
 	{
-		if (i / 4 < tex->height)
+		*(int *)scene_addr = *(int *)tex_addr;
+		if (line->next_step_h >= 10000000)
 		{
-			color = *(int *)&(tex->
-			img_addr[tex_x_pos + tex->size_line * (i / 4)]);
-			*((int *)(img_addr)) = color;
+			line->next_step_h -= 10000000;
+			tex_addr += line->tex_step_h + size_line;
 		}
 		else
-			*((int *)(img_addr)) = 0x00FFFFFF;
-		img_addr += step_y;
+			tex_addr += line->tex_step_h;
+		line->next_step_h += line->step_precision;
+		// printf("line->next_step_h: %4d | ", line->next_step_h);
+		scene_addr += game->scene.size_line;
 		i++;
 	}
+	// printf("\nStep precision: %d\n", line->step_precision);
+	// printf("Step tex_step_h_float: %f\n", line->tex_step_h_float);
+}
+
+void	ft_init_line(t_game *game, t_ray *ray, int scene_h, int pos_x)
+{
+	t_vert_line	*line;
+
+	line = &game->line;
+	line->scene_h = scene_h;
+	line->line_h = scene_h / ray->dist;
+	line->tex = &game->tex[ray->tex];
+	line->tex_addr = line->tex->img_addr
+		+ (int)(line->tex->width * ray->tex_pos) * 4;
+	line->tex_step_h_float = (double)line->tex->height / line->line_h;
+	line->tex_step_h = line->tex->size_line * (int)line->tex_step_h_float;
+	line->step_precision = (line->tex_step_h_float
+		- (int)line->tex_step_h_float) * 10000000;
+	line->next_step_h = line->step_precision;
+	if (line->line_h > scene_h)
+	{
+		line->tex_h = scene_h;
+		// Offset could be removed because used on only one occasion right now
+		// Leaving because it may be useful in the future
+		line->offset = (line->line_h - scene_h) / 2.0;
+		line->skip_texels = line->offset * line->tex_step_h_float;
+		line->tex_addr += line->tex->size_line * (int)(line->skip_texels);
+		line->next_step_h = ((line->skip_texels)
+			- (int)(line->skip_texels)) * 10000000;
+	}
+	else
+	{
+		line->next_step_h = line->step_precision;
+		line->tex_h = line->line_h;
+		line->offset = 0;
+	}
+	line->pos.x = pos_x;
+	line->pos.y = (scene_h - line->tex_h) / 2;
 }
 
 void	ft_scene(t_game *game)
 {
-	int		line_height;
-	int		square_color;
 	int		half_height;
 	int		i;
-	t_size	pos;
 
 	half_height = game->res.y / 2;
 	ft_draw_bg(game, half_height);
 	i = 0;
 	while (i < game->res.x)
 	{
-		line_height = game->res.y / game->rays[i].dist;
-		if (line_height > game->res.y)
-			line_height = game->res.y;
+		ft_init_line(game, &game->rays[i], game->res.y, i);
+		// // line_height = game->res.y / game->rays[i].dist;
+		// // if (line_height > game->res.y)
+		// // 	line_height = game->res.y;
 		
 		// For shade related to distance in grayscale
-		if (game->rays[i].dist <= 1)
-			square_color = 255;
-		else
-			square_color = 255 / game->rays[i].dist;
-		// To check texture position on the box
-		square_color = 255 / game->rays[i].tex_pos;
+		// if (game->rays[i].dist <= 1)
+		// 	square_color = 255;
+		// else
+		// 	square_color = 255 / game->rays[i].dist;
+		// // To check texture position on the box
+		// square_color = 255 / game->rays[i].tex_pos;
 
-		pos.x = i;
-		pos.y = half_height - line_height / 2;
+		// // pos.x = i;
+		// // pos.y = half_height - line_height / 2;
 		// ft_draw_rect(&game->scene, pos, line_height, ft_get_white_color(square_color));
-		ft_draw_tex(game, &game->rays[i], pos, line_height);
+		ft_draw_tex(game);
 		// ft_draw_rect(&game->scene, pos, line_height, game->rays[i].color);
 		i++;
 	}

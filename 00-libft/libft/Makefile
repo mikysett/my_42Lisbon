@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 14:13:08 by msessa            #+#    #+#              #
-#    Updated: 2021/04/06 11:03:49 by msessa           ###   ########.fr        #
+#    Updated: 2021/04/10 23:51:19 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ BDEPS	:=	$(DEPS) libft.h
 
 CC		=	gcc
 
-CFLAGS	=	-O3 -Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror
 
 RM		=	rm -f
 

@@ -6,14 +6,16 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 13:45:38 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/09 20:52:49 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/10 22:14:01 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_CONSTANTS_H
 # define FT_CONSTANTS_H
 
-# define IS_OS_MAC		1
+# define BUFFER_SIZE	64
+
+# define IS_OS_MAC		0
 
 #  define MIN_RES_X		300
 #  define MIN_RES_Y		300

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:19:20 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/09 20:06:59 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/10 10:28:05 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ t_size_f	ft_get_float_pos(t_size pos, t_size cell_pos)
 void	ft_ray_cast(t_game *game, t_map_el **map_grid, t_ray *ray,
 	t_size_f p_pos, t_size_f ray_pos)
 {
-	t_size_f	intersec;
-
 	ray->diff_x = ray_pos.x - p_pos.x;
 	ray->diff_y = ray_pos.y - p_pos.y;
 	if (fabs(ray->diff_x) > fabs(ray->diff_y))
