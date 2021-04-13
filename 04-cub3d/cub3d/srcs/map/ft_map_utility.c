@@ -6,15 +6,15 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 11:16:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/28 19:07:56 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/11 20:08:41 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/ft_cub3d.h"
 
-t_color	ft_get_color(char *clr_str)
+int	ft_get_color(char *clr_str)
 {
-	t_color	clr;
+	t_color	rgb_clr;
 	char	**clr_arr;
 	int		nb_clr;
 
@@ -23,13 +23,17 @@ t_color	ft_get_color(char *clr_str)
 	if (nb_clr != 3)
 	{
 		ft_free_split(clr_arr);
-		return ((t_color){red : - 1, green : - 1, blue : - 1});
+		return (-1);
 	}
-	clr.red = ft_atoi(clr_arr[0]);
-	clr.green = ft_atoi(clr_arr[1]);
-	clr.blue = ft_atoi(clr_arr[2]);
+	rgb_clr.red = ft_atoi(clr_arr[0]);
+	rgb_clr.green = ft_atoi(clr_arr[1]);
+	rgb_clr.blue = ft_atoi(clr_arr[2]);
 	ft_free_split(clr_arr);
-	return (clr);
+	if (rgb_clr.red < 0 || rgb_clr.red > 255
+		|| rgb_clr.green < 0 || rgb_clr.green > 255
+		|| rgb_clr.blue < 0 || rgb_clr.blue > 255)
+		return (-1);
+	return ((rgb_clr.red << 16) + (rgb_clr.green << 8) + rgb_clr.blue);
 }
 
 bool	ft_is_map_grid(char *line, bool *p_set)

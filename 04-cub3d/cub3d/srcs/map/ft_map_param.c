@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 11:16:37 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/09 20:53:01 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/11 10:27:10 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ static bool	ft_set_param_value(t_map_par *new_p, char **param, int nb_args)
 		&& nb_args == 2)
 	{
 		new_p->val.clr = ft_get_color(param[1]);
-		if (new_p->val.clr.red >= 0 && new_p->val.clr.red <= 255
-			&& new_p->val.clr.green >= 0 && new_p->val.clr.green <= 255
-			&& new_p->val.clr.blue >= 0 && new_p->val.clr.blue <= 255)
+		if (new_p->val.clr != -1)
 			return (true);
 	}
 	return (false);

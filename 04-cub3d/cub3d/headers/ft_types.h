@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 22:13:40 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/11 01:33:42 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/11 20:59:09 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ typedef struct	s_color
 typedef union	u_map_p_val
 {
 	t_size	res;
-	t_color	clr;
+	int		clr;
 	char	*texture;
 }				t_map_p_val;
 
@@ -210,18 +210,22 @@ typedef struct s_game
 {
 	t_map		*map;
 	t_mini_map	mini_map;
-	t_img_data	mm_img;
-	t_size		mm_pos;
 	t_size		res;
 	t_player	*player;
 	t_ray		*rays;
 	t_rays_info	rays_info;
 	t_vert_line	line;
+	int			ceil_clr;
+	int			floor_clr;
 	void		*mlx;
 	void		*win;
+	t_img_data	bg;
 	t_img_data	scene;
-	int			tex_size;
+	t_img_data	lifeb;
+	t_img_data	mm_img;
+	t_size		mm_pos;
 	t_img_data	tex[NB_TEX];
+	int			tex_size;
 	bool		settings[NB_SETTINGS];
 	struct timeval	old_time;
 	struct timeval	new_time;

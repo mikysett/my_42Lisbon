@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:01:47 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/09 20:02:54 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/11 21:02:49 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,32 @@ void	ft_basic_settings(t_game *game, t_map *map)
 	game->player = ft_ply_init(&(map->player));
 }
 
+void	ft_init_layers(t_game *game)
+{
+	const t_size	pos = {x : 0, y : 0};
+	game->win = mlx_new_window(game->mlx, game->res.x, game->res.y, "cub3D");
+	game->bg.img_ref = mlx_new_image(game->mlx, game->res.x, game->res.y);
+	game->bg.img_addr = mlx_get_data_addr(game->bg.img_ref,
+		&game->bg.bits_pix, &game->bg.size_line, &game->bg.endian);
+	ft_draw_rect(&game->bg, pos, game->res, 0x00000000);
+	game->scene.img_ref = mlx_new_image(game->mlx, game->res.x, game->res.y);
+	game->scene.img_addr = mlx_get_data_addr(game->scene.img_ref,
+		&game->scene.bits_pix, &game->scene.size_line, &game->scene.endian);
+	game->lifeb.img_ref = mlx_new_image(game->mlx, game->res.x, game->res.y);
+	game->lifeb.img_addr = mlx_get_data_addr(game->lifeb.img_ref,
+		&game->lifeb.bits_pix, &game->lifeb.size_line, &game->lifeb.endian);
+}
+
+void	ft_init_bg(t_game *game)
+{
+	t_map_par	*clr_sel;
+
+	clr_sel = ft_get_map_param(game->map->map_params, ceiling_col);
+	game->ceil_clr = clr_sel->val.clr;
+	clr_sel = ft_get_map_param(game->map->map_params, floor_col);
+	game->floor_clr = clr_sel->val.clr;
+}
+
 bool	ft_init_graphics(t_game *game)
 {
 	game->tex_size = TEX_SIZE;
@@ -100,10 +126,8 @@ bool	ft_init_graphics(t_game *game)
 	game->res = ft_init_res(game->map->map_params);
 	if (!ft_rays_init(game, game->res.x))
 		return (false);
-	game->win = mlx_new_window(game->mlx, game->res.x, game->res.y, "cub3D");
-	game->scene.img_ref = mlx_new_image(game->mlx, game->res.x, game->res.y);
-	game->scene.img_addr = mlx_get_data_addr(game->scene.img_ref,
-		&(game->scene.bits_pix), &(game->scene.size_line), &(game->scene.endian));
+	ft_init_layers(game);
+	ft_init_bg(game);
 	ft_mm_init_img(game);
 	game->mm_pos = ft_mm_set_pos(game->res, game->mini_map.size);
 	return (true);

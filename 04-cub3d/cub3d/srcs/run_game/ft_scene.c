@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 18:49:26 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/11 01:36:34 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/11 20:40:06 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,62 +26,16 @@ int	ft_get_white_color(int brightness)
 
 void	ft_draw_bg(t_game *game, int half_height)
 {
-	ft_draw_rect(&game->scene,
-		(t_size){x : 0, y : 0},
-		(t_size){x : game->res.x, y : half_height}, 0x00000044);
-	ft_draw_rect(&game->scene,
-		(t_size){x : 0, y : half_height},
-		(t_size){x : game->res.x, y : half_height}, 0x0011AA00);
+	// ft_draw_rect(&game->scene,
+	// 	(t_size){x : 0, y : 0},
+	// 	(t_size){x : game->res.x, y : half_height}, 0x00000044);
+	// ft_draw_rect(&game->scene,
+	// 	(t_size){x : 0, y : half_height},
+	// 	(t_size){x : game->res.x, y : half_height}, 0x0011AA00);
 }
 
-void	ft_draw_tex(t_game *game)
+static void	ft_set_line_offset(t_vert_line *line, int scene_h)
 {
-	t_vert_line	*line;
-	int			i;
-	char		*scene_addr;
-	char		*tex_addr;
-	int			size_line;
-
-	line = &game->line;
-	size_line = line->tex->size_line;
-	tex_addr = line->tex_addr;
-	scene_addr = game->scene.img_addr + (line->pos.x * 4)
-		+ line->pos.y * game->scene.size_line;
-	i = 0;
-	while (i < line->tex_h)
-	{
-		*(int *)scene_addr = *(int *)tex_addr;
-		if (line->next_step_h >= 10000000)
-		{
-			line->next_step_h -= 10000000;
-			tex_addr += line->tex_step_h + size_line;
-		}
-		else
-			tex_addr += line->tex_step_h;
-		line->next_step_h += line->step_precision;
-		// printf("line->next_step_h: %4d | ", line->next_step_h);
-		scene_addr += game->scene.size_line;
-		i++;
-	}
-	// printf("\nStep precision: %d\n", line->step_precision);
-	// printf("Step tex_step_h_float: %f\n", line->tex_step_h_float);
-}
-
-void	ft_init_line(t_game *game, t_ray *ray, int scene_h, int pos_x)
-{
-	t_vert_line	*line;
-
-	line = &game->line;
-	line->scene_h = scene_h;
-	line->line_h = scene_h / ray->dist;
-	line->tex = &game->tex[ray->tex];
-	line->tex_addr = line->tex->img_addr
-		+ (int)(line->tex->width * ray->tex_pos) * 4;
-	line->tex_step_h_float = (double)line->tex->height / line->line_h;
-	line->tex_step_h = line->tex->size_line * (int)line->tex_step_h_float;
-	line->step_precision = (line->tex_step_h_float
-		- (int)line->tex_step_h_float) * 10000000;
-	line->next_step_h = line->step_precision;
 	if (line->line_h > scene_h)
 	{
 		line->tex_h = scene_h;
@@ -99,15 +53,35 @@ void	ft_init_line(t_game *game, t_ray *ray, int scene_h, int pos_x)
 		line->tex_h = line->line_h;
 		line->offset = 0;
 	}
+}
+
+static void	ft_init_line(t_game *game, t_ray *ray, int scene_h, int pos_x)
+{
+	t_vert_line	*line;
+
+	line = &game->line;
+	line->scene_h = scene_h;
+	line->line_h = scene_h / ray->dist;
+	line->tex = &game->tex[ray->tex];
+	line->tex_addr = line->tex->img_addr
+		+ (int)(line->tex->width * ray->tex_pos) * 4;
+	line->tex_step_h_float = (double)line->tex->height / line->line_h;
+	line->tex_step_h = line->tex->size_line * (int)line->tex_step_h_float;
+	line->step_precision = (line->tex_step_h_float
+		- (int)line->tex_step_h_float) * 10000000;
+	line->next_step_h = line->step_precision;
+	ft_set_line_offset(line, scene_h);
 	line->pos.x = pos_x;
 	line->pos.y = (scene_h - line->tex_h) / 2;
 }
 
 void	ft_scene(t_game *game)
 {
-	int		half_height;
-	int		i;
+	t_vert_line	*line;
+	int			half_height;
+	int			i;
 
+	line = &game->line;
 	half_height = game->res.y / 2;
 	ft_draw_bg(game, half_height);
 	i = 0;
@@ -129,7 +103,7 @@ void	ft_scene(t_game *game)
 		// // pos.x = i;
 		// // pos.y = half_height - line_height / 2;
 		// ft_draw_rect(&game->scene, pos, line_height, ft_get_white_color(square_color));
-		ft_draw_tex(game);
+		ft_draw_line(game, line, line->tex->size_line);
 		// ft_draw_rect(&game->scene, pos, line_height, game->rays[i].color);
 		i++;
 	}

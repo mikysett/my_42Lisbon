@@ -1,0 +1,18 @@
+OK		• Wall collisions.
+		• A skybox.
+		• Floor and/or ceiling texture.
+OK		• An HUD. (heads-up display)
+NO		• Ability to look up and down.
+		• Jump or crouch.
+		• A distance related shadow effect.
+		• Life bar.
+		• More items in the maze.
+		• Object collisions.
+		• Earning points and/or losing life by picking up objects/traps.
+		• Doors which can open and close.
+		• Secret doors.
+NO		• Animations of a gun shot or animated sprite.
+		• Several levels.
+NO		• Sounds and music.
+		• Rotate the point of view with the mouse.
+NO		• Weapons and bad guys to fight!

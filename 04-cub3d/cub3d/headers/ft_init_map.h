@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:43:09 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/10 22:20:12 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/11 10:26:27 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool			ft_init_map_param(t_list *map_line, t_map *map,
 
 bool			ft_init_map_size(t_list *map_line, t_map *map);
 
-t_color			ft_get_color(char *clr_str);
+int				ft_get_color(char *clr_str);
 bool			ft_is_map_grid(char *line, bool *p_set);
 int				ft_count_param_args(char **params);
 bool			ft_param_double(t_map_p_types p_type, bool *p_set);

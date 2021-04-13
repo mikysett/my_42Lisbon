@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 19:36:29 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/09 11:16:37 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/12 09:29:51 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	ft_print_fps(t_game *game)
 
 static void	ft_game_print(t_game *game)
 {
+	// Black bg for transparency, flickering on linux, need to check on mac
+	// mlx_put_image_to_window(game->mlx, game->win, game->bg.img_ref, 0, 0);
 	if (ft_player_moved(game->player))
 		ft_game_update(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->scene.img_ref, 0, 0);
