@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:01:47 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/11 21:02:49 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/13 19:47:10 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ void	ft_init_layers(t_game *game)
 	game->scene.img_ref = mlx_new_image(game->mlx, game->res.x, game->res.y);
 	game->scene.img_addr = mlx_get_data_addr(game->scene.img_ref,
 		&game->scene.bits_pix, &game->scene.size_line, &game->scene.endian);
-	game->lifeb.img_ref = mlx_new_image(game->mlx, game->res.x, game->res.y);
-	game->lifeb.img_addr = mlx_get_data_addr(game->lifeb.img_ref,
-		&game->lifeb.bits_pix, &game->lifeb.size_line, &game->lifeb.endian);
+	game->lb.img.img_ref = mlx_new_image(game->mlx, game->res.x, game->res.y);
+	game->lb.img.img_addr = mlx_get_data_addr(game->lb.img.img_ref,
+		&game->lb.img.bits_pix, &game->lb.img.size_line, &game->lb.img.endian);
 }
 
 void	ft_init_bg(t_game *game)
@@ -130,7 +130,30 @@ bool	ft_init_graphics(t_game *game)
 	ft_init_bg(game);
 	ft_mm_init_img(game);
 	game->mm_pos = ft_mm_set_pos(game->res, game->mini_map.size);
+	ft_lifeb_init_img(game);
 	return (true);
+}
+
+void	ft_init_extra_tex(t_game *game)
+{
+	t_map_par	*tex_sel;
+	t_img_data	*tex;
+	int			i;
+
+	tex = &game->sky_tex;
+	tex->img_ref = 0;
+	tex_sel = ft_get_map_param(game->map->map_params, skybox_tex);
+	if (tex_sel)
+	{
+		tex->img_ref = mlx_xpm_file_to_image(game->mlx,
+			tex_sel->val.texture,
+			&(tex->width), &(tex->height));
+		if (!tex->img_ref)
+			return ;
+		tex->img_addr = mlx_get_data_addr(tex->img_ref,
+			&(tex->bits_pix),
+			&(tex->size_line), &(tex->endian));
+	}
 }
 
 bool	ft_init_tex(t_game *game)
@@ -157,6 +180,7 @@ bool	ft_init_tex(t_game *game)
 			&(game->tex[i].size_line), &(game->tex[i].endian));
 		i++;
 	}
+	ft_init_extra_tex(game);
 	return (true);
 }
 

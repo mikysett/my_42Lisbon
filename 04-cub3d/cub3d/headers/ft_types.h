@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 22:13:40 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/11 20:59:09 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/13 20:19:05 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ typedef enum	e_map_p_types
 	resolution,
 	floor_col,
 	ceiling_col,
-	map_grid
+	map_grid,
+	skybox_tex
 }				t_map_p_types;
 
 typedef enum	e_map_el_type
@@ -146,22 +147,6 @@ typedef enum	e_tex_type
 	tex_wall_e
 }				t_tex_type;
 
-typedef struct	s_vert_line
-{
-	t_size		pos;
-	int			scene_h;
-	int			line_h;
-	int			tex_h;
-	double		offset;
-	t_img_data	*tex;
-	char		*tex_addr;
-	double		tex_step_h_float;
-	int			tex_step_h;
-	int			next_step_h;
-	int			step_precision;
-	double		skip_texels;
-}				t_vert_line;
-
 // General game settings
 
 typedef enum e_game_settings
@@ -179,6 +164,13 @@ typedef struct s_mini_map
 	t_size		first_cell;
 }				t_mini_map;
 
+typedef struct s_lifebar
+{
+	t_img_data	img;
+	t_size		pos;
+	t_size		size;
+}				t_lifebar;
+
 typedef struct s_ray
 {
 	t_size_f	pos;
@@ -194,8 +186,9 @@ typedef struct s_ray
 	double		x_incr;
 	double		y_incr;
 	double		tex_pos;
-	int			color;
 	t_tex_type	tex;
+	bool		sprite;
+	double		sprite_dist;
 }				t_ray;
 
 typedef struct s_rays_info
@@ -205,6 +198,25 @@ typedef struct s_rays_info
 	double	step;
 
 }				t_rays_info;
+
+typedef struct	s_vert_line
+{
+	t_ray			*ray;
+	t_size			pos;
+	int				scene_h;
+	int				line_h;
+	int				tex_h;
+	unsigned int	tex_alpha;
+	double			offset;
+	t_img_data		*tex;
+	char			*tex_addr;
+	double			tex_step_h_float;
+	int				tex_step_h;
+	int				next_step_h;
+	int				step_precision;
+	double			skip_texels;
+	bool			sprite;
+}				t_vert_line;
 
 typedef struct s_game
 {
@@ -221,9 +233,10 @@ typedef struct s_game
 	void		*win;
 	t_img_data	bg;
 	t_img_data	scene;
-	t_img_data	lifeb;
+	t_lifebar	lb;
 	t_img_data	mm_img;
 	t_size		mm_pos;
+	t_img_data	sky_tex;
 	t_img_data	tex[NB_TEX];
 	int			tex_size;
 	bool		settings[NB_SETTINGS];

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:19:20 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/10 10:28:05 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/13 15:20:51 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_rays_set(t_game *game, t_ray *rays,
 	i = 0;
 	while (i < res_x)
 	{
+		rays[i].sprite = false;
 		rays[i].dir = dir_sel;
 		rays[i].pos.x = p_pos.x + cos(dir_sel);
 		rays[i].pos.y = p_pos.y - sin(dir_sel);

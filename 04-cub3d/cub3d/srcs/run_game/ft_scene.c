@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 18:49:26 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/11 20:40:06 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/13 20:17:50 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void	ft_init_line(t_game *game, t_ray *ray, int scene_h, int pos_x)
 	t_vert_line	*line;
 
 	line = &game->line;
+	line->ray = ray;
 	line->scene_h = scene_h;
 	line->line_h = scene_h / ray->dist;
 	line->tex = &game->tex[ray->tex];
@@ -73,6 +74,19 @@ static void	ft_init_line(t_game *game, t_ray *ray, int scene_h, int pos_x)
 	ft_set_line_offset(line, scene_h);
 	line->pos.x = pos_x;
 	line->pos.y = (scene_h - line->tex_h) / 2;
+
+	if (ray->dist <= 1)
+		line->tex_alpha = 0;
+	if (ray->dist > 12.75)
+		line->tex_alpha = 255 << 24;
+	else
+		line->tex_alpha = (unsigned int)(ray->dist * 20) << 24;
+
+	// To test
+	if (ray->sprite == true)
+		line->sprite = true;
+	else
+		line->sprite = false;
 }
 
 void	ft_scene(t_game *game)

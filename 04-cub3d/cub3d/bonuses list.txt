@@ -4,10 +4,10 @@ OK		• Wall collisions.
 OK		• An HUD. (heads-up display)
 NO		• Ability to look up and down.
 		• Jump or crouch.
-		• A distance related shadow effect.
-		• Life bar.
+OK		• A distance related shadow effect.
+OK		• Life bar.
 		• More items in the maze.
-		• Object collisions.
+OK		• Object collisions.
 		• Earning points and/or losing life by picking up objects/traps.
 		• Doors which can open and close.
 		• Secret doors.

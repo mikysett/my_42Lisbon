@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 19:36:29 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/12 09:29:51 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/13 19:07:36 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,13 @@ void	ft_print_fps(t_game *game)
 
 static void	ft_game_print(t_game *game)
 {
-	// Black bg for transparency, flickering on linux, need to check on mac
-	// mlx_put_image_to_window(game->mlx, game->win, game->bg.img_ref, 0, 0);
+	// Black bg for transparency, flickering on linux, ok on mac
+	mlx_put_image_to_window(game->mlx, game->win, game->bg.img_ref, 0, 0);
 	if (ft_player_moved(game->player))
 		ft_game_update(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->scene.img_ref, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win, game->lb.img.img_ref,
+	game->lb.pos.x, game->lb.pos.y);
 	if (game->settings[show_minimap])
 		mlx_put_image_to_window(game->mlx, game->win, game->mm_img.img_ref,
 			game->mm_pos.x, game->mm_pos.y);
@@ -83,5 +85,6 @@ void	ft_run_game(t_map *map)
 		return ;
 	ft_set_events(&game);
 	ft_game_update(&game);
+	ft_lifeb_update(&game);
 	mlx_loop(game.mlx);
 }

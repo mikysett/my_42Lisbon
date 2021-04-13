@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 19:45:54 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/09 18:57:04 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/13 18:22:09 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@ static void	ft_set_sidewall_y_neg(t_ray *ray)
 	{
 		ray->intersec.x = (int)(ray->pos.x) + 1 - ray->pos.x;
 		ray->intersec.y = ray->intersec.x / tan(ray->dir - DEGREES_90);
-		ray->color = 0x00110000;
 		ray->tex = tex_wall_w;
 	}
 	else
 	{
 		ray->intersec.x = ray->pos.x - (int)ray->pos.x;
 		ray->intersec.y = ray->intersec.x / tan(DEGREES_90 - ray->dir);
-		ray->color = 0x00006600;
 		ray->tex = tex_wall_e;
 	}
 	if (ray->intersec.y > 0 && ray->intersec.y < 1)
@@ -47,7 +45,6 @@ static void	ft_set_sidewall_y_pos(t_ray *ray)
 		ray->intersec.x = (int)(ray->pos.x) + 1 - ray->pos.x;
 		ray->intersec.y = ray->intersec.x / tan(DEGREES_90 - ray->dir);
 		ray->pos.y = ray->pos.y - ray->intersec.y;
-		ray->color = 0x00110000;
 		ray->tex = tex_wall_w;
 		ray->tex_pos = 1 - (ray->pos.y - (int)ray->pos.y);
 	}
@@ -56,7 +53,6 @@ static void	ft_set_sidewall_y_pos(t_ray *ray)
 		ray->intersec.x = ray->pos.x - (int)(ray->pos.x);
 		ray->intersec.y = ray->intersec.x / tan(ray->dir - DEGREES_90);
 		ray->pos.y = ray->pos.y - ray->intersec.y;
-		ray->color = 0x00006600;
 		ray->tex = tex_wall_e;
 		ray->tex_pos = ray->pos.y - (int)ray->pos.y;
 	}

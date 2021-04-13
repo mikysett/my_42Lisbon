@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 13:14:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/06 11:48:09 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/13 15:41:41 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void		ft_ply_set_cell_x(t_map *map, t_player *player, t_size move)
 	new_cell_pos_x = player->cell_pos.x + move.x;
 	if (new_cell_pos_x < 0)
 	{
-		if (map->map_grid[player->pos.x - 1][player->pos.y].type != wall)
+		if (map->map_grid[player->pos.x - 1][player->pos.y].type == e_floor)
 		{
 			player->pos.x -= 1;
 			player->cell_pos.x = NB_CELL_POS + new_cell_pos_x;
@@ -73,7 +73,7 @@ void		ft_ply_set_cell_x(t_map *map, t_player *player, t_size move)
 	}
 	else if (new_cell_pos_x >= NB_CELL_POS)
 	{
-		if (map->map_grid[player->pos.x + 1][player->pos.y].type != wall)
+		if (map->map_grid[player->pos.x + 1][player->pos.y].type == e_floor)
 		{
 			player->pos.x += 1;
 			player->cell_pos.x = new_cell_pos_x - NB_CELL_POS;
@@ -92,7 +92,7 @@ void		ft_ply_set_cell_y(t_map *map, t_player *player, t_size move)
 	new_cell_pos_y = player->cell_pos.y + move.y;
 	if (new_cell_pos_y < 0)
 	{
-		if (map->map_grid[player->pos.x][player->pos.y - 1].type != wall)
+		if (map->map_grid[player->pos.x][player->pos.y - 1].type == e_floor)
 		{
 			player->pos.y -= 1;
 			player->cell_pos.y = NB_CELL_POS + new_cell_pos_y;
@@ -102,7 +102,7 @@ void		ft_ply_set_cell_y(t_map *map, t_player *player, t_size move)
 	}
 	else if (new_cell_pos_y >= NB_CELL_POS)
 	{
-		if (map->map_grid[player->pos.x][player->pos.y + 1].type != wall)
+		if (map->map_grid[player->pos.x][player->pos.y + 1].type == e_floor)
 		{
 			player->pos.y += 1;
 			player->cell_pos.y = new_cell_pos_y - NB_CELL_POS;

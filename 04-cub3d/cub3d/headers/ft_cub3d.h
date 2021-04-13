@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:34:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/11 09:58:31 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/13 18:10:54 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # include <fcntl.h>
 # include <stdbool.h>
 // # include "../minilibx-linux/mlx.h"
-# include "../minilibx/mlx.h"
+// # include "../minilibx/mlx.h"
+# include <mlx.h>
 # include "../libft/libft.h"
 # include "ft_constants.h"
 # include "ft_types.h"

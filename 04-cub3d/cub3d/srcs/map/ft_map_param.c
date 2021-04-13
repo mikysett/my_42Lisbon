@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 11:16:37 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/11 10:27:10 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/13 19:21:33 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static bool	ft_set_param_value(t_map_par *new_p, char **param, int nb_args)
 		if (new_p->val.res.x >= MIN_RES_X && new_p->val.res.y >= MIN_RES_Y)
 			return (true);
 	}
-	else if (new_p->type >= nord_tex && new_p->type <= sprite_tex
-		&& nb_args == 2)
+	else if (((new_p->type >= nord_tex && new_p->type <= sprite_tex)
+			|| new_p->type >= skybox_tex) && nb_args == 2)
 	{
 		new_p->val.texture = ft_strdup(param[1]);
 		return (true);
@@ -55,6 +55,8 @@ static bool	ft_set_param_type(t_map_par *new_p, char *param_type)
 		new_p->type = floor_col;
 	else if (!ft_strncmp("C", param_type, 2))
 		new_p->type = ceiling_col;
+	else if (!ft_strncmp("SKY", param_type, 3))
+		new_p->type = skybox_tex;
 	else
 		return (false);
 	return (true);
