@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 09:57:53 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/13 20:22:18 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/13 20:38:21 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	ft_draw_sky(t_game *game, t_vert_line *line,
 	int		next_step_h;
 	int		sky_pos_x;
 
-	sky_pos_x = (int)(line->tex->width * (line->ray->dir / PI)) * 4;
+	printf("ray dir: %f\n", line->ray->dir);
+	printf("sky px: %d\n", (int)(game->sky_tex.width * (line->ray->dir / (PI * 2))));
+	sky_pos_x = (int)(game->sky_tex.width * (line->ray->dir / (PI * 2))) * 4;
 	sky_addr = game->sky_tex.img_addr + sky_pos_x;
 	// line->tex_addr = line->tex->img_addr
 	// 	+ (int)(line->tex->width * ray->tex_pos) * 4;
@@ -33,7 +35,7 @@ void	ft_draw_sky(t_game *game, t_vert_line *line,
 	step_precision = (sky_step_h_float - (int)sky_step_h_float) * 10000000;
 	next_step_h = step_precision;
 
-	while (scene_addr < wall_addr - (game->scene.size_line * 100))
+	while (scene_addr < wall_addr - (game->scene.size_line * 99))
 	{
 		*(int *)scene_addr = *(int *)sky_addr;
 		if (next_step_h >= 10000000)
