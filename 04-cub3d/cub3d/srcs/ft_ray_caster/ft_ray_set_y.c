@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 19:45:54 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/13 18:22:09 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/17 20:28:46 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,9 @@ static void	ft_set_sidewall_y_pos(t_ray *ray)
 	}
 }
 
-static void	ft_ray_cast_y_neg(t_map_el **map_grid, t_ray *ray,
-	t_size_f p_pos)
+static void	ft_ray_cast_y_neg(t_map_el **map_grid, t_ray *ray, t_size_f p_pos)
 {
-	double	last_ray_pos_x;
+	double		last_ray_pos_x;
 
 	ray->pos.y = (int)p_pos.y;
 	ray->pos.x = p_pos.x - tan(ray->dir - DEGREES_90) * (p_pos.y - ray->pos.y);
@@ -78,18 +77,12 @@ static void	ft_ray_cast_y_neg(t_map_el **map_grid, t_ray *ray,
 			return ;
 		}
 	}
-	// Apparently useless condition, leaved for further check
-	// if ((int)last_ray_pos_x != (int)ray->pos.x
-	// 	&& map_grid[(int)last_ray_pos_x][(int)ray->pos.y].type == wall)
-	// 		ft_wall_front_y(ray);
-	// else
-		ft_set_sidewall_y_neg(ray);
+	ft_set_sidewall_y_neg(ray);
 }
 
-static void	ft_ray_cast_y_pos(t_map_el **map_grid, t_ray *ray,
-	t_size_f p_pos)
+static void	ft_ray_cast_y_pos(t_map_el **map_grid, t_ray *ray, t_size_f p_pos)
 {
-	double	last_ray_pos_x;
+	double		last_ray_pos_x;
 
 	last_ray_pos_x = p_pos.x;
 	ray->pos.y = (int)p_pos.y + 1;

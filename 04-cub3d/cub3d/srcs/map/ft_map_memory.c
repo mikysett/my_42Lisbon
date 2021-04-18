@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 15:54:56 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/29 20:35:35 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/14 18:58:39 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	ft_del_map_param(void *p)
 	t_map_par	*param;
 
 	param = (t_map_par *)p;
-	if (param->type >= nord_tex && param->type <= sprite_tex)
+	if ((param->type >= nord_tex && param->type <= trap_tex)
+		|| param->type == skybox_tex)
 		free(param->val.texture);
 	free(param);
 }

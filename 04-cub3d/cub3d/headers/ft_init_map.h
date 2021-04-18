@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:43:09 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/11 10:26:27 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/14 16:24:45 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ char			*ft_next_map_el(char *line);
 bool			ft_set_map_grid(t_list *map_line, t_map *map);
 bool			ft_check_map_grid(t_map_el **grid, t_size map_size);
 
+t_map_par		*ft_get_map_param(t_list **params, t_map_p_types type_sel);
 void			ft_set_grid_line(t_map_el *grid_line, int grid_size);
-t_map_el_type	ft_get_el_type(char c);
+t_map_el_type	ft_get_el_type(t_map *map, char c);
 t_map_el		**ft_alloc_map_grid(t_size map_size);
 
 #endif

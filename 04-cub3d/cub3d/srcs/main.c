@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:26:03 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/09 12:03:20 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/14 17:28:36 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,8 @@ int	ft_mlx_error(t_mlx_errors err)
 		printf("Failed to open the window\n");
 	if (err == err_tex)
 		printf("Failed to process textures\n");
-	// else if (err == err_map_extension)
-	// 	printf("Map file must be a .cub file\n");
-	// else if (err == err_map_path)
-	// 	printf("Map file not found\n");
-	// else if (err == err_map_malloc)
-	// 	printf("Failed to allocate memory for the map\n");
-	// else if (err == err_map_gnl)
-	// 	printf("Failed to get next line in map file\n");
-	// else if (err == err_map_split)
-	// 	printf("Failed to load map parameters\n");
-	// else if (err == err_map_param)
-	// 	printf("Invalid parameter in map file\n");
-	// else if (err == err_map_grid)
-	// 	printf("Error in the map grid\n");
-	// else if (err == err_map_param_miss)
-	// 	printf("Mandatory parameters are missing\n");
+	if (err == err_sprite)
+		printf("Failed to allocate sprites\n");
 	else
 		printf("Unknown MLX error\n");
 	return (0);

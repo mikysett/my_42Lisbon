@@ -6,11 +6,25 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 18:41:10 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/29 20:32:20 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/14 18:54:44 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/ft_cub3d.h"
+
+t_map_par	*ft_get_map_param(t_list **params, t_map_p_types type_sel)
+{
+	t_list	*head;
+
+	head = *params;
+	while (head)
+	{
+		if (((t_map_par *)(head->content))->type == type_sel)
+			return ((t_map_par *)(head->content));
+		head = head->next;
+	}
+	return (0);
+}
 
 void	ft_set_grid_line(t_map_el *grid_line, int grid_size)
 {
@@ -19,14 +33,14 @@ void	ft_set_grid_line(t_map_el *grid_line, int grid_size)
 	i = 0;
 	while (i < grid_size)
 	{
-		grid_line->extra = 0;
 		grid_line->type = empty;
+		grid_line->sprite_done = false;
 		grid_line++;
 		i++;
 	}
 }
 
-t_map_el_type	ft_get_el_type(char c)
+t_map_el_type	ft_get_el_type(t_map *map, char c)
 {
 	if (c == ' ')
 		return (empty);
@@ -36,6 +50,10 @@ t_map_el_type	ft_get_el_type(char c)
 		return (wall);
 	else if (c == '2')
 		return (item);
+	else if (c == '3' && ft_get_map_param(map->map_params, heal))
+		return (heal);
+	else if (c == '4' && ft_get_map_param(map->map_params, trap))
+		return (trap);
 	else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (player);
 	else

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 17:55:49 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/09 12:11:15 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/15 14:29:52 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,32 @@ void	ft_free_tex(t_game *game)
 			mlx_destroy_image(game->mlx, tex[i].img_ref);
 		i++;
 	}
+	if (game->sky_tex.img_ref)
+		mlx_destroy_image(game->mlx, game->sky_tex.img_ref);
 }
 
 void	ft_free_game(t_game *game)
 {
 	ft_free_map(game->map);
-
-	// to test
 	if (game->win)
 	{
-		// textures needs to be improved
 		ft_free_tex(game);
+		if (game->bg.img_ref)
+			mlx_destroy_image(game->mlx, game->bg.img_ref);
+		if (game->scene.img_ref)
+			mlx_destroy_image(game->mlx, game->scene.img_ref);
+		if (game->obj.img_ref)
+			mlx_destroy_image(game->mlx, game->obj.img_ref);
 		if (game->mm_img.img_ref)
 			mlx_destroy_image(game->mlx, game->mm_img.img_ref);
+		if (game->lb.img.img_ref)
+			mlx_destroy_image(game->mlx, game->lb.img.img_ref);
 		mlx_destroy_window(game->mlx, game->win);
 		if (game->rays)
 			free(game->rays);
+		if (game->sprites)
+			free(game->sprites);
 	}
-	// free(game->mlx);
 }
 
 int	ft_exit_game(int key, void *game)

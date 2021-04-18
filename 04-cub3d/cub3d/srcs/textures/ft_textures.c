@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 09:57:53 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/13 20:38:21 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/16 16:31:01 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,29 @@
 void	ft_draw_sky(t_game *game, t_vert_line *line,
 	char *scene_addr, char *wall_addr)
 {
-	int		half_height;
 	char	*sky_addr;
-	double	sky_step_h_float;
-	int		sky_step_h;
-	int		step_precision;
 	int		next_step_h;
 	int		sky_pos_x;
 
-	printf("ray dir: %f\n", line->ray->dir);
-	printf("sky px: %d\n", (int)(game->sky_tex.width * (line->ray->dir / (PI * 2))));
-	sky_pos_x = (int)(game->sky_tex.width * (line->ray->dir / (PI * 2))) * 4;
+	if (line->ray->dir < 0)
+		line->ray->dir += FULL_CIRCLE;
+	else if (line->ray->dir >= FULL_CIRCLE)
+		line->ray->dir -= FULL_CIRCLE;
+	sky_pos_x = (int)(game->sky_tex.width * (line->ray->dir / FULL_CIRCLE)) * 4;
 	sky_addr = game->sky_tex.img_addr + sky_pos_x;
-	// line->tex_addr = line->tex->img_addr
-	// 	+ (int)(line->tex->width * ray->tex_pos) * 4;
-	half_height = game->res.y / 2;
-	sky_step_h_float = (double)game->sky_tex.height / half_height;
-	sky_step_h = game->sky_tex.size_line * (int)sky_step_h_float;
-	step_precision = (sky_step_h_float - (int)sky_step_h_float) * 10000000;
-	next_step_h = step_precision;
+	next_step_h = game->sky_info.step_precision;
 
-	while (scene_addr < wall_addr - (game->scene.size_line * 99))
+	while (scene_addr < wall_addr)
 	{
 		*(int *)scene_addr = *(int *)sky_addr;
-		if (next_step_h >= 10000000)
+		if (next_step_h >= TEX_PRECISION)
 		{
-			next_step_h -= 10000000;
-			sky_addr += line->tex_step_h + game->sky_tex.size_line;
+			next_step_h -= TEX_PRECISION;
+			sky_addr += game->sky_info.step_h + game->sky_tex.size_line;
 		}
 		else
-			sky_addr += line->tex_step_h;
-		next_step_h += line->step_precision;
+			sky_addr += game->sky_info.step_h;
+		next_step_h += game->sky_info.step_precision;
 		scene_addr += game->scene.size_line;
 	}
 }
@@ -101,11 +93,9 @@ void	ft_draw_line(t_game *game, t_vert_line *line, int tex_size_line)
 	while (i++ < line->tex_h)
 	{
 		*(int *)wall_addr = *(int *)tex_addr | line->tex_alpha;
-		if (line->sprite)
-			*(int *)wall_addr = 0x00AA0000;
-		if (line->next_step_h >= 10000000)
+		if (line->next_step_h >= TEX_PRECISION)
 		{
-			line->next_step_h -= 10000000;
+			line->next_step_h -= TEX_PRECISION;
 			tex_addr += line->tex_step_h + tex_size_line;
 		}
 		else
@@ -113,7 +103,6 @@ void	ft_draw_line(t_game *game, t_vert_line *line, int tex_size_line)
 		line->next_step_h += line->step_precision;
 		wall_addr += game->scene.size_line;
 	}
-	if (line->pos.y != 0)
-		ft_draw_floor(game, line, wall_addr,
-		game->res.y - line->pos.y - line->line_h);
+	if (line->pos.y > 0)
+		ft_draw_floor(game, line, wall_addr, line->pos.y);
 }

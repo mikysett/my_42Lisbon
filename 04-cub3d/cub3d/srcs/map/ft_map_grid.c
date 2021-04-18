@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 17:22:04 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/13 14:33:15 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/14 16:41:13 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	ft_set_player_dir(t_player *player, char dir)
 
 void	ft_get_map_el(char *line, t_map *map, int x, int y)
 {
-	map->map_grid[x][y].extra = 0;
-	map->map_grid[x][y].type = ft_get_el_type(*line);
+	map->map_grid[x][y].type = ft_get_el_type(map, *line);
 	if (map->map_grid[x][y].type == player)
 	{
 		ft_set_player_dir(&(map->player), *line);

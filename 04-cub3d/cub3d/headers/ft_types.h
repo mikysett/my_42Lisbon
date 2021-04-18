@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 22:13:40 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/13 20:19:05 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/17 21:18:52 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ typedef enum	e_map_p_types
 	south_tex,
 	west_tex,
 	east_tex,
-	sprite_tex,
+	item_tex,
+	heal_tex,
+	trap_tex,
 	resolution,
 	floor_col,
 	ceiling_col,
@@ -54,24 +56,19 @@ typedef enum	e_map_el_type
 	e_floor,
 	wall,
 	item,
+	heal,
+	trap,
 	player,
 	door,
 	enemy
 }				t_map_el_type;
 
-typedef struct	s_map_el_extra
-{
-	char			*text;
-	char			*sprite;
-	int				direction;
-	int				life;
-	int				height;
-}				t_map_el_extra;
-
 typedef struct	s_map_el
 {
 	t_map_el_type	type;
-	t_map_el_extra	*extra;
+	bool			sprite;
+	bool			sprite_done;
+
 }				t_map_el;
 
 typedef struct	s_size
@@ -126,7 +123,7 @@ typedef struct	s_map
 	t_map_el	**map_grid;
 }				t_map;
 
-// Textures
+// Textures and Sprites
 
 typedef struct s_img_data
 {
@@ -144,8 +141,48 @@ typedef enum	e_tex_type
 	tex_wall_n,
 	tex_wall_s,
 	tex_wall_w,
-	tex_wall_e
+	tex_wall_e,
+	tex_item,
+	tex_heal,
+	tex_trap
 }				t_tex_type;
+
+typedef struct s_sky_info
+{
+	int		height;
+	double	step_h_float;
+	int		step_h;
+	int		step_precision;
+	int		next_step_h;
+}				t_sky_info;
+
+typedef struct s_sprite
+{
+	t_size_f	f_pos;
+	t_size_f	border_pos;
+	t_img_data	*img;
+	bool		in_fov;
+
+	t_size		pos;
+	int			height;
+	int			width;
+	double		dist;
+	int			ray_index;
+	double		tex_pos_x;
+	int			tex_pos_y;
+
+	char		*sprite_addr;
+	double		step_x;
+	double		skip_texels;
+	int			skipped_pix;
+	int			init_next_step_h;
+	int			tex_h;
+	double		step_h_float;
+	int			step_h;
+	int			next_step_h;
+	int			step_precision;
+	t_map_el	*map_el;
+}				t_sprite;
 
 // General game settings
 
@@ -173,6 +210,7 @@ typedef struct s_lifebar
 
 typedef struct s_ray
 {
+	int			index;
 	t_size_f	pos;
 	double		dist;
 	double		dir;
@@ -187,8 +225,6 @@ typedef struct s_ray
 	double		y_incr;
 	double		tex_pos;
 	t_tex_type	tex;
-	bool		sprite;
-	double		sprite_dist;
 }				t_ray;
 
 typedef struct s_rays_info
@@ -215,8 +251,9 @@ typedef struct	s_vert_line
 	int				next_step_h;
 	int				step_precision;
 	double			skip_texels;
-	bool			sprite;
 }				t_vert_line;
+
+
 
 typedef struct s_game
 {
@@ -233,12 +270,15 @@ typedef struct s_game
 	void		*win;
 	t_img_data	bg;
 	t_img_data	scene;
+	t_img_data	obj;
 	t_lifebar	lb;
 	t_img_data	mm_img;
 	t_size		mm_pos;
 	t_img_data	sky_tex;
+	t_sky_info	sky_info;
 	t_img_data	tex[NB_TEX];
-	int			tex_size;
+	int			nb_sprites;
+	t_sprite	*sprites;
 	bool		settings[NB_SETTINGS];
 	struct timeval	old_time;
 	struct timeval	new_time;

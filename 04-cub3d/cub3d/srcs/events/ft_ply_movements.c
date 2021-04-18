@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 13:14:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/13 15:41:41 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/14 16:48:38 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,9 @@ void		ft_ply_set_cell_y(t_map *map, t_player *player, t_size move)
 void	ft_ply_set_dir(t_player *player)
 {
 	if (player->rotating[r_left] == true)
-		player->dir += ONE_DEGREE;
+		player->dir += ROTATION_DEG;
 	if (player->rotating[r_right] == true)
-		player->dir -= ONE_DEGREE;
+		player->dir -= ROTATION_DEG;
 	if (player->dir < 0)
 		player->dir = FULL_CIRCLE + player->dir;
 	else if (player->dir > FULL_CIRCLE)

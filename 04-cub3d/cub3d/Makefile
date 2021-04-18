@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/04/13 20:09:41 by msessa           ###   ########.fr        #
+#    Updated: 2021/04/14 15:51:32 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,13 +45,13 @@ BDEPS	:=	$(DEPS)
 CC		=	gcc
 
 # Change optimization flag to -O3 for faster execution
-CFLAGS	=	-O0 -Wall -Wextra -fsanitize=address
+CFLAGS	=	-O0 -Wall -Wextra
 
 # Linux Libs
 LIBS	=	-lm -L./libft -lft -lmlx -lX11 -lbsd -lXext
 
 # Mac Libs
-LIBS	=	-lm -L./libft -lft -lmlx -framework OpenGL -framework AppKit
+# LIBS	=	-lm -L./libft -lft -lmlx -framework OpenGL -framework AppKit
 
 RM		=	rm -f
 

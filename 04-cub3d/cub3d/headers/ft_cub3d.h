@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:34:11 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/13 18:10:54 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/16 16:55:21 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <limits.h>
 // # include "../minilibx-linux/mlx.h"
 // # include "../minilibx/mlx.h"
 # include <mlx.h>

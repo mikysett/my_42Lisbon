@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 11:06:56 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/13 13:53:10 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/17 20:23:46 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_print_params_set(bool *param_set)
 
 	i = 0;
 	printf("--> Print params_set\n");
-	while (i < MIN_MAP_PARAMS)
+	while (i < NB_MAP_PARAMS)
 	{
 		printf("%d: %d | ", i, param_set[i]);
 		i++;
@@ -98,5 +98,23 @@ void	ft_print_map_grid(t_map *map)
 		c = '\n';
 		write(1, &c, 1);
 		y++;
+	}
+}
+
+void	ft_print_sprites_info(t_sprite *sprites, int nb_sprites)
+{
+	int	i;
+
+	i = 0;
+	printf("--> Printing sprites info\n");
+	while (i < nb_sprites)
+	{
+		printf("f_pos.x: %f\n", sprites[i].f_pos.x);
+		printf("f_pos.y: %f\n", sprites[i].f_pos.y);
+		// printf("dist     : %f\n", sprite->dist);
+		// printf("tex_pos.x: %f\n\n", sprite->tex_pos_x);
+		// printf("tex_pos.y: %d\n\n", sprite->tex_pos_y);
+		printf("\n");
+		i++;
 	}
 }

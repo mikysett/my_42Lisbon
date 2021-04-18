@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 11:16:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/11 20:08:41 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/14 16:43:28 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_count_param_args(char **params)
 
 bool	ft_param_double(t_map_p_types p_type, bool *p_set)
 {
-	if (p_type >= MIN_MAP_PARAMS)
+	if (p_type >= NB_MAP_PARAMS)
 		return (false);
 	if (p_set[p_type] == true)
 		return (true);
@@ -72,6 +72,7 @@ bool	ft_param_double(t_map_p_types p_type, bool *p_set)
 char	*ft_next_map_el(char *line)
 {
 	if (*line == ' ' || *line == '0' || *line == '1' || *line == '2'
+		 || *line == '3' || *line == '4'
 		|| *line == 'N' || *line == 'S' || *line == 'E' || *line == 'W')
 		return (line + 1);
 	if (*line == '[')

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 11:16:37 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/13 19:21:33 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/14 16:39:11 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static bool	ft_set_param_value(t_map_par *new_p, char **param, int nb_args)
 		if (new_p->val.res.x >= MIN_RES_X && new_p->val.res.y >= MIN_RES_Y)
 			return (true);
 	}
-	else if (((new_p->type >= nord_tex && new_p->type <= sprite_tex)
+	else if (((new_p->type >= nord_tex && new_p->type <= trap_tex)
 			|| new_p->type >= skybox_tex) && nb_args == 2)
 	{
 		new_p->val.texture = ft_strdup(param[1]);
@@ -50,7 +50,11 @@ static bool	ft_set_param_type(t_map_par *new_p, char *param_type)
 	else if (!ft_strncmp("EA", param_type, 2))
 		new_p->type = east_tex;
 	else if (!ft_strncmp("S", param_type, 2))
-		new_p->type = sprite_tex;
+		new_p->type = item_tex;
+	else if (!ft_strncmp("H", param_type, 2))
+		new_p->type = heal_tex;
+	else if (!ft_strncmp("T", param_type, 2))
+		new_p->type = trap_tex;
 	else if (!ft_strncmp("F", param_type, 2))
 		new_p->type = floor_col;
 	else if (!ft_strncmp("C", param_type, 2))

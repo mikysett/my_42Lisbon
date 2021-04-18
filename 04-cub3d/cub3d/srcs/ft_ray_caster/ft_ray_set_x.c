@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 19:45:54 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/13 18:21:11 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/17 20:28:18 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,51 +58,29 @@ static void	ft_set_sidewall_x_pos(t_ray *ray)
 	}
 }
 
-static void	ft_ray_cast_x_neg(t_player *p, t_map_el **map_grid, t_ray *ray,
-	t_size_f p_pos)
+static void	ft_ray_cast_x_neg(t_map_el **map_grid, t_ray *ray, t_size_f p_pos)
 {
-	double	last_ray_pos_y;
+	double		last_ray_pos_y;
 
 	ray->pos.x = (int)p_pos.x;
 	ray->pos.y = p_pos.y + tan(ray->dir) * (p_pos.x - (int)p_pos.x);
 	last_ray_pos_y = ray->pos.y;
 	while (map_grid[(int)ray->pos.x][(int)ray->pos.y].type != wall)
 	{
-		if (map_grid[(int)ray->pos.x][(int)ray->pos.y].type != e_floor)
-		{
-			ray->sprite = true;
-			ray->sprite_dist = ((p_pos.x - ray->pos.x) / sin(DEGREES_270 - ray->dir))
-				* sin(p->dir + DEGREES_90 - ray->dir);
-		}
 		last_ray_pos_y = ray->pos.y;
 		ray->pos.x -= 1;
 		ray->pos.y += ray->y_incr;
-		if ((int)last_ray_pos_y != (int)ray->pos.y)
+		if ((int)last_ray_pos_y != (int)ray->pos.y
+			&& map_grid[(int)ray->pos.x][(int)last_ray_pos_y].type == wall)
 		{
-			if (map_grid[(int)ray->pos.x][(int)last_ray_pos_y].type == wall)
-			{
-				ft_wall_front_x(ray);
-				return ;
-			}
-			else if (map_grid[(int)ray->pos.x][(int)last_ray_pos_y].type != e_floor)
-			{
-				ray->sprite = true;
-				ray->sprite_dist = ((p_pos.x - ray->pos.x) / sin(DEGREES_270 - ray->dir))
-					* sin(p->dir + DEGREES_90 - ray->dir);
-			}
-
+			ft_wall_front_x(ray);
+			return ;
 		}
 	}
-	// Apparently useless condition, leaved for further check
-	// if ((int)last_ray_pos_y != (int)ray->pos.y
-	// 	&& map_grid[(int)ray->pos.x][(int)last_ray_pos_y].type == wall)
-	// 	ft_wall_front_x(ray);
-	// else
-		ft_set_sidewall_x_neg(ray);
+	ft_set_sidewall_x_neg(ray);
 }
 
-static void	ft_ray_cast_x_pos(t_map_el **map_grid, t_ray *ray,
-	t_size_f p_pos)
+static void	ft_ray_cast_x_pos(t_map_el **map_grid, t_ray *ray, t_size_f p_pos)
 {
 	double	last_ray_pos_y;
 
@@ -143,7 +121,7 @@ void	ft_ray_cast_x(t_game *game, t_map_el **map_grid, t_ray *ray,
 		ray->neg_step_y = false;
 	ray->y_incr = ray->diff_y / ray->step;
 	if (ray->neg_step_x)
-		ft_ray_cast_x_neg(game->player, map_grid, ray, p_pos);
+		ft_ray_cast_x_neg(map_grid, ray, p_pos);
 	else
 		ft_ray_cast_x_pos(map_grid, ray, p_pos);
 	ray->dist = ((p_pos.x - ray->pos.x) / sin(DEGREES_270 - ray->dir))

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:44:13 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/29 14:30:34 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/14 16:41:37 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	ft_init_params(bool *params_set)
 	int	i;
 
 	i = 0;
-	while (i < MIN_MAP_PARAMS)
+	while (i < NB_MAP_PARAMS)
 	{
 		params_set[i] = false;
 		i++;
@@ -29,9 +29,10 @@ static bool	ft_check_params(bool *params_set)
 	int	i;
 
 	i = 0;
-	while (i < MIN_MAP_PARAMS)
+	while (i < NB_MAP_PARAMS)
 	{
-		if (params_set[i] == false)
+		if (params_set[i] == false
+			&& (i != trap_tex && i != heal_tex && i != skybox_tex))
 			return (false);
 		i++;
 	}
@@ -40,7 +41,7 @@ static bool	ft_check_params(bool *params_set)
 
 static int	ft_set_map(t_list **map_lines, t_map *map)
 {
-	bool	params_set[MIN_MAP_PARAMS];
+	bool	params_set[NB_MAP_PARAMS];
 
 	ft_init_params(params_set);
 	if (!ft_init_map_param(*map_lines, map, params_set))

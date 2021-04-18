@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 19:36:29 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/13 19:07:36 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/17 20:58:05 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static void	ft_game_update(t_game *game)
 	move = ft_ply_set_move(game->player->dir, game->player->moving);
 	ft_ply_set_cell_x(game->map, game->player, move);
 	ft_ply_set_cell_y(game->map, game->player, move);
+	if (game->player->rotating[r_left] || game->player->rotating[r_right])
+		ft_ply_set_dir(game->player);
 	ft_rays_set(game, game->rays, game->res.x, game->rays_info.step);
 	// To test
 	// ft_print_rays(game->rays, game->res.x);
-	if (game->player->rotating[r_left] || game->player->rotating[r_right])
-		ft_ply_set_dir(game->player);
 	// Bottleneck on movement
 	ft_scene(game);
 	if (game->settings[show_minimap])
@@ -53,15 +53,23 @@ void	ft_print_fps(t_game *game)
 static void	ft_game_print(t_game *game)
 {
 	// Black bg for transparency, flickering on linux, ok on mac
-	mlx_put_image_to_window(game->mlx, game->win, game->bg.img_ref, 0, 0);
+	// mlx_put_image_to_window(game->mlx, game->win, game->bg.img_ref, 0, 0);
 	if (ft_player_moved(game->player))
 		ft_game_update(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->scene.img_ref, 0, 0);
-	mlx_put_image_to_window(game->mlx, game->win, game->lb.img.img_ref,
-	game->lb.pos.x, game->lb.pos.y);
+	// Extra layer for objects, don't sure it will be useful
+	// Maybe for putting black on scene and transparency on objects
+	// mlx_put_image_to_window(game->mlx, game->win, game->obj.img_ref, 0, 0);
 	if (game->settings[show_minimap])
+	{
 		mlx_put_image_to_window(game->mlx, game->win, game->mm_img.img_ref,
 			game->mm_pos.x, game->mm_pos.y);
+		mlx_put_image_to_window(game->mlx, game->win, game->lb.img.img_ref,
+			game->lb.pos.x, game->lb.pos.y);
+	}
+	else
+		mlx_put_image_to_window(game->mlx, game->win, game->lb.img.img_ref,
+			game->lb.pos.x, game->mm_pos.y + game->mini_map.size.y / 2);
 	ft_update_time(game);
 	if (game->settings[show_fps])
 		ft_print_fps(game);
@@ -72,7 +80,6 @@ int	ft_render_game(void *game_void)
 	t_game	*game;
 
 	game = (t_game *)game_void;
-	// mlx_clear_window(game->mlx, game->win);
 	ft_game_print(game);
 	return (1);
 }
