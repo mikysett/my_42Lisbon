@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 22:13:40 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/17 21:18:52 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/18 18:07:06 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,15 @@ typedef struct	s_map_par
 
 typedef struct	s_player
 {
-	t_size	pos;
-	double	dir;
-	t_size	cell_pos;
-	t_size	last_pos;
-	t_size	last_cell_pos;
-	bool	moving[NB_DIRECTIONS];
-	bool	rotating[2];
-	int		life;
+	t_size		pos;
+	t_size_f	f_pos;
+	double		dir;
+	t_size		cell_pos;
+	t_size		last_pos;
+	t_size		last_cell_pos;
+	bool		moving[NB_DIRECTIONS];
+	bool		rotating[2];
+	int			life;
 }				t_player;
 
 typedef struct	s_map
@@ -162,6 +163,7 @@ typedef struct s_sprite
 	t_size_f	border_pos;
 	t_img_data	*img;
 	bool		in_fov;
+	double		angle;
 
 	t_size		pos;
 	int			height;

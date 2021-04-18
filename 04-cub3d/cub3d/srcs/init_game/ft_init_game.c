@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:01:47 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/17 20:18:16 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/18 17:59:06 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ bool	ft_init_graphics(t_game *game)
 	ft_mm_init_img(game);
 	game->mm_pos = ft_mm_set_pos(game->res, game->mini_map.size);
 	ft_lifeb_init_img(game);
-	mlx_mouse_hide(game->mlx, game->win);
+	// Not working on mac
+	// mlx_mouse_hide(game->mlx, game->win);
 	return (true);
 }
 

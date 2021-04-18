@@ -6,33 +6,61 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:21:10 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/17 21:20:03 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/18 20:11:01 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/ft_cub3d.h"
 
-void	ft_set_sprites(t_game *game)
+void	ft_sprites_visibility(t_game *game)
 {
-	t_ray		*first_ray;
-	t_ray		*last_ray;
-	t_sprite	*sprite_sel;
+	t_size_f	f_ray_dir;
+	t_size_f	l_ray_dir;
+	t_sprite	*s;
 	int			i;
+	int			nb_visibles;
 
 	// calculate angle for visibility
-	first_ray = game->rays;
-	last_ray = &game->rays[game->res.x - 1];
+	f_ray_dir.x = game->rays->dir + 0.7;
+	f_ray_dir.y = game->rays->dir - 0.7;
+	l_ray_dir.x = game->rays[game->res.x - 1].dir + 0.7;
+	l_ray_dir.y = game->rays[game->res.x - 1].dir - 0.7;
 	i = 0;
-	sprite_sel = game->sprites;
+	s = game->sprites;
 	while (i < game->nb_sprites)
 	{
-		if (first_ray->slope == 'x')
+		if ((f_ray_dir.x < l_ray_dir.x &&
+			s->angle > f_ray_dir.x && s->angle < l_ray_dir.y)
+			|| (f_ray_dir.x > l_ray_dir.x &&
+			s->angle > f_ray_dir.y && s->angle < l_ray_dir.x))
+			s->in_fov = false;
+		else
 		{
-			if (!first_ray->neg_step_x && sprite_sel->f_pos.y )
+			s->in_fov = true;
 		}
-		sprite_sel++;
+		s++;
 		i++;
 	}
+}
+
+void	ft_set_sprites(t_game *game)
+{
+	t_sprite	*s;
+	int			i;
+
+	i = 0;
+	s = game->sprites;
+	while (i < game->nb_sprites)
+	{
+		s->angle = DEGREES_90 + atan2(game->player->f_pos.x - s->f_pos.x,
+				game->player->f_pos.y - s->f_pos.y);
+		if (s->f_pos.y > game->player->f_pos.y
+			&& s->f_pos.x > game->player->f_pos.x)
+			s->angle = FULL_CIRCLE + s->angle;
+		s++;
+		i++;
+	}
+	ft_sprites_visibility(game);
 
 	// calculate distance
 

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:06:47 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/15 10:07:48 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/18 17:58:50 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ t_size	ft_init_res(t_game *game, t_list **map_params)
 	t_map_par	*res;
 	t_size		max_size;
 
-	mlx_get_screen_size(game->mlx, &max_size.x, &max_size.y);
+	// Not working on mac
+	// mlx_get_screen_size(game->mlx, &max_size.x, &max_size.y);
+	max_size.x = MAX_RES_X;
+	max_size.y = MAX_RES_Y;
 	res = ft_get_map_param(map_params, resolution);
 	if (res->val.res.x > max_size.x)
 		res->val.res.x = max_size.x;

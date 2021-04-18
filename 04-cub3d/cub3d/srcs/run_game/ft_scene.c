@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 18:49:26 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/18 16:14:54 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/18 18:22:00 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	ft_scene(t_game *game)
 	// Draw Sprites
 	if (game->sprites)
 	{
+		ft_set_sprites(game);
 		ft_draw_sprites(game);
 		ft_print_sprites_info(game->sprites, game->nb_sprites);
 		// printf("----------------------------\n");
