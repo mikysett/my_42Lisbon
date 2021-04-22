@@ -6,13 +6,13 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:19:20 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/21 11:33:30 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 17:23:00 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/ft_cub3d.h"
 
-double		ft_normalize_angle(double angle)
+double	ft_normalize_angle(double angle)
 {
 	if (angle < 0)
 		return (FULL_CIRCLE + angle);

@@ -1,24 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rays_init.c                                     :+:      :+:    :+:   */
+/*   ft_sprites_utility.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/02 17:19:20 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/22 17:22:45 by msessa           ###   ########.fr       */
+/*   Created: 2021/04/22 19:00:28 by msessa            #+#    #+#             */
+/*   Updated: 2021/04/22 19:01:12 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/ft_cub3d.h"
 
-bool	ft_rays_init(t_game *game, int res_x)
+void	ft_sort_sprites(t_game *game)
 {
-	game->rays = malloc(sizeof(t_ray) * game->res.x);
-	if (!game->rays)
-		return (false);
-	game->rays_info.fov = FOV_66;
-	game->rays_info.half_fov = game->rays_info.fov / 2.0;
-	game->rays_info.step = game->rays_info.fov / res_x;
-	return (true);
+	int			i;
+	int			j;
+	t_sprite	s_buf;
+
+	i = 0;
+	while (i < game->nb_sprites)
+	{
+		if (!game->sprites[i].in_fov)
+			return ;
+		j = i + 1;
+		while (j < game->nb_sprites)
+		{
+			if (!game->sprites[j].in_fov)
+				break ;
+			if (game->sprites[i].dist < game->sprites[j].dist)
+			{
+				s_buf = game->sprites[j];
+				game->sprites[j] = game->sprites[i];
+				game->sprites[i] = s_buf;
+			}
+			j++;
+		}
+		i++;
+	}
 }

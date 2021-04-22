@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 13:14:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/22 14:17:50 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 19:05:21 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,48 +25,6 @@ bool	ft_player_moved(t_player *p)
 		if (p->moving[i] == true)
 			return (true);
 		i++;
-	}
-	return (false);
-}
-
-void	ft_update_status(t_game *game, t_status status)
-{
-	if (status == dead)
-	{
-		game->status = dead;
-		game->player->moving[d_l] = false;
-		game->player->moving[d_r] = false;
-		game->player->moving[d_t] = false;
-		game->player->moving[d_b] = false;
-		game->player->rotating[r_left] = false;
-		game->player->rotating[r_right] = false;
-	}
-}
-
-bool	ft_process_item(t_game *game, int x, int y)
-{
-	const t_map_el_type	item_type = game->map->map_grid[x][y].type;
-
-	if (item_type == e_floor)
-		return (true);
-	if (item_type == trap)
-	{
-		game->player->life -= LIFE_DOWN_STEP;
-		if (game->player->life <= 0)
-		{
-			game->player->life = 0;
-			ft_update_status(game, dead);
-		}
-		ft_item_picked(game, x, y);
-		ft_lifeb_update(game);
-	}
-	else if (item_type == heal)
-	{
-		game->player->life += LIFE_UP_STEP;
-		if (game->player->life > 100)
-			game->player->life = 100;
-		ft_item_picked(game, x, y);
-		ft_lifeb_update(game);
 	}
 	return (false);
 }
@@ -93,12 +51,12 @@ t_size	ft_ply_set_move(t_game *game, double move_dir, bool *moving)
 	else if (moving[d_r] == true)
 		move_dir -= DEG_90;
 	else
-		return ((t_size){x : 0, y : 0});
-	return ((t_size){x : cos(move_dir) * (WALK_STEP * game->delta_time),
-		y : -(int)(sin(move_dir) * (WALK_STEP * game->delta_time))});
+		return ((t_size){.x = 0, .y = 0});
+	return ((t_size){.x = cos(move_dir) * (WALK_STEP * game->delta_time),
+		.y = -(int)(sin(move_dir) * (WALK_STEP * game->delta_time))});
 }
 
-void		ft_ply_set_cell_x(t_game *game, t_player *p, t_size move)
+void	ft_ply_set_cell_x(t_game *game, t_player *p, t_size move)
 {
 	int	new_cell_pos_x;
 
@@ -127,7 +85,7 @@ void		ft_ply_set_cell_x(t_game *game, t_player *p, t_size move)
 		p->cell_pos.x = new_cell_pos_x;
 }
 
-void		ft_ply_set_cell_y(t_game *game, t_player *p, t_size move)
+void	ft_ply_set_cell_y(t_game *game, t_player *p, t_size move)
 {
 	int	new_cell_pos_y;
 

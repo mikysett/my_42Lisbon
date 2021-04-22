@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:06:47 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/21 20:48:40 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 19:05:21 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ t_player	*ft_ply_init(t_player *player)
 	int	i;
 
 	i = 0;
-	player->last_pos = (t_size){x : 0, y : 0};
-	player->last_cell_pos = (t_size){x : 0, y : 0};
+	player->last_pos = (t_size){.x = 0, .y = 0};
+	player->last_cell_pos = (t_size){.x = 0, .y = 0};
 	player->rotating[r_left] = false;
 	player->rotating[r_right] = false;
 	while (i < NB_DIRECTIONS)

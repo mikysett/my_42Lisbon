@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 18:41:10 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/22 12:56:14 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 19:05:17 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ t_map_el_type	ft_get_el_type(t_map *map, char c)
 		return (wall);
 	else if (c == '2')
 		return (item);
-	else if (c == '3' && ft_get_map_param(map->map_params, heal))
+	else if (c == '3' && ft_get_map_param(map->map_params, heal_tex))
 		return (heal);
-	else if (c == '4' && ft_get_map_param(map->map_params, trap))
+	else if (c == '4' && ft_get_map_param(map->map_params, trap_tex))
 		return (trap);
 	else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (player);

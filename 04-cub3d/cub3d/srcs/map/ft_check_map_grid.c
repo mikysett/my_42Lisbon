@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 18:37:02 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/29 21:00:04 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 17:24:49 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static bool	ft_check_map_cell(t_map_el_type *cell)
 			&& (cell[d_l] == empty || cell[d_b] == empty
 				|| cell[d_bl] == empty || cell[d_tl] == empty))
 		|| (cell[d_cn] == empty
-				&& ((cell[d_l] != empty && cell[d_l] != wall)
-					|| (cell[d_b] != empty && cell[d_b] != wall)
-					|| (cell[d_bl] != empty && cell[d_bl] != wall)
-					|| (cell[d_tl] != empty && cell[d_tl] != wall))))
+			&& ((cell[d_l] != empty && cell[d_l] != wall)
+				|| (cell[d_b] != empty && cell[d_b] != wall)
+				|| (cell[d_bl] != empty && cell[d_bl] != wall)
+				|| (cell[d_tl] != empty && cell[d_tl] != wall))))
 		return (false);
 	return (true);
 }

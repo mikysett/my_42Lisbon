@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 17:55:26 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/21 20:45:40 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 18:37:05 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_draw_sky(t_game *game, t_vert_line *line,
 		line->ray->dir += FULL_CIRCLE;
 	else if (line->ray->dir >= FULL_CIRCLE)
 		line->ray->dir -= FULL_CIRCLE;
-	sky_pos_x = (int)(game->sky_tex.width * (line->ray->dir / FULL_CIRCLE)) * 4;
+	sky_pos_x = 4 * (int)(game->sky_tex.width * (line->ray->dir / FULL_CIRCLE));
 	sky_addr = game->sky_tex.img_addr + sky_pos_x;
 	next_step_h = game->sky_info.step_precision;
 	while (scene_addr < wall_addr)
@@ -47,11 +47,13 @@ void	ft_draw_ceil(t_game *game, t_vert_line *line,
 	if (game->sky_tex.img_ref)
 		ft_draw_sky(game, line, scene_addr, wall_addr);
 	else
+	{
 		while (scene_addr < wall_addr)
 		{
 			*(int *)scene_addr = game->ceil_clr;
 			scene_addr += game->scene.size_line;
 		}
+	}
 }
 
 void	ft_draw_floor(t_game *game, t_vert_line *line,

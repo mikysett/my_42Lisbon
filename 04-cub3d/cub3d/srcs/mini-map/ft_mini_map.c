@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:59:46 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/17 20:55:31 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 17:25:41 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_mm_init_img(t_game *game)
 	img = &(game->mm_img);
 	img->img_ref = mlx_new_image(game->mlx, mm->size.x, mm->size.y);
 	img->img_addr = mlx_get_data_addr(img->img_ref, &(img->bits_pix),
-		&(img->size_line), &(img->endian));
+			&(img->size_line), &(img->endian));
 }
 
 static void	ft_mm_init(t_player *p, t_mini_map *mm)
@@ -49,7 +49,7 @@ static void	ft_mm_init(t_player *p, t_mini_map *mm)
 void	*ft_mini_map(t_game *game)
 {
 	t_mini_map	*mm;
-	
+
 	mm = &game->mini_map;
 	ft_mm_init(game->player, mm);
 	ft_mm_print(game, game->map, mm, &(game->mm_img));

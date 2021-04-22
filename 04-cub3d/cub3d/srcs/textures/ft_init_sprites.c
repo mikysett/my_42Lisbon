@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 19:53:08 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/22 12:49:40 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 19:05:21 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	ft_preset_sprites(t_game *game, t_sprite *sprite_sel,
 			{
 				sprite_sel->is_picked = false;
 				sprite_sel->in_fov = false;
-				sprite_sel->pos = (t_size){x : x, y : y};
+				sprite_sel->pos = (t_size){.x = x, .y = y};
 				sprite_sel->f_pos.x = x + 0.5;
 				sprite_sel->f_pos.y = y + 0.5;
 				sprite_sel->img = &game->tex[map_grid[x][y].type];

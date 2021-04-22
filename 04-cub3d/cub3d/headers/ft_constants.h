@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 13:45:38 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/22 14:20:42 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 19:10:50 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # define BUFFER_SIZE	64
 
-# define IS_OS_MAC		0
+# define IS_OS_MAC		1
 
-#  define MIN_RES_X		300
-#  define MIN_RES_Y		350
-#  define MAX_RES_X		1920
-#  define MAX_RES_Y		1080
+# define MIN_RES_X		300
+# define MIN_RES_Y		350
+# define MAX_RES_X		1920
+# define MAX_RES_Y		1080
 
 # define NB_MAP_PARAMS	12
 # define NB_DIRECTIONS	9

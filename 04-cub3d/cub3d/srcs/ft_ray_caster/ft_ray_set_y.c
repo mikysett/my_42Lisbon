@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 19:45:54 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/21 19:12:49 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 17:43:30 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ static void	ft_ray_cast_y_pos(t_map_el **map_grid, t_ray *ray, t_size_f p_pos)
 	ray->pos.x = p_pos.x + tan(ray->dir - DEG_270) * (ray->pos.y - p_pos.y);
 	while (map_grid[(int)ray->pos.x][(int)ray->pos.y].type != wall)
 	{
-		if (((int)last_ray_pos_x != (int)ray->pos.x
-			&& map_grid[(int)ray->pos.x][(int)ray->pos.y - 1].type == wall))
+		if ((int)last_ray_pos_x != (int)ray->pos.x
+			&& map_grid[(int)ray->pos.x][(int)ray->pos.y - 1].type == wall)
 		{
 			ft_set_sidewall_y_pos(ray);
 			return ;
@@ -100,7 +100,7 @@ static void	ft_ray_cast_y_pos(t_map_el **map_grid, t_ray *ray, t_size_f p_pos)
 		ray->pos.x += ray->x_incr;
 	}
 	if (((int)last_ray_pos_x != (int)ray->pos.x
-		&& map_grid[(int)ray->pos.x][(int)ray->pos.y - 1].type == wall))
+			&& map_grid[(int)ray->pos.x][(int)ray->pos.y - 1].type == wall))
 		ft_set_sidewall_y_pos(ray);
 	else
 		ft_wall_front_y(ray);

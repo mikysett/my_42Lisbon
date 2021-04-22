@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 10:31:53 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/22 14:18:01 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 17:23:46 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ void	ft_ply_set_dir(t_game *game, t_player *player);
 void	ft_ply_set_cell_x(t_game *game, t_player *player, t_size move);
 void	ft_ply_set_cell_y(t_game *game, t_player *player, t_size move);
 
+bool	ft_process_item(t_game *game, int x, int y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 11:06:56 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/21 12:24:08 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 19:05:08 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	ft_print_sprites_info(t_sprite *sprites, int nb_sprites)
 			printf("start_pos.y: %f\n", sprites[i].start_pos.y);
 			printf("angle      : %f\n", ft_rad_to_deg(sprites[i].angle));
 			printf("angle_plane: %f\n", ft_rad_to_deg(sprites[i].angle_plane));
-			printf("angle_x_ax : %f\n", ft_rad_to_deg(sprites[i].angle_x_axis));
+			printf("angle_x_a.x = %f\n", ft_rad_to_deg(sprites[i].angle_x_axis));
 			printf("dist       : %f\n", sprites[i].dist);
 			printf("ray_ref    : %i\n", sprites[i].ray_index);
 		}

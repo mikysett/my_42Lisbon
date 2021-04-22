@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 17:22:04 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/21 19:12:49 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 19:05:21 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void	ft_get_map_el(char *line, t_map *map, int x, int y)
 	if (map->map_grid[x][y].type == player)
 	{
 		ft_set_player_dir(&(map->player), *line);
-		map->player.pos = (t_size){x : x, y : y};
-		map->player.cell_pos = (t_size){x : NB_CELL_POS / 2, y : NB_CELL_POS / 2};
+		map->player.pos = (t_size){.x = x, .y = y};
+		map->player.cell_pos = (t_size){.x = NB_CELL_POS / 2,
+			.y = NB_CELL_POS / 2};
 		map->player.life = 100;
 	}
 }

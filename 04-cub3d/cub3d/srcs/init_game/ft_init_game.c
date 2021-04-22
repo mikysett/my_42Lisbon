@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:01:47 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/22 12:45:10 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 19:05:21 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_basic_settings(t_game *game, t_map *map)
 
 void	ft_init_layers(t_game *game)
 {
-	const t_size	pos = {x : 0, y : 0};
+	const t_size	pos = {.x = 0, .y = 0};
 
 	game->win = mlx_new_window(game->mlx, game->res.x, game->res.y, "cub3D");
 	game->bg.img_ref = mlx_new_image(game->mlx, game->res.x, game->res.y);

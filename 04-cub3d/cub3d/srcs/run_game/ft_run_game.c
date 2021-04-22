@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 19:36:29 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/22 14:18:09 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 18:51:15 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,11 @@ static void	ft_game_update(t_game *game)
 
 static void	ft_game_print(t_game *game)
 {
-	// Black bg for transparency, flickering on linux, ok on mac
 	mlx_put_image_to_window(game->mlx, game->win, game->bg.img_ref, 0, 0);
 	if (ft_player_moved(game->player))
 		ft_game_update(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->scene.img_ref, 0, 0);
-	// Extra layer for objects, don't sure it will be useful
-	// Maybe for putting black on scene and transparency on objects
-	// mlx_put_image_to_window(game->mlx, game->win, game->obj.img_ref, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win, game->obj.img_ref, 0, 0);
 	if (game->settings[show_minimap])
 	{
 		mlx_put_image_to_window(game->mlx, game->win, game->mm_img.img_ref,

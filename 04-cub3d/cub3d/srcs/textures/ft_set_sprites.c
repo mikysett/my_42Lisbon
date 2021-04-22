@@ -6,12 +6,11 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:21:10 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/22 12:57:51 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 17:36:06 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/ft_cub3d.h"
-
 
 void	ft_item_picked(t_game *game, int x, int y)
 {
@@ -40,7 +39,7 @@ static void	ft_sprites_visibility(t_game *game, t_sprite *s,
 		if (s->is_picked || (f_ray_dir > l_ray_dir
 				&& (s->angle > f_ray_dir || s->angle < l_ray_dir))
 			|| (f_ray_dir < l_ray_dir
-					&& (s->angle > f_ray_dir && s->angle < l_ray_dir)))
+				&& (s->angle > f_ray_dir && s->angle < l_ray_dir)))
 			s->in_fov = false;
 		else if (i != nb_visibles)
 		{
