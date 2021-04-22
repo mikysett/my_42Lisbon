@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 19:45:54 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/17 20:28:18 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/21 19:12:38 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,6 @@ void	ft_ray_cast_x(t_game *game, t_map_el **map_grid, t_ray *ray,
 		ft_ray_cast_x_neg(map_grid, ray, p_pos);
 	else
 		ft_ray_cast_x_pos(map_grid, ray, p_pos);
-	ray->dist = ((p_pos.x - ray->pos.x) / sin(DEGREES_270 - ray->dir))
-		* sin(game->player->dir + DEGREES_90 - ray->dir);
+	ray->dist = ((p_pos.x - ray->pos.x) / sin(DEG_270 - ray->dir))
+		* sin(game->player->dir + DEG_90 - ray->dir);
 }

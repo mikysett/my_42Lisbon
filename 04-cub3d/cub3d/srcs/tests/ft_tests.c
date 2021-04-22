@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 11:06:56 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/18 19:50:03 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/21 12:24:08 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,18 @@ void	ft_print_sprites_info(t_sprite *sprites, int nb_sprites)
 	printf("--> Printing sprites info\n");
 	while (i < nb_sprites)
 	{
-		printf("f_pos.x: %f\n", sprites[i].f_pos.x);
-		printf("f_pos.y: %f\n", sprites[i].f_pos.y);
-		printf("angle  : %f\n", ft_rad_to_deg(sprites[i].angle));
+			printf("f_pos.x    : %f\n", sprites[i].f_pos.x);
+			printf("f_pos.y    : %f\n", sprites[i].f_pos.y);
+		if (sprites[i].in_fov)
+		{
+			printf("start_pos.x: %f\n", sprites[i].start_pos.x);
+			printf("start_pos.y: %f\n", sprites[i].start_pos.y);
+			printf("angle      : %f\n", ft_rad_to_deg(sprites[i].angle));
+			printf("angle_plane: %f\n", ft_rad_to_deg(sprites[i].angle_plane));
+			printf("angle_x_ax : %f\n", ft_rad_to_deg(sprites[i].angle_x_axis));
+			printf("dist       : %f\n", sprites[i].dist);
+			printf("ray_ref    : %i\n", sprites[i].ray_index);
+		}
 		printf("in_fov : %d\n", sprites[i].in_fov);
 		// printf("dist     : %f\n", sprite->dist);
 		// printf("tex_pos.x: %f\n\n", sprite->tex_pos_x);

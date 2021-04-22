@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:44:13 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/14 16:41:37 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/21 20:46:21 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ static int	ft_set_map(t_list **map_lines, t_map *map)
 		return (false);
 	if (!ft_check_params(params_set))
 		return (ft_error(err_map_param_miss));
-	// to test
-	// ft_print_params_set(params_set);
 	if (!ft_init_map_size(*map_lines, map))
 		return (ft_error(err_map_grid));
 	return (1);
@@ -68,9 +66,6 @@ t_map	*ft_init_map(char *map_path)
 		map = ft_free_map(map);
 	if (map && !ft_set_map_grid(*map_lines, map))
 		map = ft_free_map(map);
-	// to test
-	else if (map)
-		ft_print_map_grid(map);
 	ft_free_map_file(map_lines);
 	return (map);
 }

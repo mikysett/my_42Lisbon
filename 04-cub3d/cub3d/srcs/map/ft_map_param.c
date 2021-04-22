@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 11:16:37 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/14 16:39:11 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/21 20:45:54 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ static bool	ft_save_map_param(t_map *map, char *line, bool *p_set)
 		ft_error(err_map_split);
 		return (false);
 	}
-	// to test
-	// ft_print_split(param);
 	nb_args = ft_count_param_args(param);
 	if (!ft_set_param(map, param, nb_args, p_set))
 	{

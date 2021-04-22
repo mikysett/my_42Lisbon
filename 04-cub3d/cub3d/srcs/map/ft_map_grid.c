@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 17:22:04 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/14 16:41:13 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/21 19:12:49 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	ft_set_player_dir(t_player *player, char dir)
 	if (dir == 'E')
 		player->dir = 0;
 	else if (dir == 'N')
-		player->dir = DEGREES_90;
+		player->dir = DEG_90;
 	else if (dir == 'W')
-		player->dir = DEGREES_180;
+		player->dir = DEG_180;
 	else if (dir == 'S')
-		player->dir = DEGREES_270;
+		player->dir = DEG_270;
 }
 
 void	ft_get_map_el(char *line, t_map *map, int x, int y)

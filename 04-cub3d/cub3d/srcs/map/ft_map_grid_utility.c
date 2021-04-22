@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 18:41:10 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/14 18:54:44 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 12:56:14 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	ft_set_grid_line(t_map_el *grid_line, int grid_size)
 	while (i < grid_size)
 	{
 		grid_line->type = empty;
-		grid_line->sprite_done = false;
 		grid_line++;
 		i++;
 	}

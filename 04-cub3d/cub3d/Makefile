@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/04/18 17:44:28 by msessa           ###   ########.fr        #
+#    Updated: 2021/04/22 12:00:11 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,12 +32,6 @@ SUB_DIR_O := $(SUB_DIR_O:%=$(DIR_O)/%)
 
 BSRCS	:=	$(SRCS) \
 
-# TSRCS	:=	$(SRCS) main.c
-
-# TOBJS	:=	$(TSRCS:.c=.o)
-
-# BOBJS	=	$(BSRCS:.c=.o)
-
 DEPS	=	$(HEADERS)/ft_cub3d.h
 
 BDEPS	:=	$(DEPS)
@@ -51,7 +45,7 @@ CFLAGS	=	-O0 -Wall -Wextra
 LIBS	=	-lm -L./libft -lft -lmlx -lX11 -lbsd -lXext
 
 # Mac Libs
-LIBS	=	-lm -L./libft -lft -lmlx -framework OpenGL -framework AppKit
+# LIBS	=	-lm -L./libft -lft -lmlx -framework OpenGL -framework AppKit
 
 RM		=	rm -f
 
@@ -72,11 +66,6 @@ $(NAME):	$(DEPS) $(OBJS)
 
 all:		$(NAME)
 
-# test:		$(DEPS) $(TOBJS)
-# 			@make bonus -C $(LIBFT)
-# 			@cp libft/libft.a ./$(NAME)
-# 			$(CC) -g -fsanitize=address $(NAME) $(TOBJS) -o test
-
 cubclean:
 			$(RM) $(OBJS)
 			$(RM) $(BOBJS)
@@ -92,9 +81,8 @@ fclean:		clean
 re:			fclean all
 			@make fclean -C $(LIBFT)
 
-# bonus:		$(BDEPS) $(BOBJS)
-# 			@make bonus -C $(LIBFT)
-# 			@cp libft/libft.a ./$(NAME)
-# 			ar rc $(NAME) $(BOBJS)
+# bonus:	$(DEPS) $(BOBJS)
+			@make bonus -C $(LIBFT)
+			$(CC) $(CFLAGS) -o $(NAME) $(BOBJS) $(LIBS)
 
-.PHONY:		all clean fclean re bonus
+.PHONY:		all clean fclean cubclean re bonus

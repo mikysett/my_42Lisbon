@@ -6,11 +6,16 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 22:13:40 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/18 18:07:06 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 14:05:20 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Map
+typedef enum	e_status
+{
+	playing,
+	dead,
+	game_pause
+}				t_status;
 
 typedef enum	e_rot
 {
@@ -66,9 +71,6 @@ typedef enum	e_map_el_type
 typedef struct	s_map_el
 {
 	t_map_el_type	type;
-	bool			sprite;
-	bool			sprite_done;
-
 }				t_map_el;
 
 typedef struct	s_size
@@ -124,8 +126,6 @@ typedef struct	s_map
 	t_map_el	**map_grid;
 }				t_map;
 
-// Textures and Sprites
-
 typedef struct s_img_data
 {
 	void	*img_ref;
@@ -151,7 +151,7 @@ typedef enum	e_tex_type
 typedef struct s_sky_info
 {
 	int		height;
-	double	step_h_float;
+	double	step_h_f;
 	int		step_h;
 	int		step_precision;
 	int		next_step_h;
@@ -159,34 +159,32 @@ typedef struct s_sky_info
 
 typedef struct s_sprite
 {
-	t_size_f	f_pos;
-	t_size_f	border_pos;
-	t_img_data	*img;
-	bool		in_fov;
-	double		angle;
-
 	t_size		pos;
-	int			height;
-	int			width;
+	t_size_f	f_pos;
+	t_size_f	start_pos;
+	t_img_data	*img;
+	bool		is_picked;
+	bool		in_fov;
 	double		dist;
+	double		e_dist;
+	double		angle;
+	double		angle_x_axis;
+	double		angle_plane;
 	int			ray_index;
-	double		tex_pos_x;
-	int			tex_pos_y;
-
-	char		*sprite_addr;
+	int			height;
 	double		step_x;
+	double		step_h_f;
+	int			step_h;
+	int			step_precision;
+	int			tex_h;
 	double		skip_texels;
 	int			skipped_pix;
 	int			init_next_step_h;
-	int			tex_h;
-	double		step_h_float;
-	int			step_h;
 	int			next_step_h;
-	int			step_precision;
-	t_map_el	*map_el;
+	int			screen_pos_y;
+	double		tex_pos_x;
+	char		*sprite_addr;
 }				t_sprite;
-
-// General game settings
 
 typedef enum e_game_settings
 {
@@ -248,7 +246,7 @@ typedef struct	s_vert_line
 	double			offset;
 	t_img_data		*tex;
 	char			*tex_addr;
-	double			tex_step_h_float;
+	double			tex_step_h_f;
 	int				tex_step_h;
 	int				next_step_h;
 	int				step_precision;
@@ -259,29 +257,31 @@ typedef struct	s_vert_line
 
 typedef struct s_game
 {
-	t_map		*map;
-	t_mini_map	mini_map;
-	t_size		res;
-	t_player	*player;
-	t_ray		*rays;
-	t_rays_info	rays_info;
-	t_vert_line	line;
-	int			ceil_clr;
-	int			floor_clr;
-	void		*mlx;
-	void		*win;
-	t_img_data	bg;
-	t_img_data	scene;
-	t_img_data	obj;
-	t_lifebar	lb;
-	t_img_data	mm_img;
-	t_size		mm_pos;
-	t_img_data	sky_tex;
-	t_sky_info	sky_info;
-	t_img_data	tex[NB_TEX];
-	int			nb_sprites;
-	t_sprite	*sprites;
-	bool		settings[NB_SETTINGS];
+	t_status		status;
+	t_map			*map;
+	t_mini_map		mini_map;
+	t_size			res;
+	t_player		*player;
+	t_ray			*rays;
+	t_rays_info		rays_info;
+	t_vert_line		line;
+	int				ceil_clr;
+	int				floor_clr;
+	void			*mlx;
+	void			*win;
+	t_img_data		bg;
+	t_img_data		scene;
+	t_img_data		obj;
+	t_lifebar		lb;
+	t_img_data		mm_img;
+	t_size			mm_pos;
+	t_img_data		sky_tex;
+	t_sky_info		sky_info;
+	t_img_data		tex[NB_TEX];
+	int				nb_sprites;
+	t_sprite		*sprites;
+	bool			settings[NB_SETTINGS];
 	struct timeval	old_time;
 	struct timeval	new_time;
+	double			delta_time;
 }				t_game;

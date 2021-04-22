@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_textures.h                                      :+:      :+:    :+:   */
+/*   ft_update_time.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/09 11:45:40 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/22 12:52:35 by msessa           ###   ########.fr       */
+/*   Created: 2021/04/06 09:45:32 by msessa            #+#    #+#             */
+/*   Updated: 2021/04/22 14:31:37 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_TEXTURE_H
-# define FT_TEXTURE_H
+#include "../../headers/ft_cub3d.h"
 
-void	ft_draw_sprites(t_game *game);
-void	ft_clear_sprites(void *void_sprite);
+// void	ft_update_time(t_game *game)
+// {
+// 	game->delta_time = 1.0 / 24;
+// }
 
-bool	ft_init_sprites(t_game *game);
-void	ft_set_sprites(t_game *game);
-void	ft_item_picked(t_game *game, int x, int y);
+// void	ft_init_time(t_game *game)
+// {
+// 	game->delta_time = 1.0 / 24;
+// }
 
-void	ft_draw_line(t_game *game, t_vert_line *line);
-
-bool	ft_init_tex(t_game *game);
-
-#endif
+// void	ft_print_fps(t_game *game)
+// {
+// 	mlx_string_put(game->mlx, game->win, 10, 20, 0xFFFF0000,
+// 		"FPS: TIME TRACKING NOT SET");
+// }

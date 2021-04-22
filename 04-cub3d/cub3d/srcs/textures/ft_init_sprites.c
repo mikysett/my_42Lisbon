@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 19:53:08 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/17 20:40:23 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 12:49:40 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,12 @@ static int	ft_count_sprites(t_map_el **map_grid, t_size size)
 	return (nb_sprites);
 }
 
-static void	ft_preset_sprites(t_game *game, t_map_el **map_grid, t_size size)
+static void	ft_preset_sprites(t_game *game, t_sprite *sprite_sel,
+	t_map_el **map_grid, t_size size)
 {
-	t_sprite	*sprite_sel;
 	int			x;
 	int			y;
 
-	sprite_sel = game->sprites;
 	x = 0;
 	while (x < size.x)
 	{
@@ -49,10 +48,12 @@ static void	ft_preset_sprites(t_game *game, t_map_el **map_grid, t_size size)
 		{
 			if (map_grid[x][y].type >= item && map_grid[x][y].type <= trap)
 			{
+				sprite_sel->is_picked = false;
+				sprite_sel->in_fov = false;
+				sprite_sel->pos = (t_size){x : x, y : y};
 				sprite_sel->f_pos.x = x + 0.5;
 				sprite_sel->f_pos.y = y + 0.5;
 				sprite_sel->img = &game->tex[map_grid[x][y].type];
-				sprite_sel->in_fov = false;
 				sprite_sel++;
 			}
 			y++;
@@ -64,12 +65,13 @@ static void	ft_preset_sprites(t_game *game, t_map_el **map_grid, t_size size)
 bool	ft_init_sprites(t_game *game)
 {
 	game->nb_sprites = ft_count_sprites(game->map->map_grid,
-		game->map->map_size);
+			game->map->map_size);
 	if (!game->nb_sprites)
 		return (true);
 	game->sprites = malloc(sizeof(t_sprite) * game->nb_sprites);
 	if (!game->sprites)
 		return (false);
-	ft_preset_sprites(game, game->map->map_grid, game->map->map_size);
+	ft_preset_sprites(game, game->sprites,
+		game->map->map_grid, game->map->map_size);
 	return (true);
 }

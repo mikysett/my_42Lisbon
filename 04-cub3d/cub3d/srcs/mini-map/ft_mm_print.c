@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 18:02:17 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/02 14:09:15 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/21 19:32:11 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ static void	ft_print_sgl_cell(t_size cell_size, t_size printer_pos,
 		cell_size.x -= 2;
 		cell_size.y -= 2;
 		ft_draw_rect(img, printer_pos, cell_size, CLR_WALL);
+	}
+	else if (cell_type >= item && cell_type <= trap)
+	{
+		printer_pos.x += 1;
+		printer_pos.y += 1;
+		cell_size.x -= 2;
+		cell_size.y -= 2;
+		ft_draw_rect(img, printer_pos, cell_size, CLR_ITEM);
 	}
 }
 
@@ -100,8 +108,8 @@ static void	ft_mm_print_player(t_player *player,
 		(t_size){x : PLAYER_SIZE, y : PLAYER_SIZE}, CLR_PLAYER);
 	dir_point = ft_take_dir_point(player->dir);
 	ft_draw_rect(img,
-		(t_size){x : half_size_x + dir_point.x, y : half_size_y - dir_point.y},
-		(t_size){x : PLAYER_SIZE, y : PLAYER_SIZE}, CLR_DIR);
+		(t_size){x : half_size_x + dir_point.x -1, y : half_size_y - dir_point.y},
+		(t_size){x : 2, y : 2}, CLR_DIR);
 }
 
 void	ft_mm_print(t_game *game, t_map *map, t_mini_map *mm, t_img_data *img)

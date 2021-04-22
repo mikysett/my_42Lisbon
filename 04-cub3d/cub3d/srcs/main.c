@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:26:03 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/14 17:28:36 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/21 19:34:47 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,15 @@ static int	ft_isextension(char *f, char *ext)
 int	main(int argc, char **argv)
 {
 	t_map	*map;
-	// int		i;
 
-	// i = 0;
-	// while (i < 100000)
-	// {
-		if (argc < 2)
-			return (ft_error(err_params));
-		if (!ft_isextension(argv[1], ".cub"))
-			return (ft_error(err_map_extension));
-		map = ft_init_map(argv[1]);
-		if (!map)
-			return (0);
-		ft_run_game(map);
-		ft_free_map(map);
-	// 	i++;
-	// }
+	if (argc < 2)
+		return (ft_error(err_params));
+	if (!ft_isextension(argv[1], ".cub"))
+		return (ft_error(err_map_extension));
+	map = ft_init_map(argv[1]);
+	if (!map)
+		return (0);
+	ft_run_game(map);
+	ft_free_map(map);
 	return (0);
 }

@@ -1,6 +1,6 @@
 **/.vscode/
 **/test-*/
-**/obj/
+**/obj/*
 /42_Subjects-master/
 /42-exercises/
 /Documentation/

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:19:20 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/18 18:09:30 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/21 11:33:30 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,18 @@ void	ft_rays_set(t_game *game, t_ray *rays,
 {
 	int			i;
 	double		dir_sel;
+	t_player	*p;
 
-	game->player->f_pos = ft_get_float_pos(game->player->pos,
-		game->player->cell_pos);
-	dir_sel = ft_normalize_angle(game->player->dir + game->rays_info.half_fov);
+	p = game->player;
+	p->f_pos = ft_get_float_pos(p->pos, p->cell_pos);
+	dir_sel = ft_normalize_angle(p->dir + game->rays_info.half_fov);
 	i = 0;
 	while (i < res_x)
 	{
 		rays[i].index = i;
 		rays[i].dir = dir_sel;
-		rays[i].pos.x = game->player->f_pos.x + cos(dir_sel);
-		rays[i].pos.y = game->player->f_pos.y - sin(dir_sel);
+		rays[i].pos.x = p->f_pos.x + cos(dir_sel);
+		rays[i].pos.y = p->f_pos.y - sin(dir_sel);
 		ft_ray_cast(game, game->map->map_grid, (rays + i), rays[i].pos);
 		dir_sel = ft_normalize_angle(dir_sel - rays_step);
 		i++;

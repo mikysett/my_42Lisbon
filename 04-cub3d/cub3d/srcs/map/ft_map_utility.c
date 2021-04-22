@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 11:16:43 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/14 16:43:28 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/22 12:03:22 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,5 @@ char	*ft_next_map_el(char *line)
 		 || *line == '3' || *line == '4'
 		|| *line == 'N' || *line == 'S' || *line == 'E' || *line == 'W')
 		return (line + 1);
-	if (*line == '[')
-	{
-		line++;
-		while (*line)
-		{
-			if (*line == ']')
-				return (line + 1);
-			line++;
-		}
-	}
 	return (0);
 }

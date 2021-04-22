@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_set_sprites.c                                   :+:      :+:    :+:   */
+/*   OLD_ft_set_sprites.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 16:21:10 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/17 20:24:08 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/21 19:12:49 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 // 	}
 // 	else
 // 		sprite->tex_pos_x = sprite->f_pos.y - (int)sprite->f_pos.y;
-// 	sprite->dist = ((p_pos.x - sprite->f_pos.x) / sin(DEGREES_270 - ray->dir))
-// 		* sin(game->player->dir + DEGREES_90 - ray->dir);
+// 	sprite->dist = ((p_pos.x - sprite->f_pos.x) / sin(DEG_270 - ray->dir))
+// 		* sin(game->player->dir + DEG_90 - ray->dir);
 // }
 
 // static void	ft_sprite_x(t_game *game, t_ray *ray,
@@ -38,12 +38,12 @@
 // 		sprite->f_pos.x = (int)ray->pos.x + 1;
 // 		sprite->f_pos.y -= ray->y_incr;
 // 		sprite->tex_pos_x = 1 - (sprite->f_pos.y - (int)sprite->f_pos.y);
-// 		sprite->dist = ((p_pos.x - sprite->f_pos.x) / sin(DEGREES_270 - ray->dir))
-// 			* sin(game->player->dir + DEGREES_90 - ray->dir);
+// 		sprite->dist = ((p_pos.x - sprite->f_pos.x) / sin(DEG_270 - ray->dir))
+// 			* sin(game->player->dir + DEG_90 - ray->dir);
 // 	}
 // 	else
 // 	{
-// 		if (game->player->dir < DEGREES_90)
+// 		if (game->player->dir < DEG_90)
 // 			correction_rad = game->player->dir;
 // 		else
 // 			correction_rad = -(game->player->dir - FULL_CIRCLE);
@@ -60,8 +60,8 @@
 
 // 		// sprite->f_pos.y -= game->rays[sprite->ray_index].y_incr;
 // 		sprite->tex_pos_x = sprite->f_pos.y - (int)sprite->f_pos.y;
-// 		sprite->dist = ((p_pos.x - sprite->f_pos.x) / sin(DEGREES_270 - game->rays[sprite->ray_index].dir))
-// 			* sin(game->player->dir + DEGREES_90 - game->rays[sprite->ray_index].dir);
+// 		sprite->dist = ((p_pos.x - sprite->f_pos.x) / sin(DEG_270 - game->rays[sprite->ray_index].dir))
+// 			* sin(game->player->dir + DEG_90 - game->rays[sprite->ray_index].dir);
 // 		// printf("ray index: %d\n", sprite->ray_index);
 // 		// printf("tex_pos_x: %f\n", sprite->tex_pos_x);
 // 		// printf("correction_rad: %f\n", correction_rad);
@@ -71,10 +71,10 @@
 // 	// sprite->dist = 1000000;
 // }
 
-// 		// if (game->player->dir < DEGREES_90)
-// 		// 	correction_rad = DEGREES_90 - game->player->dir;
+// 		// if (game->player->dir < DEG_90)
+// 		// 	correction_rad = DEG_90 - game->player->dir;
 // 		// else
-// 		// 	correction_rad = DEGREES_90 - (FULL_CIRCLE - game->player->dir);
+// 		// 	correction_rad = DEG_90 - (FULL_CIRCLE - game->player->dir);
 
 
 
@@ -90,7 +90,7 @@
 // // 	else
 // // 		sprite->tex_pos_x = 1 - (sprite->f_pos.x - (int)sprite->f_pos.x);
 // // 	sprite->dist = cos(ray->dir - game->player->dir)
-// // 		* ((p_pos.y - sprite->f_pos.y) / sin(DEGREES_180 - ray->dir));
+// // 		* ((p_pos.y - sprite->f_pos.y) / sin(DEG_180 - ray->dir));
 // // }
 
 
@@ -103,7 +103,7 @@
 
 // 	if (ray->neg_step_y)
 // 	{
-// 		correction_rad = DEGREES_180 - (game->player->dir + DEGREES_90);
+// 		correction_rad = DEG_180 - (game->player->dir + DEG_90);
 // 		correction = tan(correction_rad) * 0.5;
 
 // 		sprite->f_pos.y = sprite->f_pos.y + 1.5 - correction;
@@ -112,11 +112,11 @@
 // 		sprite->f_pos.x -= game->rays[sprite->ray_index].x_incr;
 // 		sprite->tex_pos_x = sprite->f_pos.x - (int)sprite->f_pos.x;
 // 		sprite->dist = cos(game->rays[sprite->ray_index].dir - game->player->dir)
-// 			* ((p_pos.y - sprite->f_pos.y) / sin(DEGREES_180 - game->rays[sprite->ray_index].dir));
+// 			* ((p_pos.y - sprite->f_pos.y) / sin(DEG_180 - game->rays[sprite->ray_index].dir));
 // 	}
 // 	else
 // 	{
-// 		correction_rad = FULL_CIRCLE - game->player->dir - DEGREES_90;
+// 		correction_rad = FULL_CIRCLE - game->player->dir - DEG_90;
 // 		correction = tan(correction_rad) * 0.5;
 
 // 		sprite->f_pos.y = sprite->f_pos.y + 0.5 + correction;
@@ -134,7 +134,7 @@
 // 			// printf("sprite->ray_index: %d\n", sprite->ray_index);
 // 			sprite->tex_pos_x = 1 - (sprite->f_pos.x - (int)sprite->f_pos.x);
 // 			sprite->dist = cos(game->rays[sprite->ray_index].dir - game->player->dir)
-// 				* ((p_pos.y - sprite->f_pos.y) / sin(DEGREES_180 - game->rays[sprite->ray_index].dir));
+// 				* ((p_pos.y - sprite->f_pos.y) / sin(DEG_180 - game->rays[sprite->ray_index].dir));
 
 // 		}
 // 	}
