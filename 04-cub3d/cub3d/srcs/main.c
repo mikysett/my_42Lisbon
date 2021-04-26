@@ -6,51 +6,11 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:26:03 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/21 19:34:47 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/23 11:57:57 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/ft_cub3d.h"
-
-int	ft_error(t_errors err)
-{
-	printf("Error\n");
-	if (err == err_params)
-		printf("Too few params passed\n");
-	else if (err == err_map_extension)
-		printf("Map file must be a .cub file\n");
-	else if (err == err_map_path)
-		printf("Map file not found\n");
-	else if (err == err_map_malloc)
-		printf("Failed to allocate memory for the map\n");
-	else if (err == err_map_gnl)
-		printf("Failed to get next line in map file\n");
-	else if (err == err_map_split)
-		printf("Failed to load map parameters\n");
-	else if (err == err_map_param)
-		printf("Invalid parameter in map file\n");
-	else if (err == err_map_grid)
-		printf("Error in the map grid\n");
-	else if (err == err_map_param_miss)
-		printf("Mandatory parameters are missing\n");
-	else
-		printf("Unknown error\n");
-	return (0);
-}
-
-int	ft_mlx_error(t_mlx_errors err)
-{
-	printf("Error\n");
-	if (err == err_mlx)
-		printf("Failed to open the window\n");
-	if (err == err_tex)
-		printf("Failed to process textures\n");
-	if (err == err_sprite)
-		printf("Failed to allocate sprites\n");
-	else
-		printf("Unknown MLX error\n");
-	return (0);
-}
 
 static int	ft_isextension(char *f, char *ext)
 {
@@ -76,7 +36,10 @@ int	main(int argc, char **argv)
 	map = ft_init_map(argv[1]);
 	if (!map)
 		return (0);
-	ft_run_game(map);
+	if (argc >= 3 && !strcmp(argv[2], "--save"))
+		ft_run_game(map, true);
+	else
+		ft_run_game(map, false);
 	ft_free_map(map);
 	return (0);
 }

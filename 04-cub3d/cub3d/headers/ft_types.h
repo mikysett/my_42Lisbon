@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 22:13:40 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/22 19:16:25 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/23 17:34:28 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,5 +287,36 @@ typedef struct s_game
 	struct timeval	new_time;
 	double			delta_time;
 }				t_game;
+
+typedef struct s_bmp_info
+{
+	char		identifier[2];
+	uint32_t	file_size;
+	uint32_t	unused_bytes;
+	uint32_t	pix_array_offset;
+
+	uint32_t	dib_header_size;
+	uint32_t	img_width;
+	uint32_t	img_height;
+	uint16_t	nb_color_planes;
+	uint16_t	bits_per_pixel;
+	uint32_t	compression;
+	uint32_t	bmp_array_size;
+	uint32_t	x_resolution;
+	uint32_t	y_resolution;
+	uint32_t	clrs_palette;
+	uint32_t	important_clrs;
+	uint32_t	red_mask;
+	uint32_t	green_mask;
+	uint32_t	blue_mask;
+	uint32_t	alpha_mask;
+	uint32_t	color_space;
+
+	int			size_line_int;
+	int			*bmp_arr;
+	int			img_size;
+	int			*scene_addr;
+	int			*obj_addr;
+}				t_bmp_info;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 17:01:47 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/22 19:05:21 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/23 11:34:15 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_basic_settings(t_game *game, t_map *map)
 {
+	game->win = 0;
 	game->status = playing;
 	game->map = map;
 	game->mini_map.size.x = MINI_MAP_WIDTH;
@@ -33,7 +34,6 @@ void	ft_init_layers(t_game *game)
 {
 	const t_size	pos = {.x = 0, .y = 0};
 
-	game->win = mlx_new_window(game->mlx, game->res.x, game->res.y, "cub3D");
 	game->bg.img_ref = mlx_new_image(game->mlx, game->res.x, game->res.y);
 	game->bg.img_addr = mlx_get_data_addr(game->bg.img_ref,
 			&game->bg.bits_pix, &game->bg.size_line, &game->bg.endian);

@@ -6,14 +6,14 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 16:52:38 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/22 19:13:40 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/23 11:19:41 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_RUN_GAME_H
 # define FT_RUN_GAME_H
 
-void	ft_run_game(t_map *map);
+void	ft_run_game(t_map *map, bool save_bmp);
 int		ft_render_game(void *game);
 
 void	ft_scene(t_game *game);

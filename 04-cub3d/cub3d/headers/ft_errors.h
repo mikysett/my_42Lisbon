@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:13:56 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/14 17:28:46 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/23 11:52:03 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef enum e_mlx_errors
 {
 	err_mlx,
 	err_tex,
-	err_sprite
+	err_sprite,
+	err_save_bmp
 }				t_mlx_errors;
 #endif

@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 13:45:38 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/22 19:10:50 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/26 09:26:08 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 
 # define BUFFER_SIZE	64
 
-# define IS_OS_MAC		1
+# define IS_OS_MAC		0
 
 # define MIN_RES_X		300
 # define MIN_RES_Y		350
-# define MAX_RES_X		1920
-# define MAX_RES_Y		1080
 
 # define NB_MAP_PARAMS	12
 # define NB_DIRECTIONS	9
@@ -63,6 +61,8 @@
 # define CLR_DIR		0x88220000
 
 # if IS_OS_MAC == 1
+#  define MAX_RES_X		2560
+#  define MAX_RES_Y		1440
 #  define KEY_ARR_LEFT	123
 #  define KEY_ARR_RIGHT	124
 #  define KEY_ARR_UP	126
@@ -83,6 +83,8 @@
 #  define KEY_RELEASE		3
 #  define KEY_RELEASE_M		2
 # else
+#  define MAX_RES_X		1920
+#  define MAX_RES_Y		1080
 #  define KEY_ARR_LEFT	65361
 #  define KEY_ARR_RIGHT	65363
 #  define KEY_ARR_UP	65362
