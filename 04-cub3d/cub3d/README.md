@@ -2,10 +2,11 @@
 
 * m: toggle minimap
 * f: toggle fps count
+* Esc: quit the game
 
 * Render distance related shadows
 * Skybox feature
-* Delta time used to normalize mouvement speed
+* Delta time used to normalize mouvement speed (with `make bonus` rule)
 * Lifebar with healing/damaging items and traps
 * Map extras: 3: Healing object, 4: Trap
 
