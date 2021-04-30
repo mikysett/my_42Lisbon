@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 19:36:29 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/23 14:19:35 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/28 15:47:45 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,5 @@ void	ft_run_game(t_map *map, bool save_bmp)
 		mlx_loop(game.mlx);
 	}
 	else
-	{
 		ft_save_bmp(&game);
-		// game.win = mlx_new_window(game.mlx, game.res.x, game.res.y, "cub3D");
-		// mlx_put_image_to_window(game.mlx, game.win, game.scene.img_ref, 0, 0);
-		// mlx_loop(game.mlx);
-	}
 }

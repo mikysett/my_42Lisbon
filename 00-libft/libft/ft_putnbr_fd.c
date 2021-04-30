@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 13:27:23 by msessa            #+#    #+#             */
-/*   Updated: 2021/03/23 13:32:31 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/28 15:50:04 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_write_neg_nb(int n, int fd)
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	char neg;
+	char	neg;
 
 	if (n < 0)
 	{

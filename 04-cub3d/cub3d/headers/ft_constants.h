@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 13:45:38 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/26 09:26:08 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/28 15:28:30 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define BUFFER_SIZE	64
 
-# define IS_OS_MAC		0
+# define IS_OS_MAC		1
 
 # define MIN_RES_X		300
 # define MIN_RES_Y		350

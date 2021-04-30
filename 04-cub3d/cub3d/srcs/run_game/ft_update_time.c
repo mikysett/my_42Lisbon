@@ -6,7 +6,7 @@
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:45:32 by msessa            #+#    #+#             */
-/*   Updated: 2021/04/26 11:23:49 by msessa           ###   ########.fr       */
+/*   Updated: 2021/04/28 15:42:38 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_update_time(t_game *game)
 void	ft_init_time(t_game *game)
 {
 	game->delta_time = 1.0 / 24;
+	game->settings[show_fps] = false;
 }
 
 void	ft_print_fps(t_game *game)

@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/04/26 11:45:25 by msessa           ###   ########.fr        #
+#    Updated: 2021/04/28 15:44:41 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,13 +94,13 @@ DEPS	=	headers/ft_init_map.h \
 CC		=	gcc
 
 # Change optimization flag to -O3 for faster execution
-CFLAGS	=	-O3 -Wall -Wextra 
+CFLAGS	=	-O3 -Wall -Wextra -Werror
 
 # Linux Libs
-LIBS	=	-lm -L./libft -lft -lmlx -lX11 -lbsd -lXext
+# LIBS	=	-lm -L./libft -lft -lmlx -lX11 -lbsd -lXext
 
 # Mac Libs
-# LIBS	=	-lm -L./libft -lft -lmlx -framework OpenGL -framework AppKit
+LIBS	=	-lm -L./libft -lft -lmlx -framework OpenGL -framework AppKit
 
 RM		=	rm -f
 
