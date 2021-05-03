@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/30 16:34:16 by msessa            #+#    #+#              #
-#    Updated: 2021/05/03 16:16:43 by msessa           ###   ########.fr        #
+#    Updated: 2021/05/03 17:54:54 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ fi
 if [ $autoindex == 'on' ]
 	then
 		ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+		echo "autoindex ON"
 	else
 		ln -s /etc/nginx/sites-available/no-autoindex /etc/nginx/sites-enabled/default
+		echo "autoindex OFF"
 fi
 service nginx restart
