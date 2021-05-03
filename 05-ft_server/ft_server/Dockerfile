@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/30 12:32:49 by msessa            #+#    #+#              #
-#    Updated: 2021/04/30 17:27:49 by msessa           ###   ########.fr        #
+#    Updated: 2021/05/01 12:11:06 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,17 +29,26 @@ RUN	apt-get update && apt-get upgrade -y && apt-get install -y \
 	php-gettext \
 	php-mysql \
 	php-bcmath \
-	unzip
+	unzip \
+	wget
 
-RUN	service mysql start
-RUN	mysql -u root -p
-RUN	CREATE DATABASE wpdb;
-RUN	CREATE USER 'wpuser'@'localhost' identified by 'dbpassword';
-RUN	GRANT ALL PRIVILEGES ON wpdb.* TO 'wpuser'@'localhost';
-RUN	FLUSH PRIVILEGES;
-RUN	EXIT
+RUN	service mysql start && \
+	echo "CREATE DATABASE wpdb;" | mysql -u root && \
+	echo "CREATE USER 'wpuser'@'localhost' identified by 'dbpassword';" | mysql -u root && \
+	echo "GRANT ALL PRIVILEGES ON wpdb.* TO 'wpuser'@'localhost';" | mysql -u root && \
+	echo "FLUSH PRIVILEGES;" | mysql -u root && \
+	echo "EXIT" | mysql -u root
+
+RUN	cd /var/www/html/ && \
+	wget https://wordpress.org/latest.tar.gz && \
+	tar -xvzf latest.tar.gz && \
+	rm -f latest.tar.gz && \
+	rm -f wordpress/wp-config-sample.php
 
 COPY	srcs ./root/
+
+RUN	mv ./root/wp-config.php /var/www/html/wordpress/wp-config.php
+RUN chown -R www-data:www-data /var/www/html/wordpress
 
 RUN	mv ./root/wordpress.conf /etc/nginx/sites-available/wordpress.conf
 RUN	ln -s /etc/nginx/sites-available/wordpress.conf /etc/nginx/sites-enabled/
