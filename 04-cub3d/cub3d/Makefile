@@ -6,15 +6,13 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/04/28 15:44:41 by msessa           ###   ########.fr        #
+#    Updated: 2021/05/06 16:31:12 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	cub3D
 
 LIBFT	=	libft
-
-MINILIBX	=	minilibx
 
 HEADERS	=	headers
 
@@ -113,7 +111,6 @@ $(DIR_O)/%.o: %.c
 
 $(NAME):	$(DEPS) $(OBJS)
 			@make bonus -C $(LIBFT)
-			echo $(SRCS)
 			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 
 all:		$(NAME)
