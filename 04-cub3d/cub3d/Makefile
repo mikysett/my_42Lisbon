@@ -6,7 +6,7 @@
 #    By: msessa <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/23 11:32:44 by msessa            #+#    #+#              #
-#    Updated: 2021/05/06 16:31:12 by msessa           ###   ########.fr        #
+#    Updated: 2021/05/14 15:40:20 by msessa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,21 +73,21 @@ BOBJS	:= $(B_SRCS:%.c=$(DIR_O)/%.o)
 SUB_DIR_O := $(shell find $(DIR_S) -type d)
 SUB_DIR_O := $(SUB_DIR_O:%=$(DIR_O)/%)
 
-DEPS	=	headers/ft_init_map.h \
-			headers/ft_ray_caster.h \
-			headers/ft_mini_map.h \
-			headers/ft_run_game.h \
-			headers/ft_save_bmp.h \
-			headers/ft_set_events.h \
-			headers/ft_types.h \
-			headers/ft_bonus.h \
-			headers/ft_tests.h \
-			headers/ft_cub3d.h \
-			headers/ft_textures.h \
-			headers/ft_constants.h \
-			headers/ft_init_game.h \
-			headers/ft_errors.h \
-			headers/ft_utilities.h
+DEPS	=	$(HEADERS)/ft_init_map.h \
+			$(HEADERS)/ft_ray_caster.h \
+			$(HEADERS)/ft_mini_map.h \
+			$(HEADERS)/ft_run_game.h \
+			$(HEADERS)/ft_save_bmp.h \
+			$(HEADERS)/ft_set_events.h \
+			$(HEADERS)/ft_types.h \
+			$(HEADERS)/ft_bonus.h \
+			$(HEADERS)/ft_tests.h \
+			$(HEADERS)/ft_cub3d.h \
+			$(HEADERS)/ft_textures.h \
+			$(HEADERS)/ft_constants.h \
+			$(HEADERS)/ft_init_game.h \
+			$(HEADERS)/ft_errors.h \
+			$(HEADERS)/ft_utilities.h
 
 CC		=	gcc
 

@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fib.c                                              :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 17:15:06 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/06 17:30:00 by msessa           ###   ########.fr       */
+/*   Created: 2021/01/18 16:24:35 by msessa            #+#    #+#             */
+/*   Updated: 2021/02/15 19:03:48 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	long	i;
-	long	curr_nb;
-	long	next_nb;
-	long	buf;
+	t_list	*curr;
+	t_list	*next;
 
-	curr_nb = 0;
-	next_nb = 1;
-	i = 900000;
-	while (i != 0)
+	curr = *lst;
+	while (curr)
 	{
-		printf("%20ld\n", curr_nb);
-		buf = curr_nb;
-		curr_nb = next_nb;
-		next_nb = buf + next_nb;
-		i--;
+		next = curr->next;
+		del(curr->content);
+		free(curr);
+		curr = next;
 	}
+	*lst = 0;
 }
