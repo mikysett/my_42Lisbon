@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msessa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/15 14:03:16 by msessa            #+#    #+#             */
-/*   Updated: 2021/05/21 10:58:12 by msessa           ###   ########.fr       */
+/*   Created: 2021/01/14 17:26:56 by msessa            #+#    #+#             */
+/*   Updated: 2021/03/23 11:52:15 by msessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(int c)
+void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
-	return (c);
+	c = (unsigned char)c;
+	if (dest != src)
+	{
+		while (n > 0)
+		{
+			*((unsigned char *)dest++) = *((unsigned char *)src++);
+			if (*((unsigned char *)src - 1) == c)
+				return (dest);
+			n--;
+		}
+	}
+	return (0);
 }
